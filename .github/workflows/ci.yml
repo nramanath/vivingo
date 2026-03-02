@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v2
+
+      - name: Install Dependencies
+        run: mise run init
+
+      - name: Check Formatting
+        run: mise run check-format
+
+      - name: Run Linter
+        run: mise run lint
+
+      - name: Run Tests
+        run: mise run test
+
+      - name: Build Project
+        run: mise run build

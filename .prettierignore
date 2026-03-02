@@ -1,0 +1,8 @@
+node_modules
+dist
+.vscode
+.git
+pnpm-lock.yaml
+bun.lock
+bun.lockb
+.env*
