@@ -30,3 +30,9 @@ jobs:
 
       - name: Build Project
         run: mise run build
+
+      - name: Validate PR title with commitlint
+        if: github.event_name == 'pull_request'
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: echo "$PR_TITLE" | bunx commitlint
