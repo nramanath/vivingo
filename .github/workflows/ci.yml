@@ -1,4 +1,4 @@
-name: CI
+name: CI - Code Quality & Build Check
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
