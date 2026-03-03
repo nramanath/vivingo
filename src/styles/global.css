@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 :root {
   /* Vivingo Brand Colors (Zesty Macaroons) */
   --color-neon-green: #c5e5a5;
@@ -10,7 +12,7 @@
   font-weight: 700;
 
   color-scheme: light;
-  color: var(--color-kelly-green);
+  color: black;
   background-color: var(--color-yellow);
 
   font-synthesis: none;
@@ -24,5 +26,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
