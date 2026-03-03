@@ -2,6 +2,7 @@ import '../styles/global.css';
 
 // Importing the actual Vivingo Logo
 import vivingoLogo from '../assets/vivingo-logo.png';
+import { AgeSelector } from '../components/AgeSelector';
 
 export default function App() {
   return (
@@ -22,16 +23,7 @@ export default function App() {
 
         {/* Right: Age Selection */}
         <div className="flex items-center justify-end flex-1">
-          <div className="bg-[var(--color-freesia)] rounded-full px-4 py-2 shadow-sm font-bold text-black border-2 border-[var(--color-freesia)] hover:border-black transition-colors flex items-center gap-2 cursor-pointer">
-            <span>Age:</span>
-            <select className="bg-transparent outline-none cursor-pointer font-bold appearance-none pr-4">
-              <option value="all">All Ages</option>
-              <option value="3">3 Years</option>
-              <option value="4">4 Years</option>
-              <option value="5">5 Years</option>
-              <option value="6">6 Years</option>
-            </select>
-          </div>
+          <AgeSelector />
         </div>
       </header>
 
@@ -42,7 +34,7 @@ export default function App() {
           <h2 className="text-4xl text-black font-black mb-4 font-fredoka">
             Select a Game to Play!
           </h2>
-          <p className="text-xl text-black mb-8 max-w-md text-center">
+          <p className="text-xl text-black mb-8 max-w-md text-center font-medium font-fredoka">
             Pick from our awesome collection of learning adventures.
           </p>
 
