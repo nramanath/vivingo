@@ -1,8 +1,8 @@
 import '../styles/global.css';
 
-// Importing the actual Vivingo Logo
 import vivingoLogo from '../assets/vivingo-logo.png';
 import { AgeSelector } from '../components/AgeSelector';
+import { GradientGameCard } from '../components/GradientGameCard';
 
 export default function App() {
   return (
@@ -38,17 +38,13 @@ export default function App() {
             Pick from our awesome collection of learning adventures.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full px-12">
-            {/* Placeholder Game Cards */}
-            <div className="bg-[var(--color-freesia)] aspect-square rounded-2xl shadow-md border-4 border-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-              <span className="text-2xl font-bold font-fredoka text-black">Math Fun</span>
-            </div>
-            <div className="bg-[var(--color-neon-green)] aspect-square rounded-2xl shadow-md border-4 border-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-              <span className="text-2xl font-bold font-fredoka text-black">ABC Hunt</span>
-            </div>
-            <div className="bg-[var(--color-kelly-green)] aspect-square rounded-2xl shadow-md border-4 border-white flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-              <span className="text-2xl font-bold font-fredoka text-black">Puzzles</span>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full px-12 pb-8">
+            <GradientGameCard title="Math Fun" variantClass="gradient-button" />
+            <GradientGameCard title="ABC Hunt" variantClass="gradient-button-variant" />
+            <GradientGameCard
+              title="Puzzles"
+              variantClass="gradient-button" // Using default since we only have two variants
+            />
           </div>
         </div>
       </main>
