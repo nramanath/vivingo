@@ -1,15 +1,16 @@
 @import 'tailwindcss';
 
+@theme {
+  --font-inter: 'Inter', sans-serif;
+  --font-fredoka: 'Fredoka', sans-serif;
+}
+
 :root {
   /* Vivingo Brand Colors (Zesty Macaroons) */
   --color-neon-green: #c5e5a5;
   --color-kelly-green: #98b66e;
   --color-freesia: #f9d876;
   --color-yellow: #fbe39d;
-
-  font-family: 'Nunito', 'Comic Sans MS', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 700;
 
   color-scheme: light;
   color: black;
