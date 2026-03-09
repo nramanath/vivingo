@@ -34,19 +34,19 @@ export const Sidebar = ({ onSelectGame }: SidebarProps) => {
         {/* Game Selection Grid */}
         <div className="grid grid-cols-2 gap-4 pb-8">
           <GradientGameCard
-            onClick={() => onSelectGame('Math Fun')}
-            title="Math Fun"
-            variantClass="gradient-button"
-          />
-          <GradientGameCard
             onClick={() => onSelectGame('ABC Hunt')}
             title="ABC Hunt"
-            variantClass="gradient-button-variant"
+            variantClass="gradient-brand-button"
+          />
+          <GradientGameCard
+            onClick={() => onSelectGame('Math Fun')}
+            title="Math Fun"
+            variantClass="gradient-brand-button"
           />
           <GradientGameCard
             onClick={() => onSelectGame('Puzzles')}
             title="Puzzles"
-            variantClass="gradient-button"
+            variantClass="gradient-brand-button"
           />
         </div>
       </div>
