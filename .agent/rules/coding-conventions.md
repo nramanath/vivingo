@@ -16,6 +16,7 @@ This rule file establishes the global baseline for all agents operating within t
 
 - **Conventional Commits**: Agents must adhere to the Conventional Commits specification (e.g., `feat:`, `fix:`, `docs:`, `chore:`, `ai:`).
 - **Automation Reliance**: Agents should prefer predefined `.agent/workflows/` (such as `pr-creator.md` or `pr-bot-review-resolver.md`) when formatting, validating, and pushing Pull Requests, rather than writing ad-hoc validation bash scripts from scratch.
+- **Branching Rule**: Agents MUST NEVER push code directly to the `main` branch. All changes must be pushed to a feature or fix branch, and integrated only via Pull Requests.
 - **Validation**: Never push a PR without ensuring `vitest` unit tests and `commitlint` title validation pass successfully locally.
 
 ## 3. Testing Paradigm
