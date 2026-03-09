@@ -34,8 +34,7 @@ describe('AlphabetHunt', () => {
 
   it('handles correct and incorrect keyboard inputs', () => {
     // Generate 3 unique starting positions to prevent overlap loops
-    const randomSpy = vi
-      .spyOn(Math, 'random')
+    vi.spyOn(Math, 'random')
       .mockReturnValueOnce(0.1) // 0.1 * 26 = 2 -> 'C'
       .mockReturnValueOnce(0.3) // 0.3 * 26 = 7 -> 'H'
       .mockReturnValueOnce(0.5); // 0.5 * 26 = 13 -> 'N'
@@ -54,7 +53,5 @@ describe('AlphabetHunt', () => {
       fireEvent.keyDown(window, { key: 'C', code: 'KeyC' });
     });
     expect(screen.getByText('Correct!')).toBeDefined();
-
-    randomSpy.mockRestore();
   });
 });

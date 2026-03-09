@@ -125,6 +125,7 @@ function useAlphabetHuntLogic() {
       } else {
         showFeedback('wrong');
         setWobbleIndex(targetMissingIndex);
+        if (wobbleTimeoutRef.current) clearTimeout(wobbleTimeoutRef.current);
         wobbleTimeoutRef.current = setTimeout(() => setWobbleIndex(null), 500);
       }
     };
