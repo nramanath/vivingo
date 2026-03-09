@@ -33,6 +33,8 @@ function useAlphabetHuntLogic() {
 
   const [feedback, setFeedback] = useState<FeedbackType>(null);
   const feedbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stageAdvanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wobbleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const currentStage = STAGES[currentStageIndex];
 
@@ -49,7 +51,7 @@ function useAlphabetHuntLogic() {
       for (let i = 0; i < sets; i++) {
         const start = Math.floor(Math.random() * (maxStart + 1));
         const overlap = starts.some(
-          (s) => Math.max(s, start) <= Math.min(s + lettersPerSet, start + lettersPerSet)
+          (s) => Math.max(s, start) < Math.min(s + lettersPerSet, start + lettersPerSet)
         );
         if (overlap) {
           valid = false;
@@ -107,7 +109,7 @@ function useAlphabetHuntLogic() {
 
         if (newSolved.length === missingIndices.length) {
           showFeedback('completed');
-          setTimeout(() => {
+          stageAdvanceTimeoutRef.current = setTimeout(() => {
             setScore((prev) => prev + 1);
             const nextStageIdx = currentStageIndex + 1;
             if (nextStageIdx < STAGES.length) {
@@ -123,7 +125,8 @@ function useAlphabetHuntLogic() {
       } else {
         showFeedback('wrong');
         setWobbleIndex(targetMissingIndex);
-        setTimeout(() => setWobbleIndex(null), 500);
+        if (wobbleTimeoutRef.current) clearTimeout(wobbleTimeoutRef.current);
+        wobbleTimeoutRef.current = setTimeout(() => setWobbleIndex(null), 500);
       }
     };
 
@@ -143,6 +146,8 @@ function useAlphabetHuntLogic() {
   useEffect(() => {
     return () => {
       if (feedbackTimeoutRef.current) clearTimeout(feedbackTimeoutRef.current);
+      if (stageAdvanceTimeoutRef.current) clearTimeout(stageAdvanceTimeoutRef.current);
+      if (wobbleTimeoutRef.current) clearTimeout(wobbleTimeoutRef.current);
     };
   }, []);
 
