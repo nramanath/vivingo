@@ -32,21 +32,29 @@ describe('AlphabetHunt', () => {
     expect(document.querySelectorAll('.aspect-square').length).toBe(26);
   });
 
-  it('handles keyboard inputs without crashing', () => {
+  it('handles correct and incorrect keyboard inputs', () => {
+    // Generate 3 unique starting positions to prevent overlap loops
+    const randomSpy = vi
+      .spyOn(Math, 'random')
+      .mockReturnValueOnce(0.1) // 0.1 * 26 = 2 -> 'C'
+      .mockReturnValueOnce(0.3) // 0.3 * 26 = 7 -> 'H'
+      .mockReturnValueOnce(0.5); // 0.5 * 26 = 13 -> 'N'
+
     render(<AlphabetHunt />);
     fireEvent.click(screen.getByText('Start Playing!'));
 
-    // Simulate some random keystrokes
+    // Incorrect guess
     act(() => {
-      fireEvent.keyDown(window, { key: 'A', code: 'KeyA' });
-      fireEvent.keyDown(window, { key: 'M', code: 'KeyM' });
-      fireEvent.keyDown(window, { key: 'Z', code: 'KeyZ' });
-
-      // Advance timers in case feedback banners are triggered
-      vi.runAllTimers();
+      fireEvent.keyDown(window, { key: 'X', code: 'KeyX' });
     });
+    expect(screen.getByText('Wrong!')).toBeDefined();
 
-    // Should still be on the game board
-    expect(screen.getByText(/Stage: 1/)).toBeDefined();
+    // Correct guess -> 'C'
+    act(() => {
+      fireEvent.keyDown(window, { key: 'C', code: 'KeyC' });
+    });
+    expect(screen.getByText('Correct!')).toBeDefined();
+
+    randomSpy.mockRestore();
   });
 });
