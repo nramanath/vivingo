@@ -1,22 +1,16 @@
-import vivingoLogo from '../assets/vivingo-logo.png';
+import { useState } from 'react';
+import '../styles/global.css';
 
-function App() {
+import { Sidebar } from '../components/layout/Sidebar';
+import { GameCanvas } from '../components/layout/GameCanvas';
+
+export default function App() {
+  const [selectedGame, setSelectedGame] = useState<string | null>(null);
+
   return (
-    <div
-      style={{
-        backgroundColor: '#ffffff',
-        minHeight: '100vh',
-        width: '100vw',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <img src={vivingoLogo} alt="Vivingo" style={{ height: '200px', marginBottom: '20px' }} />
-      <h1 style={{ color: '#000000', fontFamily: 'sans-serif' }}>Coming Soon!</h1>
+    <div className="flex h-screen w-screen overflow-hidden bg-[var(--color-yellow)] font-inter">
+      <Sidebar onSelectGame={setSelectedGame} />
+      <GameCanvas selectedGame={selectedGame} />
     </div>
   );
 }
-
-export default App;
