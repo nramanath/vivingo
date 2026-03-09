@@ -22,6 +22,7 @@ module.exports = {
         'ci',
         'chore',
         'revert',
+        'ai',
       ],
     ],
     'type-case': [2, 'always', 'lower-case'],
