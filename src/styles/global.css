@@ -209,6 +209,36 @@
     --border-color-1: hsla(320, 75%, 90%, 0.2);
     --border-color-2: hsla(320, 50%, 90%, 0.75);
   }
+
+  .gradient-brand-button {
+    --color-1: #98b66e;
+    --color-2: #c5e5a5;
+    --color-3: #f9d876;
+    --color-4: #fbe39d;
+    --border-angle: 200deg;
+    --border-color-1: hsla(88, 50%, 50%, 0.6);
+    --border-color-2: hsla(88, 50%, 30%, 0.15);
+  }
+
+  .gradient-brand-button:hover {
+    --pos-x: 0%;
+    --pos-y: 95.51%;
+    --spread-x: 110.24%;
+    --spread-y: 110.2%;
+    --color-1: #98b66e;
+    --color-2: #c5e5a5;
+    --color-3: #f9d876;
+    --color-4: #fbe39d;
+    --color-5: #ffffff;
+    --stop-1: 0%;
+    --stop-2: 10%;
+    --stop-3: 35.44%;
+    --stop-4: 71.34%;
+    --stop-5: 90.76%;
+    --border-angle: 210deg;
+    --border-color-1: hsla(88, 50%, 50%, 0.2);
+    --border-color-2: hsla(88, 50%, 30%, 0.75);
+  }
 }
 
 @keyframes gradient-shift {

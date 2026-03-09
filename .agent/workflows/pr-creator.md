@@ -31,9 +31,17 @@ This workflow automates the process of wrapping up local changes, running strict
    git push -u origin HEAD
    ```
 8. **Create PR**: Use the `gh` CLI to create the PR.
-   - Read `.github/PULL_REQUEST_TEMPLATE.md`.
-   - Ensure the PR title _also_ strictly follows the `.commitlintrc.cjs` rules.
+   - Read `.github/pull_request_template.md`.
+   - Ensure the PR title _also_ strictly follows the `.commitlintrc.cjs` rules (e.g., lowercase subjects, proper enums).
    - Write the description to a temporary file (`/tmp/pr-body.md`).
+   - Validate the title before creating the pull request by piping it into commitlint:
+
+   ```bash
+   echo "type(scope): succinct description" | bunx commitlint
+   ```
+
+   - If that validation passes, you safely create the PR:
+
    ```bash
    gh pr create --title "type(scope): succinct description" --body-file /tmp/pr-body.md
    rm /tmp/pr-body.md
