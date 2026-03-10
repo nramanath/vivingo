@@ -78,7 +78,42 @@ describe('MysteryMessages Game', () => {
     });
   });
 
-  it('declares the game complete', () => {
-    expect(true).toBe(true); // Placeholder for manual verification done in demo
+  it('declares the game complete after all stages and rounds are finished', () => {
+    render(<MysteryMessages />);
+
+    fireEvent.click(screen.getByText('Start Playing!'));
+    act(() => {
+      vi.advanceTimersByTime(10);
+    });
+
+    // Play through all 9 rounds: 3 stages × 3 rounds, each mocked to return ['CAT']
+    const TOTAL_ROUNDS = 9; // MAX_STAGES(3) × MAX_ROUNDS(3)
+    for (let i = 0; i < TOTAL_ROUNDS; i++) {
+      // Type all letters of 'CAT' correctly
+      act(() => {
+        fireEvent.keyDown(window, { key: 'C', code: 'KeyC' });
+      });
+      act(() => {
+        fireEvent.keyDown(window, { key: 'A', code: 'KeyA' });
+      });
+      act(() => {
+        fireEvent.keyDown(window, { key: 'T', code: 'KeyT' });
+      });
+
+      // Advance past the 1500ms round-transition timeout
+      act(() => {
+        vi.advanceTimersByTime(1600);
+      });
+
+      // Flush the next puzzle's setTimeout(0) if not the last round
+      if (i < TOTAL_ROUNDS - 1) {
+        act(() => {
+          vi.advanceTimersByTime(10);
+        });
+      }
+    }
+
+    // After all 9 rounds, game over screen should appear
+    expect(screen.getByText('Play Again!')).toBeDefined();
   });
 });

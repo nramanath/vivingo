@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { generateMysteryPhrase } from './utils/dictionary';
 
+const MAX_ROUNDS = 3;
+const MAX_STAGES = 3;
+
+export { MAX_ROUNDS, MAX_STAGES };
+
 export type PuzzleLetter = {
   char: string;
   isTarget: boolean;
@@ -133,8 +138,8 @@ export function useMysteryMessagesLogic() {
 
           stageAdvanceTimeoutRef.current = setTimeout(() => {
             setScore((s) => s + 1);
-            if (round === 3) {
-              if (stage === 3) {
+            if (round === MAX_ROUNDS) {
+              if (stage === MAX_STAGES) {
                 setIsGameComplete(true);
               } else {
                 setStage((s) => s + 1);

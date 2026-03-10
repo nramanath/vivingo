@@ -1,5 +1,5 @@
-import React from 'react';
-import { useMysteryMessagesLogic } from './useMysteryMessagesLogic';
+import React, { useMemo } from 'react';
+import { useMysteryMessagesLogic, MAX_ROUNDS } from './useMysteryMessagesLogic';
 import { Play } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 
@@ -86,6 +86,21 @@ export const MysteryMessages: React.FC = () => {
     resetGame,
   } = useMysteryMessagesLogic();
 
+  // Calculate decoded word progress for the bottom decoder boxes.
+  // Must be declared before any early returns to satisfy Rules of Hooks.
+  // Memoized so it only recalculates when targetWords or currentLetterIndex change.
+  const decodedWords = useMemo(() => {
+    let letterProgressIndex = 0;
+    return targetWords.map((word) => {
+      const letters = word.split('').map((char) => {
+        const isFound = letterProgressIndex < currentLetterIndex;
+        letterProgressIndex++;
+        return { char, isFound };
+      });
+      return letters;
+    });
+  }, [targetWords, currentLetterIndex]);
+
   if (!isPlaying) {
     return <StartScreen onStart={startGame} />;
   }
@@ -94,17 +109,6 @@ export const MysteryMessages: React.FC = () => {
     return <GameOverScreen score={score} onRestart={resetGame} />;
   }
 
-  // Calculate the filled progress of the words for the bottom decoder boxes
-  let letterProgressIndex = 0;
-  const decodedWords = targetWords.map((word) => {
-    const letters = word.split('').map((char) => {
-      const isFound = letterProgressIndex < currentLetterIndex;
-      letterProgressIndex++;
-      return { char, isFound };
-    });
-    return letters;
-  });
-
   return (
     <div className="flex flex-col items-center w-full h-full p-6 sm:p-10 relative">
       {/* Top HUD with Stage and Score */}
@@ -112,7 +116,7 @@ export const MysteryMessages: React.FC = () => {
         <div>
           Stage: {stage}{' '}
           <span className="text-sm opacity-60 ml-2 hidden sm:inline-block">
-            (Round {round} of 3)
+            (Round {round} of {MAX_ROUNDS})
           </span>
         </div>
         <div className="flex items-center gap-2">
