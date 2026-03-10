@@ -39,13 +39,8 @@ export const Sidebar = ({ onSelectGame }: SidebarProps) => {
             variantClass="gradient-brand-button"
           />
           <GradientGameCard
-            onClick={() => onSelectGame('Math Fun')}
-            title="Math Fun"
-            variantClass="gradient-brand-button"
-          />
-          <GradientGameCard
-            onClick={() => onSelectGame('Puzzles')}
-            title="Puzzles"
+            onClick={() => onSelectGame('Mystery Messages')}
+            title="Mystery Messages"
             variantClass="gradient-brand-button"
           />
         </div>

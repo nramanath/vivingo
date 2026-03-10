@@ -61,6 +61,56 @@ The application (`vivingo.vercel.app`) is deployed on Vercel and fully integrate
 
 No manual deployment steps or custom GitHub Actions workflows are required for the deployment process itself. Our `ci.yml` GitHub workflow handles rigorous code quality checks, while Vercel's native integration automatically watches the repository for updates to build and serve the application.
 
+## 🎮 Games
+
+### ABC Hunt
+
+A letter-recognition game where kids complete the alphabet by typing the missing letters. The full A–Z grid is shown with some letters hidden as `?` tiles — press the right key and the tile fills in green. Difficulty increases across 3 stages: 1 missing letter at a time → 2 consecutive → 3 consecutive.
+
+### Mystery Messages
+
+A word-decoding game where a jumbled grid hides a secret phrase. Kids type the underlined target letters left-to-right to reveal it. Progresses across 3 stages with increasing word length and noise density.
+
+<details>
+<summary><strong>Mystery Messages — Word System Architecture</strong></summary>
+
+#### Phrase Generation
+
+Phrases are composed from **categorized JSON word banks** located in `src/components/game/mystery-messages/utils/words/`:
+
+| File              | Contents                                       |
+| ----------------- | ---------------------------------------------- |
+| `animals.json`    | 80+ animals (ant, fox, crane, zebra…)          |
+| `nature.json`     | 80+ nature words (dew, frost, marsh, thorn…)   |
+| `food.json`       | 80+ food words (egg, plum, cake, curry…)       |
+| `things.json`     | 100+ everyday objects (bat, kite, helm, rope…) |
+| `adjectives.json` | 150+ adjectives (tiny, zesty, coral, fluffy…)  |
+| `verbs.json`      | 100+ action verbs (hop, roar, stomp, yelp…)    |
+
+[`random-word-slugs`](https://www.npmjs.com/package/random-word-slugs) auto-supplements the animal and color adjective pools. [`compromise`](https://www.npmjs.com/package/compromise) validates that each composed phrase contains a recognizable noun.
+
+#### Stage Progression
+
+| Stage | Template                                | Word length     | Example          |
+| ----- | --------------------------------------- | --------------- | ---------------- |
+| 1     | Single noun                             | exactly 3 chars | `CAT`            |
+| 2     | ADJ + NOUN                              | 3–4 chars each  | `WET FOX`        |
+| 3     | ADJ + NOUN + VERB _or_ ADJ + ADJ + NOUN | 3–5 chars each  | `FAST DEER LEAP` |
+
+#### Unique Puzzle Combinations
+
+| Stage                   | Pool sizes         | Combinations      |
+| ----------------------- | ------------------ | ----------------- |
+| Stage 1                 | 81 nouns           | **81**            |
+| Stage 2                 | 84 adj × 257 nouns | **21,588**        |
+| Stage 3 (ADJ+NOUN+VERB) | 184 × 377 × 174    | **12,070,032**    |
+| Stage 3 (ADJ+ADJ+NOUN)  | 184 × 183 × 377    | **12,694,344**    |
+| **Grand total**         |                    | **~24.8 million** |
+
+A child playing twice daily for an entire year would encounter less than **0.025%** of available combinations.
+
+</details>
+
 ## Architecture & Quality Standards
 
 - **Agentic Workflows**: See the `.agent/workflows` directory for our custom agentic workflows (`/pr-creator`, `/code-reviewer`) which enforce production-grade standards autonomously.
