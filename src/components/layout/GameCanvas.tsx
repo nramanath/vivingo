@@ -1,5 +1,6 @@
 import { ComingSoonBadge } from '../ui/ComingSoonBadge';
 import { AlphabetHunt } from '../game/alphabet-hunt';
+import { MysteryMessages } from '../game/mystery-messages';
 
 interface GameCanvasProps {
   selectedGame: string | null;
@@ -13,6 +14,8 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
         <div className="flex w-full h-full flex-col items-center justify-center transition-all duration-500">
           {selectedGame === 'ABC Hunt' ? (
             <AlphabetHunt />
+          ) : selectedGame === 'Mystery Messages' ? (
+            <MysteryMessages />
           ) : selectedGame ? (
             <div className="p-8 text-center flex flex-col items-center justify-center">
               <ComingSoonBadge selectedGame={selectedGame} />
