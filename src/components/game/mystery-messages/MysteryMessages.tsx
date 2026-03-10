@@ -1,6 +1,73 @@
 import React from 'react';
 import { useMysteryMessagesLogic } from './useMysteryMessagesLogic';
 import { Play } from 'lucide-react';
+import { cn } from '../../../lib/utils';
+
+// --- Sub-Components (Mapped from AlphabetHunt) ---
+const StartGameButton = ({ onClick, text }: { onClick: () => void; text: string }) => (
+  <button
+    onClick={onClick}
+    className={cn(
+      'group relative flex items-center justify-center rounded-[2.5rem] p-[3px] transition-transform duration-300 hover:scale-[1.03] hover:-translate-y-2 cursor-pointer shadow-md',
+      'gradient-card-base gradient-brand-button'
+    )}
+  >
+    <div className="relative flex w-full h-full items-center justify-center gap-2 rounded-[2.3rem] bg-[var(--color-kelly-green)] px-10 py-5 shadow-inner overflow-hidden border border-white/60 z-10 transition-colors duration-300 group-hover:bg-white/95">
+      <span className="relative z-20 flex items-center gap-2 font-fredoka text-2xl font-bold text-white transition-all duration-300 group-hover:scale-105 group-hover:text-[var(--color-kelly-green)]">
+        <Play
+          className="fill-white transition-colors duration-300 group-hover:fill-[var(--color-kelly-green)]"
+          size={24}
+        />
+        {text}
+      </span>
+    </div>
+  </button>
+);
+
+const StartScreen = ({ onStart }: { onStart: () => void }) => (
+  <div className="flex flex-col items-center justify-center animate-in zoom-in duration-500 w-full h-full">
+    <div className="text-6xl mb-4">🕵️‍♂️</div>
+    <h2 className="mb-4 font-fredoka text-4xl font-black text-black drop-shadow-sm text-center">
+      Mystery Messages
+    </h2>
+    <p className="max-w-md font-fredoka text-xl text-black/80 mb-8 text-center">
+      Crack the secret code by finding the underlined letters! Use your keyboard.
+    </p>
+    <StartGameButton onClick={onStart} text="Start Playing!" />
+  </div>
+);
+
+const GameOverScreen = ({ score, onRestart }: { score: number; onRestart: () => void }) => (
+  <div className="flex flex-col items-center justify-center animate-in zoom-in duration-500 w-full h-full p-4 text-center">
+    <div className="text-8xl mb-6">🎉</div>
+    <h2 className="mb-4 font-fredoka text-5xl font-black text-[var(--color-kelly-green)] drop-shadow-sm">
+      Amazing Work!
+    </h2>
+    <p className="max-w-md font-fredoka text-2xl text-black/80 mb-8">
+      You decoded all the messages like a top-secret agent! Score: {score}{' '}
+      <span className="text-yellow-500">⭐</span>
+    </p>
+    <StartGameButton onClick={onRestart} text="Play Again!" />
+  </div>
+);
+
+const FeedbackBanner = ({ feedback }: { feedback: 'correct' | 'wrong' | null }) => {
+  if (!feedback) return null;
+  return (
+    <div
+      className={cn(
+        'absolute -top-4 sm:-top-6 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-full px-8 py-2 font-fredoka text-2xl font-black transition-all duration-300 transform min-w-[200px] z-50',
+        feedback === 'correct'
+          ? 'bg-green-500 text-white translate-y-0 opacity-100 shadow-lg scale-110'
+          : feedback === 'wrong'
+            ? 'bg-red-500 text-white translate-y-0 opacity-100 shadow-lg scale-110'
+            : '-translate-y-4 opacity-0 scale-90 pointer-events-none'
+      )}
+    >
+      {feedback === 'correct' ? 'Correct!' : feedback === 'wrong' ? 'Wrong!' : ''}
+    </div>
+  );
+};
 
 export const MysteryMessages: React.FC = () => {
   const {
@@ -12,28 +79,19 @@ export const MysteryMessages: React.FC = () => {
     currentLetterIndex,
     feedback,
     wobbleIndex,
+    isPlaying,
     isGameComplete,
+    score,
+    startGame,
     resetGame,
   } = useMysteryMessagesLogic();
 
+  if (!isPlaying) {
+    return <StartScreen onStart={startGame} />;
+  }
+
   if (isGameComplete) {
-    return (
-      <div className="h-full flex flex-col items-center justify-center space-y-8">
-        <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-brand bg-clip-text text-transparent drop-shadow-sm px-4">
-          Amazing Work!
-        </h2>
-        <div className="text-2xl text-[var(--color-navy)] mb-8 max-w-lg text-center font-medium">
-          You decoded all the mystery messages like a top-secret agent!
-        </div>
-        <button
-          onClick={resetGame}
-          className="gradient-brand-button flex items-center justify-center gap-2 group w-full max-w-sm font-semibold"
-        >
-          <Play className="w-5 h-5 fill-current" />
-          <span>Play Again</span>
-        </button>
-      </div>
-    );
+    return <GameOverScreen score={score} onRestart={resetGame} />;
   }
 
   // Calculate the filled progress of the words for the bottom decoder boxes
@@ -48,68 +106,31 @@ export const MysteryMessages: React.FC = () => {
   });
 
   return (
-    <div className="h-full flex flex-col w-full relative">
-      {/* Top HUD with Feedback and Stage/Round Trackers */}
-      <div className="h-16 flex items-center justify-between px-6 border-b border-[var(--color-cloud-gray)] shrink-0">
-        <div className="flex gap-4">
-          <div className="flex flex-col">
-            <span className="text-xs font-bold text-[var(--color-royal-blue)] uppercase tracking-wider">
-              Stage
-            </span>
-            <div className="flex gap-1.5 mt-1">
-              {[1, 2, 3].map((s) => (
-                <div
-                  key={s}
-                  className={`w-8 h-2.5 rounded-full transition-colors ${
-                    s <= stage ? 'bg-[var(--color-royal-blue)]' : 'bg-[var(--color-cloud-gray)]'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs font-bold text-[var(--color-tangerine)] uppercase tracking-wider">
-              Round
-            </span>
-            <div className="flex gap-1.5 mt-1">
-              {[1, 2, 3].map((r) => (
-                <div
-                  key={r}
-                  className={`w-8 h-2.5 rounded-full transition-colors ${
-                    r <= round ? 'bg-[var(--color-tangerine)]' : 'bg-[var(--color-cloud-gray)]'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+    <div className="flex flex-col items-center w-full h-full p-6 sm:p-10 relative">
+      {/* Top HUD with Stage and Score */}
+      <div className="absolute top-6 left-6 right-6 flex justify-between items-center font-fredoka text-2xl font-bold text-black/80 pointer-events-none z-10">
+        <div>
+          Stage: {stage}{' '}
+          <span className="text-sm opacity-60 ml-2 hidden sm:inline-block">
+            (Round {round} of 3)
+          </span>
         </div>
-        {/* Dynamic Contextual Feedback Banner */}
-        <div className="flex-1 flex justify-center">
-          {feedback && (
-            <div
-              className={`px-6 py-2 rounded-2xl font-bold text-lg animate-in fade-in slide-in-from-top-4 ${
-                feedback === 'correct'
-                  ? 'bg-[var(--color-kelly-green)] text-white shadow-lg'
-                  : 'bg-[var(--color-coral-red)] text-white shadow-lg'
-              }`}
-            >
-              {feedback === 'correct' ? 'Correct!' : 'Wrong!'}
-            </div>
-          )}
+        <div className="flex items-center gap-2">
+          <span>{score}</span> <span className="text-3xl text-yellow-500">⭐</span>
         </div>
-        <div className="w-32" /> {/* Spacer to balance HUD flexbox */}
       </div>
 
       {/* Main Game Area */}
-      <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-hidden gap-16">
+      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-2 sm:px-6 lg:px-12 mt-16 z-20 gap-16">
+        <FeedbackBanner feedback={feedback} />
         {/* The Jumble (Top View) */}
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
           {puzzleLetters.map((pl) => {
-            // Apply a slight fade and green coloring to letters already found
+            // Turn green once found, removing any placeholder styling
             const foundStyle =
               pl.isTarget && pl.isFound
-                ? 'opacity-30 text-[var(--color-kelly-green)] border-transparent'
-                : 'text-[var(--color-navy)] shadow-md';
+                ? 'text-green-600 animate-in zoom-in duration-300'
+                : 'text-black';
 
             // Check if this letter is actively wobbling due to a wrong guess
             const isWobbling =
@@ -121,18 +142,14 @@ export const MysteryMessages: React.FC = () => {
             return (
               <div
                 key={pl.id}
-                className={`relative flex items-center justify-center w-14 h-16 sm:w-16 sm:h-20 bg-white rounded-xl text-3xl sm:text-4xl font-bold transform transition-all duration-300 ${foundStyle} ${
-                  isWobbling ? 'animate-wobble border-red-400' : ''
+                className={`relative flex items-center justify-center w-10 sm:w-14 font-fredoka font-black text-4xl sm:text-5xl transform transition-all duration-300 ${foundStyle} ${
+                  isWobbling ? 'animate-[shake_0.5s_ease-in-out] text-red-500' : ''
                 }`}
-                style={{
-                  border: pl.isTarget && pl.isFound ? 'none' : '2px solid var(--color-cloud-gray)',
-                  boxShadow: pl.isTarget && pl.isFound ? 'none' : '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-                }}
               >
                 {pl.char}
                 {/* Bold Target Indicator */}
                 {pl.isTarget && !pl.isFound && (
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3/4 h-2 bg-[var(--color-tangerine)] rounded-full shadow-sm" />
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4/5 h-2 bg-[var(--color-kelly-green)] rounded-full shadow-sm" />
                 )}
               </div>
             );
@@ -146,13 +163,23 @@ export const MysteryMessages: React.FC = () => {
               {word.map((letterObj, letterIdx) => (
                 <div
                   key={letterIdx}
-                  className={`flex items-center justify-center w-16 h-20 sm:w-20 sm:h-24 rounded-2xl text-4xl sm:text-5xl font-black transition-all duration-300 shadow-sm ${
-                    letterObj.isFound
-                      ? 'bg-gradient-brand text-white shadow-lg scale-110 border-transparent'
-                      : 'bg-white text-black border-dashed border-4 border-gray-400 opacity-80 backdrop-blur-sm'
+                  className={`relative flex flex-col items-center justify-center rounded-2xl border-4 transition-all duration-300 aspect-square shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm w-14 sm:w-16 md:w-20 ${
+                    !letterObj.isFound
+                      ? 'border-dashed border-gray-400 opacity-80'
+                      : 'border-green-400 bg-green-50'
                   }`}
                 >
-                  {letterObj.isFound ? letterObj.char : '?'}
+                  {!letterObj.isFound ? (
+                    <span className="font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black text-gray-300">
+                      ?
+                    </span>
+                  ) : (
+                    <span
+                      className={`font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black select-none text-green-600 animate-in zoom-in duration-300`}
+                    >
+                      {letterObj.char}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

@@ -16,7 +16,7 @@ describe('App Integration', () => {
     // 3. Assert result: The welcome message should be gone
     expect(screen.queryByText(/Ready to Play\?/i)).toBeNull();
 
-    // The component should load successfully, verified by its inner text.
-    expect(screen.getByText(/Stage/i)).toBeDefined();
+    // The component should load successfully onto the pre-game splash screen
+    expect(screen.getByText('Start Playing!')).toBeDefined();
   });
 });

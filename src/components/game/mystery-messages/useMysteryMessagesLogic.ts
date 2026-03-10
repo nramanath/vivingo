@@ -11,7 +11,9 @@ export type PuzzleLetter = {
 export function useMysteryMessagesLogic() {
   const [stage, setStage] = useState(1);
   const [round, setRound] = useState(1);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isGameComplete, setIsGameComplete] = useState(false);
+  const [score, setScore] = useState(0);
 
   const [targetWords, setTargetWords] = useState<string[]>([]);
   const [targetLetters, setTargetLetters] = useState<string[]>([]);
@@ -87,16 +89,17 @@ export function useMysteryMessagesLogic() {
   }, [stage]);
 
   useEffect(() => {
-    if (!isGameComplete) {
-      // Small timeout to decouple the build from the synchronous react render cycle when round advances
-      const timer = setTimeout(() => generatePuzzle(), 10);
+    if (isPlaying && !isGameComplete) {
+      const timer = setTimeout(() => {
+        generatePuzzle();
+      }, 0);
       return () => clearTimeout(timer);
     }
-  }, [round, stage, isGameComplete, generatePuzzle]);
+  }, [round, stage, isPlaying, isGameComplete, generatePuzzle]);
 
   // Main keyboard event listener for strict decoding
   useEffect(() => {
-    if (isGameComplete || targetLetters.length === 0) return;
+    if (!isPlaying || isGameComplete || targetLetters.length === 0) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toUpperCase();
@@ -129,6 +132,7 @@ export function useMysteryMessagesLogic() {
           if (stageAdvanceTimeoutRef.current) clearTimeout(stageAdvanceTimeoutRef.current);
 
           stageAdvanceTimeoutRef.current = setTimeout(() => {
+            setScore((s) => s + 1);
             if (round === 3) {
               if (stage === 3) {
                 setIsGameComplete(true);
@@ -159,7 +163,7 @@ export function useMysteryMessagesLogic() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentLetterIndex, targetLetters, isGameComplete, round, stage, showFeedback]);
+  }, [isPlaying, currentLetterIndex, targetLetters, isGameComplete, round, stage, showFeedback]);
 
   // Cleanup timers strictly enforced by the global code guidelines
   useEffect(() => {
@@ -170,11 +174,17 @@ export function useMysteryMessagesLogic() {
     };
   }, []);
 
-  const resetGame = useCallback(() => {
+  const startGame = useCallback(() => {
+    setIsPlaying(true);
+    setIsGameComplete(false);
+    setScore(0);
     setStage(1);
     setRound(1);
-    setIsGameComplete(false);
   }, []);
+
+  const resetGame = useCallback(() => {
+    startGame();
+  }, [startGame]);
 
   return {
     stage,
@@ -185,7 +195,10 @@ export function useMysteryMessagesLogic() {
     currentLetterIndex,
     feedback,
     wobbleIndex,
+    isPlaying,
     isGameComplete,
+    score,
+    startGame,
     resetGame,
   };
 }
