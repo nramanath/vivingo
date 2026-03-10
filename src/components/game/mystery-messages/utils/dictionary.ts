@@ -1,8 +1,7 @@
 import nlp from 'compromise';
-import { wordList } from 'random-word-slugs/dist/words';
 
 // --- Static categorized word banks (JSON files) ---
-// Each file is a flat array of words, organized by theme.
+// Each file is a flat array of words organized by theme.
 // Length filtering is applied at runtime per stage requirements.
 import animalsBank from './words/animals.json';
 import natureBank from './words/nature.json';
@@ -11,22 +10,15 @@ import thingsBank from './words/things.json';
 import adjectivesBank from './words/adjectives.json';
 import verbsBank from './words/verbs.json';
 
-// --- Supplement nouns with categorized entries from random-word-slugs ---
-// This gives us extra variety without us maintaining them manually.
-const slugAnimals = wordList.noun
-  .filter((n) => (n.categories as unknown as string[]).includes('animals'))
-  .map((n) => n.word);
-
-const slugColorAdjs = wordList.adjective
-  .filter((a) => (a.categories as unknown as string[]).includes('color'))
-  .map((a) => a.word);
-
 // --- Merged, deduplicated pools ---
+// Note: random-word-slugs was considered as a supplement but its internal
+// dist/words path is not a public API and breaks in Vercel/CI environments.
+// The words it would have contributed are already covered by our JSON banks.
 const ALL_NOUNS: string[] = [
-  ...new Set([...animalsBank, ...natureBank, ...foodBank, ...thingsBank, ...slugAnimals]),
+  ...new Set([...animalsBank, ...natureBank, ...foodBank, ...thingsBank]),
 ];
 
-const ALL_ADJECTIVES: string[] = [...new Set([...adjectivesBank, ...slugColorAdjs])];
+const ALL_ADJECTIVES: string[] = [...new Set([...adjectivesBank])];
 
 const ALL_VERBS: string[] = [...new Set([...verbsBank])];
 
