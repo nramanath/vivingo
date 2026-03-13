@@ -3,9 +3,14 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
-export const AgeSelector = () => {
+interface AgeSelectorProps {
+  value: string;
+  onValueChange: (value: string) => void;
+}
+
+export const AgeSelector = ({ value, onValueChange }: AgeSelectorProps) => {
   return (
-    <SelectPrimitive.Root defaultValue="all">
+    <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
       <SelectPrimitive.Trigger className="flex items-center justify-between gap-3 bg-[var(--color-freesia)] text-black font-fredoka font-medium py-2 px-5 rounded-full shadow-sm hover:shadow-md hover:border-black border-2 border-transparent transition-all outline-none cursor-pointer min-w-[140px]">
         <div className="flex items-center gap-2">
           <span className="opacity-80 font-medium font-fredoka">Age:</span>
@@ -29,6 +34,7 @@ export const AgeSelector = () => {
           <SelectPrimitive.Viewport className="p-1">
             <AgeItem value="all">All Ages</AgeItem>
             <div className="h-[1px] bg-[var(--color-yellow)] my-1 mx-2" />
+            <AgeItem value="2">2 Years</AgeItem>
             <AgeItem value="3">3 Years</AgeItem>
             <AgeItem value="4">4 Years</AgeItem>
             <AgeItem value="5">5 Years</AgeItem>

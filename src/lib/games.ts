@@ -3,6 +3,8 @@ export interface GameMetadata {
   title: string;
   icon: string;
   description: string;
+  minAge: number;
+  maxAge: number;
   teaches: {
     title: string;
     description: string;
@@ -17,9 +19,11 @@ export const games: GameMetadata[] = [
   {
     id: 'ABC Hunt',
     title: 'ABC Hunt',
-    icon: '🚂',
+    icon: '🔤',
     description:
-      'A fun letter-matching game where children complete a train by finding missing letters in the sequence.',
+      'A fun letter-matching game where children complete a sequence by finding missing letters.',
+    minAge: 3,
+    maxAge: 3,
     teaches: [
       {
         title: 'Letter Recognition',
@@ -39,7 +43,7 @@ export const games: GameMetadata[] = [
       },
     ],
     howToPlay:
-      'Look at the train and find the letters with the question marks. Type the correct letter on your keyboard to fill the gap!\n\n• Stage 1: Find 1 missing letter.\n• Stage 2: Find 2 missing letters in a row.\n• Stage 3: Find 3 missing letters in a row.',
+      'Look at the sequence and find the letters with the question marks. Type the correct letter on your keyboard to fill the gap!\n\n• Stage 1: Find 1 missing letter.\n• Stage 2: Find 2 missing letters in a row.\n• Stage 3: Find 3 missing letters in a row.',
     parentNote:
       'This game helps bridge the gap between recognizing letters and understanding their sequence. It encourages patience and pattern recognition in a low-stress, playful environment.',
     parentProTip:
@@ -52,6 +56,8 @@ export const games: GameMetadata[] = [
     icon: '🕵️‍♂️',
     description:
       'A decoding adventure where children reveal hidden silly phrases using a symbol-to-letter key.',
+    minAge: 3,
+    maxAge: 3,
     teaches: [
       {
         title: 'Symbol-Letter Association',
@@ -76,6 +82,79 @@ export const games: GameMetadata[] = [
       '"Mystery Messages" introduces basic cryptography and logic. It\'s a great way to make reading practice feel like a secret mission, keeping young learners engaged and curious.',
     parentProTip:
       'When your child decodes a new word, take a moment to explain what it means. It’s a fantastic, low-pressure way to expand their vocabulary while they’re "winning" the game!',
+    variantClass: 'gradient-brand-button',
+  },
+  {
+    id: 'Surprise Box',
+    title: 'Surprise Box',
+    icon: '🎁',
+    description:
+      'A magical box that reacts to any key you press! Keep mashing to see what pops out.',
+    minAge: 2,
+    maxAge: 2,
+    teaches: [
+      {
+        title: 'Cause and Effect',
+        description: 'Understanding that their actions control the screen.',
+      },
+      { title: 'Attention', description: 'Staying focused on the box to see the surprise.' },
+      { title: 'Discovery', description: 'Exploration through open-ended play.' },
+    ],
+    howToPlay:
+      'Press ANY key on your keyboard to make the box dance and shake! Keep pressing until the surprise pops out!',
+    parentNote:
+      'This is the perfect first game for toddlers. There are no "wrong" keys—every single press provides a fun visual and audio reward, building their confidence with computers.',
+    parentProTip:
+      'Sit with your child and cheer when they mash the keys! You can also name the colors or sounds as they happen to build their vocabulary.',
+    variantClass: 'gradient-brand-button',
+  },
+  {
+    id: 'The Big Parade',
+    title: 'The Big Parade',
+    icon: '🚂',
+    description: 'Press the Spacebar to move the train and meet a new animal friend at every stop!',
+    minAge: 2,
+    maxAge: 2,
+    teaches: [
+      { title: 'Sequencing', description: 'Understanding that events happen in a specific order.' },
+      { title: 'Vocabulary', description: 'Learning animal names and their unique sounds.' },
+      {
+        title: 'Action-Trigger Timing',
+        description: 'Coordinating physical movement with screen changes.',
+      },
+    ],
+    howToPlay:
+      'Press the giant SPACEBAR to move the train forward! Discover a new animal passenger with every press.',
+    parentNote:
+      'This game isolates input to the single largest button on the keyboard, making it extremely accessible for tiny hands.',
+    parentProTip:
+      'Ask your child to imitate the animal sound after they press the Spacebar. This turns a digital game into an active, social learning experience!',
+    variantClass: 'gradient-brand-button',
+  },
+  {
+    id: 'Left or Right?',
+    title: 'Left or Right?',
+    icon: '↔️',
+    description: 'Can you find the match? Use your arrow keys to pick between two choices.',
+    minAge: 2,
+    maxAge: 2,
+    teaches: [
+      {
+        title: 'Choice and Categorization',
+        description: 'Identifying and selecting the correct object.',
+      },
+      {
+        title: 'Directional Logic',
+        description: 'Mapping left/right physical keys to screen positions.',
+      },
+      { title: 'Color/Shape Recognition', description: 'Identifying basic visual properties.' },
+    ],
+    howToPlay:
+      'Listen to the voice and use your LEFT (←) or RIGHT (→) arrow keys to pick the correct item!',
+    parentNote:
+      'This game introduces basic decision-making. Mapping a physical key to a screen position is a significant cognitive step for toddlers.',
+    parentProTip:
+      'Put a small green sticker on the Left arrow and a red one on the Right arrow. This provides a physical anchor for them to learn which hand to use.',
     variantClass: 'gradient-brand-button',
   },
 ];
