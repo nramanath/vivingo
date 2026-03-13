@@ -45,7 +45,8 @@ describe('Sidebar', () => {
       />
     );
 
-    expect(screen.getByText('Back to Games')).toBeDefined();
+    expect(screen.getByText('Back')).toBeDefined();
+    expect(screen.queryByText('Age:')).toBeNull();
     expect(screen.getByText('What it Teaches')).toBeDefined();
   });
 
@@ -60,7 +61,7 @@ describe('Sidebar', () => {
       />
     );
 
-    fireEvent.click(screen.getByText('Back to Games'));
+    fireEvent.click(screen.getByText('Back'));
     expect(onSelectGame).toHaveBeenCalledWith(null);
   });
 
