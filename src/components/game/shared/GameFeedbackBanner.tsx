@@ -1,4 +1,3 @@
-import React from 'react';
 import { cn } from '../../../lib/utils';
 
 export type FeedbackType = 'correct' | 'wrong' | 'completed' | null;

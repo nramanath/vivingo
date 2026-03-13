@@ -14,11 +14,15 @@ describe('LeftRightMatch', () => {
   it('renders correctly and allows playing with arrow keys', async () => {
     render(<LeftRightMatch />);
 
+    // Advance timers to trigger challenge generation in useEffect
+    act(() => {
+      vi.runAllTimers();
+    });
+
     // Check initial state
     expect(screen.getByText(/Where is the/)).toBeDefined();
 
     // Verify questions and choices render
-    expect(screen.getByText(/Where is the/)).toBeDefined();
     expect(screen.getByText(/left/i)).toBeDefined();
     expect(screen.getByText(/right/i)).toBeDefined();
 

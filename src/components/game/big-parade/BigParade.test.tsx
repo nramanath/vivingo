@@ -11,8 +11,13 @@ describe('BigParade', () => {
     vi.restoreAllMocks();
   });
 
-  it('renders and progresses with spacebar', () => {
+  it('renders and progresses with spacebar', async () => {
     render(<BigParade />);
+
+    // Advance timers to trigger shuffle in useEffect
+    act(() => {
+      vi.runAllTimers();
+    });
 
     expect(screen.getByText('The Big Parade')).toBeDefined();
 
