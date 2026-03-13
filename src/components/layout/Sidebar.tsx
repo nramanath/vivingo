@@ -22,7 +22,7 @@ export const Sidebar = ({ onSelectGame, selectedGame, selectedAge, onSelectAge }
   });
 
   return (
-    <aside className="relative z-10 hidden h-screen w-full flex-col p-2 md:flex md:w-[400px] lg:w-[450px]">
+    <aside className="relative z-10 flex h-screen w-full flex-col p-2 md:w-[400px] lg:w-[450px]">
       {/* The Sidebar "Canvas" Container */}
       <div className="flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-white/60 bg-white shadow-2xl transition-all duration-500">
         {/* Sticky Header Section */}
