@@ -68,7 +68,7 @@ Vivingo's game library is built on a **Unified Game Architecture**, ensuring a c
 <details>
 <summary><strong>Explore the Game Library</strong></summary>
 
-### 🔤 ABC Hunt (Age 2+)
+### 🔤 ABC Hunt (Age 3+)
 
 A letter-recognition game where kids complete the alphabet by typing missing letters.
 
