@@ -1,10 +1,9 @@
-import { ArrowLeft, Brain, Hand, Heart } from 'lucide-react';
+import { Brain, Hand, Heart } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { GameMetadata } from '../../lib/games';
 
 interface GameDetailsProps {
   game: GameMetadata;
-  onBack: () => void;
 }
 
 interface InfoSectionProps {
@@ -53,17 +52,9 @@ const GameHeader = ({ game }: GameHeaderProps) => (
   </div>
 );
 
-export const GameDetails = ({ game, onBack }: GameDetailsProps) => {
+export const GameDetails = ({ game }: GameDetailsProps) => {
   return (
     <div className="flex flex-col animate-in slide-in-from-right duration-300">
-      <button
-        onClick={onBack}
-        className="mb-6 flex items-center gap-2 font-fredoka text-lg font-bold text-black/60 transition-colors hover:text-black"
-      >
-        <ArrowLeft size={20} />
-        Back to Games
-      </button>
-
       <GameHeader game={game} />
 
       <div className="space-y-8">
