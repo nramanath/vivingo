@@ -56,7 +56,7 @@ const FeedbackBanner = ({ feedback }: { feedback: 'correct' | 'wrong' | null }) 
   return (
     <div
       className={cn(
-        'absolute -top-4 sm:-top-6 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-full px-8 py-2 font-fredoka text-2xl font-black transition-all duration-300 transform min-w-[200px] z-50',
+        'absolute top-4 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-full px-8 py-2 font-fredoka text-xl font-black transition-all duration-300 transform min-w-[180px] z-50',
         feedback === 'correct'
           ? 'bg-green-500 text-white translate-y-0 opacity-100 shadow-lg scale-110'
           : feedback === 'wrong'
@@ -110,7 +110,7 @@ export const MysteryMessages: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full h-full p-6 sm:p-10 relative">
+    <div className="flex flex-col items-center w-full h-full p-4 relative">
       {/* Top HUD with Stage and Score */}
       <div className="absolute top-6 left-6 right-6 flex justify-between items-center font-fredoka text-2xl font-bold text-black/80 pointer-events-none z-10">
         <div>
@@ -125,7 +125,7 @@ export const MysteryMessages: React.FC = () => {
       </div>
 
       {/* Main Game Area */}
-      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-2 sm:px-6 lg:px-12 mt-16 z-20 gap-16">
+      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-4 sm:px-12 mt-12 z-20 gap-16">
         <FeedbackBanner feedback={feedback} />
         {/* The Jumble (Top View) */}
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
@@ -146,7 +146,7 @@ export const MysteryMessages: React.FC = () => {
             return (
               <div
                 key={pl.id}
-                className={`relative flex items-center justify-center w-10 sm:w-14 font-fredoka font-black text-4xl sm:text-5xl transform transition-all duration-300 ${foundStyle} ${
+                className={`relative flex items-center justify-center w-9 sm:w-11 md:w-13 font-fredoka font-black text-2xl sm:text-3xl md:text-4xl transform transition-all duration-300 ${foundStyle} ${
                   isWobbling ? 'animate-[shake_0.5s_ease-in-out] text-red-500' : ''
                 }`}
               >
@@ -167,19 +167,19 @@ export const MysteryMessages: React.FC = () => {
               {word.map((letterObj, letterIdx) => (
                 <div
                   key={letterIdx}
-                  className={`relative flex flex-col items-center justify-center rounded-2xl border-4 transition-all duration-300 aspect-square shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm w-14 sm:w-16 md:w-20 ${
+                  className={`relative flex flex-col items-center justify-center rounded-xl border-2 sm:border-4 transition-all duration-300 aspect-square shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm w-12 sm:w-14 md:w-18 ${
                     !letterObj.isFound
                       ? 'border-dashed border-gray-400 opacity-80'
                       : 'border-green-400 bg-green-50'
                   }`}
                 >
                   {!letterObj.isFound ? (
-                    <span className="font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black text-gray-300">
+                    <span className="font-fredoka text-xl sm:text-2xl md:text-3xl font-black text-gray-300">
                       ?
                     </span>
                   ) : (
                     <span
-                      className={`font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black select-none text-green-600 animate-in zoom-in duration-300`}
+                      className={`font-fredoka text-xl sm:text-2xl md:text-3xl font-black select-none text-green-600 animate-in zoom-in duration-300`}
                     >
                       {letterObj.char}
                     </span>
@@ -190,7 +190,7 @@ export const MysteryMessages: React.FC = () => {
           ))}
         </div>
         {/* Control Instruction Area */}
-        <div className="mt-12 w-full flex justify-center">
+        <div className="mt-8 mb-4 w-full flex justify-center">
           <div
             className={cn(
               'px-8 py-4 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-xl transition-all min-w-[300px]',
