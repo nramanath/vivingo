@@ -63,57 +63,102 @@ No manual deployment steps or custom GitHub Actions workflows are required for t
 
 ## 🎮 Games
 
-### ABC Hunt
-
-A letter-recognition game where kids complete the alphabet by typing the missing letters. The full A–Z grid is shown with some letters hidden as `?` tiles — press the right key and the tile fills in green. Difficulty increases across 3 stages: 1 missing letter at a time → 2 consecutive → 3 consecutive.
-
-### Mystery Messages
-
-A word-decoding game where a jumbled grid hides a secret phrase. Kids type the underlined target letters left-to-right to reveal it. Progresses across 3 stages with increasing word length and noise density.
+Vivingo's game library is built on a **Unified Game Architecture**, ensuring a consistent look and feel while keeping game-specific logic completely decoupled.
 
 <details>
-<summary><strong>Mystery Messages — Word System Architecture</strong></summary>
+<summary><strong>Explore the Game Library</strong></summary>
 
-#### Phrase Generation
+### 🔤 ABC Hunt (Age 2+)
 
-Phrases are composed from **categorized JSON word banks** located in `src/components/game/mystery-messages/utils/words/`:
+A letter-recognition game where kids complete the alphabet by typing missing letters.
 
-| File              | Contents                                       |
-| ----------------- | ---------------------------------------------- |
-| `animals.json`    | 80+ animals (ant, fox, crane, zebra…)          |
-| `nature.json`     | 80+ nature words (dew, frost, marsh, thorn…)   |
-| `food.json`       | 80+ food words (egg, plum, cake, curry…)       |
-| `things.json`     | 100+ everyday objects (bat, kite, helm, rope…) |
-| `adjectives.json` | 150+ adjectives (tiny, zesty, coral, fluffy…)  |
-| `verbs.json`      | 100+ action verbs (hop, roar, stomp, yelp…)    |
+- **Goal**: Find the '?' tiles and press the matching keyboard key.
+- **Progression**: 3 stages with increasing difficulty (1 missing letter → 2 → 3).
+- **Teaches**: Visual letter recognition, keyboard familiarity.
 
-[`random-word-slugs`](https://www.npmjs.com/package/random-word-slugs) auto-supplements the animal and color adjective pools. [`compromise`](https://www.npmjs.com/package/compromise) validates that each composed phrase contains a recognizable noun.
+### 🕵️‍♂️ Mystery Messages (Age 3+)
 
-#### Stage Progression
+A word-decoding game where a jumbled grid hides a secret phrase.
 
-| Stage | Template                                | Word length     | Example          |
-| ----- | --------------------------------------- | --------------- | ---------------- |
-| 1     | Single noun                             | exactly 3 chars | `CAT`            |
-| 2     | ADJ + NOUN                              | 3–4 chars each  | `WET FOX`        |
-| 3     | ADJ + NOUN + VERB _or_ ADJ + ADJ + NOUN | 3–5 chars each  | `FAST DEER LEAP` |
+- **Goal**: Type the underlined target letters left-to-right to reveal the message.
+- **Progression**: Increases word length and "noise" density across 3 stages.
+- **Teaches**: Spelling, focus, and sequential processing.
 
-#### Unique Puzzle Combinations
+> [!NOTE]
+> **Technical Deep Dive: Mystery Messages Architecture**
+>
+> <details>
+> <summary>Click to see Word System & Combinations</summary>
+>
+> #### Phrase Generation
+>
+> Phrases are composed from categorized JSON word banks located in `src/components/game/mystery-messages/utils/words/`.
+>
+> | File              | Contents              |
+> | ----------------- | --------------------- |
+> | `animals.json`    | 80+ animals           |
+> | `nature.json`     | 80+ nature words      |
+> | `food.json`       | 80+ food words        |
+> | `things.json`     | 100+ everyday objects |
+> | `adjectives.json` | 150+ adjectives       |
+> | `verbs.json`      | 100+ action verbs     |
+>
+> #### Stage Progression
+>
+> | Stage | Template        | Example          |
+> | ----- | --------------- | ---------------- |
+> | 1     | Single noun     | `CAT`            |
+> | 2     | ADJ + NOUN      | `WET FOX`        |
+> | 3     | Complex phrases | `FAST DEER LEAP` |
+>
+> #### Unique Puzzle Combinations
+>
+> With over **24.8 million** possible combinations, a child playing twice daily would encounter less than **0.025%** of the content in a year.
+>
+> </details>
 
-| Stage                   | Pool sizes         | Combinations      |
-| ----------------------- | ------------------ | ----------------- |
-| Stage 1                 | 81 nouns           | **81**            |
-| Stage 2                 | 84 adj × 257 nouns | **21,588**        |
-| Stage 3 (ADJ+NOUN+VERB) | 184 × 377 × 174    | **12,070,032**    |
-| Stage 3 (ADJ+ADJ+NOUN)  | 184 × 183 × 377    | **12,694,344**    |
-| **Grand total**         |                    | **~24.8 million** |
+### ↔️ Left-Right Match (Age 2+)
 
-A child playing twice daily for an entire year would encounter less than **0.025%** of available combinations.
+A directional awareness game that teaches kids to distinguish between left and right.
+
+- **Goal**: Identify which side (Left/Right) contains the target object (e.g., "Where is the Elephant?").
+- **Interaction**: Click/Tap or use Arrow Keys.
+- **Teaches**: Lateral awareness, object identification.
+
+### 🦁 The Big Parade (Age 2+)
+
+An interactive discovery game featuring a vibrant animal parade.
+
+- **Goal**: Help the animals move across the screen by pressing the Spacebar.
+- **Feedback**: Each animal blast triggers a sound effect and name display.
+- **Teaches**: Cause and effect, animal names/sounds.
+
+### 🎁 Surprise Box (Age 2+)
+
+A game of persistence and delightful rewards.
+
+- **Goal**: Tap the box repeatedly to build up energy until it "pops".
+- **Reward**: A random high-value emoji reward with a confetti celebration.
+- **Teaches**: Persistence, fine motor timing.
 
 </details>
 
-## Architecture & Quality Standards
+## 🏗️ Technical Architecture
 
-- **Agentic Workflows**: See the `.agent/workflows` directory for our custom agentic workflows (`/pr-creator`, `/code-reviewer`) which enforce production-grade standards autonomously.
+<details>
+<summary><strong>Unified Game Framework</strong></summary>
+
+All games are built using a standardized framework that separates UI from Logic:
+
+1.  **Shared Components**: Reusable UI elements (`GameActionButton`, `GameInstructionPill`, `GameFeedbackBanner`, `GameProgressDots`) ensure a premium, consistent experience.
+2.  **Custom Hooks**: Business logic is encapsulated in game-specific hooks (e.g., `useAlphabetHuntLogic`), making the visual components lightweight and purely representational.
+3.  **Strict Testing**: Every game is backed by an automated test suite ensuring reliability across all stages and interactions.
+</details>
+
+<details>
+<summary><strong>Development Standards & Workflows</strong></summary>
+
+- **Agentic Workflows**: Located in `.agent/workflows`, our custom agentic commands (`/pr-creator`, `/code-reviewer`) enforce production-grade standards autonomously.
 - **Code Style**: Strictly enforced via Prettier and comprehensive ESLint rules.
 - **Conventional Commits**: Enforced via Husky and Commitlint (`.commitlintrc.cjs`).
 
