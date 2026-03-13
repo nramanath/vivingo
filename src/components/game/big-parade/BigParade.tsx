@@ -1,127 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Train, Play } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { cn } from '../../../lib/utils';
-
-const ANIMAL_DATA = [
-  { emoji: '🐘', sound: 'PAWOOO!', name: 'Elephant' },
-  { emoji: '🦁', sound: 'ROAARR!', name: 'Lion' },
-  { emoji: '🐵', sound: 'OOO OOO!', name: 'Monkey' },
-  { emoji: '🐮', sound: 'MOOO!', name: 'Cow' },
-  { emoji: '🐸', sound: 'RIBBIT!', name: 'Frog' },
-  { emoji: '🦓', sound: 'NEIGH!', name: 'Zebra' },
-  { emoji: '🦒', sound: 'HUMMM!', name: 'Giraffe' },
-  { emoji: '🦖', sound: 'RAWWR!', name: 'Dino' },
-  { emoji: '🐔', sound: 'CLUCK!', name: 'Chicken' },
-  { emoji: '🐷', sound: 'OINK!', name: 'Pig' },
-  { emoji: '🐏', sound: 'BAAAA!', name: 'Sheep' },
-  { emoji: '🦆', sound: 'QUACK!', name: 'Duck' },
-  { emoji: '🐶', sound: 'WOOF!', name: 'Dog' },
-  { emoji: '🐱', sound: 'MEOW!', name: 'Cat' },
-  { emoji: '🐭', sound: 'SQUEAK!', name: 'Mouse' },
-  { emoji: '🐹', sound: 'SQUEAK!', name: 'Hamster' },
-  { emoji: '🐰', sound: 'HOORAY!', name: 'Rabbit' },
-  { emoji: '🦊', sound: 'YIP!', name: 'Fox' },
-  { emoji: '🐻', sound: 'GRRR!', name: 'Bear' },
-  { emoji: '🐼', sound: 'GRRR!', name: 'Panda' },
-  { emoji: '🐨', sound: 'ZZZZ!', name: 'Koala' },
-  { emoji: '🐯', sound: 'GRRR!', name: 'Tiger' },
-  { emoji: '🐧', sound: 'HONK!', name: 'Penguin' },
-  { emoji: '🐦', sound: 'TWEET!', name: 'Bird' },
-  { emoji: '🐺', sound: 'HOWL!', name: 'Wolf' },
-  { emoji: '🐴', sound: 'NEIGH!', name: 'Horse' },
-  { emoji: '🐝', sound: 'BUZZ!', name: 'Bee' },
-  { emoji: '🦕', sound: 'RAWWR!', name: 'Dino' },
-  { emoji: '🐙', sound: 'GLUB!', name: 'Octopus' },
-  { emoji: '🐳', sound: 'SPLOSH!', name: 'Whale' },
-  { emoji: '🐊', sound: 'SNAP!', name: 'Croco' },
-  { emoji: '🦍', sound: 'HOO HOO!', name: 'Gorilla' },
-  { emoji: '🦃', sound: 'GOBBLE!', name: 'Turkey' },
-  { emoji: '🦜', sound: 'HELLO!', name: 'Parrot' },
-];
-
-const PARADE_LENGTH = 5;
-
-// --- Sub-Components ---
-const ActionButton = ({
-  onClick,
-  text,
-  icon: Icon,
-}: {
-  onClick: () => void;
-  text: string;
-  icon?: React.ElementType;
-}) => (
-  <button
-    onClick={onClick}
-    className={cn(
-      'group relative flex items-center justify-center rounded-[2.5rem] p-[3px] transition-transform duration-300 hover:scale-[1.03] hover:-translate-y-2 cursor-pointer shadow-md',
-      'gradient-card-base gradient-brand-button'
-    )}
-  >
-    <div className="relative flex w-full h-full items-center justify-center gap-2 rounded-[2.3rem] bg-[var(--color-kelly-green)] px-10 py-5 shadow-inner overflow-hidden border border-white/60 z-10 transition-colors duration-300 group-hover:bg-white/95">
-      <span className="relative z-20 flex items-center gap-2 font-fredoka text-2xl font-bold text-white transition-all duration-300 group-hover:scale-105 group-hover:text-[var(--color-kelly-green)]">
-        {Icon && (
-          <Icon
-            className="fill-white transition-colors duration-300 group-hover:fill-[var(--color-kelly-green)]"
-            size={24}
-          />
-        )}
-        {text}
-      </span>
-    </div>
-  </button>
-);
+import { useBigParadeLogic } from './useBigParadeLogic';
+import { GameActionButton, GameInstructionPill, GameProgressDots } from '../shared';
 
 export const BigParade = () => {
-  const [shuffledAnimals, setShuffledAnimals] = useState<typeof ANIMAL_DATA>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMoving, setIsMoving] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
-  const [showBlast, setShowBlast] = useState(false);
-
-  // Initialize and shuffle
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const shuffled = [...ANIMAL_DATA].sort(() => Math.random() - 0.5);
-      setShuffledAnimals(shuffled.slice(0, PARADE_LENGTH));
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const currentAnimal = shuffledAnimals[currentIndex];
-
-  const handleNext = useCallback(() => {
-    if (isMoving || isComplete || shuffledAnimals.length === 0) return;
-
-    setIsMoving(true);
-    setShowBlast(true);
-    setTimeout(() => setShowBlast(false), 300);
-
-    setTimeout(() => {
-      // Explicitly check against the intended PARADE_LENGTH to avoid logic bugs
-      if (currentIndex >= PARADE_LENGTH - 1) {
-        setIsComplete(true);
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#c5e5a5', '#98b66e', '#f9d876', '#fbe39d'],
-        });
-      } else {
-        setCurrentIndex((prev) => prev + 1);
-      }
-      setIsMoving(false);
-    }, 800);
-  }, [currentIndex, isMoving, isComplete, shuffledAnimals.length]);
-
-  const resetGame = () => {
-    const shuffled = [...ANIMAL_DATA].sort(() => Math.random() - 0.5);
-    setShuffledAnimals(shuffled.slice(0, PARADE_LENGTH));
-    setCurrentIndex(0);
-    setIsComplete(false);
-    setIsMoving(false);
-  };
+  const {
+    shuffledAnimals,
+    currentIndex,
+    isMoving,
+    isComplete,
+    showBlast,
+    currentAnimal,
+    handleNext,
+    resetGame,
+    PARADE_LENGTH,
+  } = useBigParadeLogic();
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -139,7 +33,7 @@ export const BigParade = () => {
 
   return (
     <div className="relative flex flex-col items-center justify-between w-full h-full select-none overflow-hidden">
-      {/* Background Layer - Maintaining consistency with translucent white/blur from GameCanvas */}
+      {/* Background Layer */}
       <div className="absolute inset-0 z-0 bg-white/20" />
 
       {/* Header Info */}
@@ -149,21 +43,7 @@ export const BigParade = () => {
             <h2 className="font-fredoka text-3xl font-black text-black drop-shadow-sm text-center">
               The Big Parade
             </h2>
-            <div className="mt-2 flex gap-2">
-              {[...Array(PARADE_LENGTH)].map((_, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    'w-3 h-3 rounded-full transition-all duration-300',
-                    i < currentIndex
-                      ? 'bg-[var(--color-kelly-green)] scale-110'
-                      : i === currentIndex
-                        ? 'bg-[var(--color-freesia)] animate-pulse scale-125'
-                        : 'bg-black/10'
-                  )}
-                />
-              ))}
-            </div>
+            <GameProgressDots current={currentIndex} total={PARADE_LENGTH} className="mt-2" />
           </>
         ) : (
           <h2 className="font-fredoka text-5xl font-black text-[var(--color-kelly-green)] animate-bounce mt-12 text-center">
@@ -256,35 +136,17 @@ export const BigParade = () => {
                 </span>
               ))}
             </div>
-            <ActionButton onClick={resetGame} text="Start New Parade!" icon={Play} />
+            <GameActionButton onClick={resetGame} text="Start New Parade!" icon={Play} />
           </div>
         )}
       </div>
 
       {/* Control Instruction Area */}
-      <div className="relative z-10 w-full p-6 flex justify-center">
-        {!isComplete && (
-          <div
-            onClick={handleNext}
-            className={cn(
-              'px-10 py-5 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-xl cursor-pointer transition-all min-w-[320px]',
-              'active:scale-95',
-              isMoving
-                ? 'opacity-30 grayscale pointer-events-none'
-                : 'hover:border-[var(--color-freesia)] hover:bg-slate-50'
-            )}
-          >
-            <div className="flex items-center justify-center gap-4">
-              <div className="h-2 w-16 bg-slate-200 rounded-full overflow-hidden shrink-0">
-                <div className="h-full bg-[var(--color-freesia)]" style={{ width: '100%' }} />
-              </div>
-              <p className="font-fredoka text-xl font-black text-black/60 tracking-widest uppercase whitespace-nowrap">
-                Tap Spacebar
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
+      <GameInstructionPill
+        text="Tap Spacebar"
+        isVisible={!isComplete}
+        className={cn(isMoving && 'opacity-30 grayscale pointer-events-none')}
+      />
     </div>
   );
 };
