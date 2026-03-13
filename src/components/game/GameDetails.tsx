@@ -7,19 +7,21 @@ interface GameDetailsProps {
   onBack: () => void;
 }
 
+interface InfoSectionProps {
+  icon: LucideIcon;
+  title: string;
+  children: React.ReactNode;
+  iconColor?: string;
+  className?: string;
+}
+
 const InfoSection = ({
   icon: Icon,
   title,
   children,
   iconColor = 'text-black',
   className = '',
-}: {
-  icon: LucideIcon;
-  title: string;
-  children: React.ReactNode;
-  iconColor?: string;
-  className?: string;
-}) => (
+}: InfoSectionProps) => (
   <section className={className}>
     <div className="mb-3 flex items-center gap-2">
       <Icon className={iconColor} size={24} />
@@ -29,7 +31,11 @@ const InfoSection = ({
   </section>
 );
 
-const GameHeader = ({ game }: { game: GameMetadata }) => (
+interface GameHeaderProps {
+  game: GameMetadata;
+}
+
+const GameHeader = ({ game }: GameHeaderProps) => (
   <div
     className={`relative mb-8 rounded-[2rem] p-6 text-black shadow-xl gradient-card-base ${
       game.variantClass || 'bg-black'
@@ -91,9 +97,9 @@ export const GameDetails = ({ game, onBack }: GameDetailsProps) => {
           className="pb-8"
         >
           <div className="grid grid-cols-1 gap-3">
-            {game.teaches.map((item, index) => (
+            {game.teaches.map((item) => (
               <div
-                key={index}
+                key={item.title}
                 className="rounded-2xl border border-black/5 bg-black/5 p-4 transition-transform hover:scale-[1.02] shadow-sm"
               >
                 <h4 className="font-fredoka font-bold text-black">{item.title}</h4>

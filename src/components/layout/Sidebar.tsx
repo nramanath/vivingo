@@ -32,8 +32,23 @@ export const Sidebar = ({ onSelectGame, selectedGame }: SidebarProps) => {
       </div>
 
       <div className="flex-1">
-        {selectedGameMetadata ? (
-          <GameDetails game={selectedGameMetadata} onBack={() => onSelectGame(null)} />
+        {selectedGame ? (
+          selectedGameMetadata ? (
+            <GameDetails game={selectedGameMetadata} onBack={() => onSelectGame(null)} />
+          ) : (
+            <div className="animate-in fade-in duration-300">
+              <button
+                onClick={() => onSelectGame(null)}
+                className="mb-8 flex items-center gap-2 font-fredoka text-lg font-bold text-black/60 transition-colors hover:text-black"
+              >
+                Back to Games
+              </button>
+              <div className="rounded-3xl bg-black/5 p-8 text-center shadow-inner">
+                <p className="font-fredoka text-xl font-bold text-black/70">Coming Soon!</p>
+                <p className="mt-2 text-black/50">The details for this game are being curated.</p>
+              </div>
+            </div>
+          )
         ) : (
           <>
             <h2 className="mb-6 font-fredoka text-2xl font-bold text-black drop-shadow-sm">
