@@ -189,6 +189,24 @@ export const MysteryMessages: React.FC = () => {
             </div>
           ))}
         </div>
+        {/* Control Instruction Area */}
+        <div className="mt-12 w-full flex justify-center">
+          <div
+            className={cn(
+              'px-8 py-4 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-xl transition-all min-w-[300px]',
+              isGameComplete ? 'opacity-0' : 'opacity-100'
+            )}
+          >
+            <div className="flex items-center justify-center gap-4">
+              <div className="h-2 w-16 bg-slate-200 rounded-full overflow-hidden shrink-0">
+                <div className="h-full bg-[var(--color-freesia)]" style={{ width: '100%' }} />
+              </div>
+              <p className="font-fredoka text-lg font-black text-black/60 tracking-widest uppercase whitespace-nowrap">
+                Type the Code
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

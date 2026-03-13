@@ -1,6 +1,9 @@
 import { ComingSoonBadge } from '../ui/ComingSoonBadge';
 import { AlphabetHunt } from '../game/alphabet-hunt';
 import { MysteryMessages } from '../game/mystery-messages';
+import { SurpriseBox } from '../game/surprise-box';
+import { BigParade } from '../game/big-parade';
+import { LeftRightMatch } from '../game/left-right-match';
 
 interface GameCanvasProps {
   selectedGame: string | null;
@@ -16,6 +19,12 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
             <AlphabetHunt />
           ) : selectedGame === 'Mystery Messages' ? (
             <MysteryMessages />
+          ) : selectedGame === 'Surprise Box' ? (
+            <SurpriseBox />
+          ) : selectedGame === 'The Big Parade' ? (
+            <BigParade />
+          ) : selectedGame === 'Left or Right?' ? (
+            <LeftRightMatch />
           ) : selectedGame ? (
             <div className="p-8 text-center flex flex-col items-center justify-center">
               <ComingSoonBadge selectedGame={selectedGame} />

@@ -188,12 +188,12 @@ const StartGameButton = ({ onClick, text }: { onClick: () => void; text: string 
 
 const StartScreen = ({ onStart }: { onStart: () => void }) => (
   <div className="flex flex-col items-center justify-center animate-in zoom-in duration-500">
-    <div className="text-6xl mb-4">🚂</div>
+    <div className="text-6xl mb-4">🔤</div>
     <h2 className="mb-4 font-fredoka text-4xl font-black text-black drop-shadow-sm text-center">
       Alphabet Word Hunt
     </h2>
     <p className="max-w-md font-fredoka text-xl text-black/80 mb-8 text-center">
-      Find the missing letters to complete the train! Use your keyboard.
+      Find the missing letters to complete the sequence! Use your keyboard.
     </p>
     <StartGameButton onClick={onStart} text="Start Playing!" />
   </div>
@@ -328,11 +328,23 @@ export const AlphabetHunt = () => {
           ))}
         </div>
 
-        <div
-          className="mt-12 font-fredoka text-xl text-black/60 text-center transition-opacity duration-300"
-          style={{ opacity: feedback === 'completed' ? 0 : 1 }}
-        >
-          Type the missing letters on your keyboard!
+        {/* Control Instruction Area */}
+        <div className="mt-12 w-full flex justify-center">
+          <div
+            className={cn(
+              'px-8 py-4 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-xl transition-all min-w-[300px]',
+              feedback === 'completed' ? 'opacity-0' : 'opacity-100'
+            )}
+          >
+            <div className="flex items-center justify-center gap-4">
+              <div className="h-2 w-16 bg-slate-200 rounded-full overflow-hidden shrink-0">
+                <div className="h-full bg-[var(--color-freesia)]" style={{ width: '100%' }} />
+              </div>
+              <p className="font-fredoka text-lg font-black text-black/60 tracking-widest uppercase whitespace-nowrap">
+                Type on Keyboard
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
