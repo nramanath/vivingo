@@ -72,6 +72,7 @@ export const MysteryMessages: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center w-full h-full p-4 relative">
+      <GameFeedbackBanner feedback={feedback} />
       {/* Top HUD with Stage and Score */}
       <div className="absolute top-6 left-6 right-6 flex justify-between items-center font-fredoka text-2xl font-bold text-black/80 pointer-events-none z-10">
         <div>
@@ -86,8 +87,7 @@ export const MysteryMessages: React.FC = () => {
       </div>
 
       {/* Main Game Area */}
-      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-4 sm:px-12 mt-12 z-20 gap-16">
-        <GameFeedbackBanner feedback={feedback} />
+      <div className="relative flex-1 flex flex-col items-center justify-start w-full max-w-4xl mx-auto px-4 sm:px-12 pt-20 z-20 gap-12">
         {/* The Jumble (Top View) */}
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
           {puzzleLetters.map((pl) => {
