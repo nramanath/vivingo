@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-[var(--color-yellow)] font-inter">
-      <Sidebar onSelectGame={setSelectedGame} />
+      <Sidebar onSelectGame={setSelectedGame} selectedGame={selectedGame} />
       <GameCanvas selectedGame={selectedGame} />
     </div>
   );
