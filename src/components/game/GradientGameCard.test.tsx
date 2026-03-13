@@ -3,15 +3,21 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { GradientGameCard } from './GradientGameCard';
 
 describe('GradientGameCard', () => {
-  it('renders the title', () => {
-    render(<GradientGameCard title="Test Game" variantClass="test-variant" />);
+  it('renders the title and icon', () => {
+    render(<GradientGameCard title="Test Game" icon="🎮" variantClass="test-variant" />);
     expect(screen.getByText('Test Game')).toBeDefined();
+    expect(screen.getByText('🎮')).toBeDefined();
   });
 
   it('calls onClick when clicked', () => {
     const handleClick = vi.fn();
     render(
-      <GradientGameCard title="Test Game" variantClass="test-variant" onClick={handleClick} />
+      <GradientGameCard
+        title="Test Game"
+        icon="🎮"
+        variantClass="test-variant"
+        onClick={handleClick}
+      />
     );
 
     fireEvent.click(screen.getByText('Test Game'));
