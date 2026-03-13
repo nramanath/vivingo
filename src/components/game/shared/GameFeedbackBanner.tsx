@@ -39,7 +39,7 @@ export const GameFeedbackBanner = ({ feedback, className }: GameFeedbackBannerPr
   return (
     <div
       className={cn(
-        'absolute top-4 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-full px-8 py-2 font-fredoka text-xl font-black transition-all duration-300 transform min-w-[180px] z-50',
+        'absolute top-12 left-1/2 -translate-x-1/2 flex items-center justify-center rounded-full px-8 py-2 font-fredoka text-xl font-black transition-all duration-300 transform min-w-[180px] z-50',
         getStyles(),
         className
       )}

@@ -87,7 +87,7 @@ export const MysteryMessages: React.FC = () => {
       </div>
 
       {/* Main Game Area */}
-      <div className="relative flex-1 flex flex-col items-center justify-start w-full max-w-4xl mx-auto px-4 sm:px-12 pt-20 z-20 gap-12">
+      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-4 sm:px-12 z-20 gap-16 mt-8">
         {/* The Jumble (Top View) */}
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
           {puzzleLetters.map((pl) => {
