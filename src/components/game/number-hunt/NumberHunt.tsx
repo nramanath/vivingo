@@ -1,5 +1,5 @@
 import { cn } from '../../../lib/utils';
-import { useAlphabetHuntLogic } from './useAlphabetHuntLogic';
+import { useNumberHuntLogic } from './useNumberHuntLogic';
 import {
   GameInstructionPill,
   GameFeedbackBanner,
@@ -7,19 +7,23 @@ import {
   GameOverScreen,
 } from '../shared';
 
-// --- Sub-Components (Cleaned up local versions) ---
-
-const LetterTile = ({
-  letter,
-  isMissing,
-  isJustSolved,
-  isWobbling,
-}: {
-  letter: string;
+interface NumberTileProps {
+  number: number;
   isMissing: boolean;
   isJustSolved: boolean;
   isWobbling: boolean;
-}) => {
+  isCurrentTarget: boolean;
+  inputBuffer: string;
+}
+
+const NumberTile = ({
+  number,
+  isMissing,
+  isJustSolved,
+  isWobbling,
+  isCurrentTarget,
+  inputBuffer,
+}: NumberTileProps) => {
   return (
     <div
       className={cn(
@@ -28,49 +32,54 @@ const LetterTile = ({
           ? 'border-dashed border-gray-400 opacity-80'
           : 'border-transparent bg-white shadow-md',
         isWobbling ? 'animate-[shake_0.5s_ease-in-out] border-red-400' : '',
-        isJustSolved ? 'border-green-400 bg-green-50' : ''
+        isJustSolved ? 'border-green-400 bg-green-50' : '',
+        isCurrentTarget && !isWobbling && !isJustSolved ? 'border-blue-400 bg-blue-50/50' : ''
       )}
     >
       {isMissing ? (
-        <span className="font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black text-gray-300">
-          ?
+        <span className="font-fredoka text-3xl sm:text-4xl lg:text-5xl font-black text-gray-400">
+          {isCurrentTarget && inputBuffer ? (
+            <span className="text-blue-600 animate-in zoom-in duration-200">{inputBuffer}_</span>
+          ) : (
+            '?'
+          )}
         </span>
       ) : (
         <span
           className={cn(
-            'font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black select-none',
+            'font-fredoka text-3xl sm:text-4xl lg:text-5xl font-black select-none',
             isJustSolved ? 'text-green-600 animate-in zoom-in duration-300' : 'text-black'
           )}
         >
-          {letter}
+          {number}
         </span>
       )}
     </div>
   );
 };
 
-// --- Main Container Component ---
-
-export const AlphabetHunt = () => {
+export const NumberHunt = () => {
   const {
     isPlaying,
     isGameOver,
     score,
     currentStage,
+    currentStageIndex,
+    sequence,
     missingIndices,
     solvedIndices,
     wobbleIndex,
+    inputBuffer,
     feedback,
     startGame,
-    ALPHABET,
-  } = useAlphabetHuntLogic();
+  } = useNumberHuntLogic();
 
   if (!isPlaying) {
     return (
       <GameStartScreen
-        icon="🔤"
-        title="Alphabet Word Hunt"
-        description="Find the missing letters to complete the sequence! Use your keyboard."
+        icon="🔢"
+        title="Number Hunt"
+        description="Find the missing numbers to complete the sequence! Use your keyboard."
         onStart={startGame}
       />
     );
@@ -80,13 +89,15 @@ export const AlphabetHunt = () => {
     return <GameOverScreen score={score} onRestart={startGame} />;
   }
 
+  const currentSet = (score % currentStage.sets) + 1;
+
   return (
     <div className="flex flex-col items-center justify-center w-full h-full p-6 sm:p-10 relative">
       <div className="absolute top-6 left-6 right-6 flex justify-between items-center font-fredoka text-2xl font-bold text-black/80 pointer-events-none z-10">
         <div>
           Stage: {currentStage.level}{' '}
           <span className="text-sm opacity-60 ml-2 hidden sm:inline-block">
-            ({currentStage.sets} sets of {currentStage.lettersPerSet})
+            (Round {currentSet} of {currentStage.sets})
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -97,16 +108,24 @@ export const AlphabetHunt = () => {
       <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-2 sm:px-6 lg:px-12 mt-12 z-20">
         <GameFeedbackBanner feedback={feedback} />
 
-        <div className="grid grid-cols-7 sm:grid-cols-9 md:grid-cols-13 gap-2 sm:gap-3 lg:gap-4 w-full relative mt-4">
-          {ALPHABET.map((letter, index) => (
-            <LetterTile
-              key={letter}
-              letter={letter}
-              isMissing={missingIndices.includes(index) && !solvedIndices.includes(index)}
-              isJustSolved={solvedIndices.includes(index)}
-              isWobbling={wobbleIndex === index}
-            />
-          ))}
+        <div className="grid grid-cols-5 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 w-full relative mt-4 max-w-3xl">
+          {sequence.map((num, index) => {
+            const isMissing = missingIndices.includes(index) && !solvedIndices.includes(index);
+            const isJustSolved = solvedIndices.includes(index);
+            const isCurrentTarget = missingIndices[solvedIndices.length] === index;
+
+            return (
+              <NumberTile
+                key={`${currentStageIndex}-${num}-${index}`}
+                number={num}
+                isMissing={isMissing}
+                isJustSolved={isJustSolved}
+                isWobbling={wobbleIndex === index}
+                isCurrentTarget={isCurrentTarget}
+                inputBuffer={inputBuffer}
+              />
+            );
+          })}
         </div>
 
         {/* Control Instruction Area */}

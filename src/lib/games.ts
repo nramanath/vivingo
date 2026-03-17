@@ -51,6 +51,40 @@ export const games: GameMetadata[] = [
     variantClass: 'gradient-brand-button',
   },
   {
+    id: 'Number Hunt',
+    title: 'Number Hunt',
+    icon: '🔢',
+    description:
+      'A fun number-matching game where children complete a sequence by finding missing numbers.',
+    minAge: 3,
+    maxAge: 4,
+    teaches: [
+      {
+        title: 'Number Sequencing',
+        description: 'Understanding and completing numerical sequences from 1 to 100.',
+      },
+      {
+        title: 'Pattern Recognition',
+        description: 'Identifying patterns like counting by ones and tens.',
+      },
+      {
+        title: 'Keyboard Familiarity',
+        description: 'Familiarity with the number row / numpad on the keyboard.',
+      },
+      {
+        title: 'Confidence',
+        description: 'Positive reinforcement through successful sequence completion.',
+      },
+    ],
+    howToPlay:
+      'Look at the sequence and find the numbers with the question marks. Type the correct numbers on your keyboard to fill the gap!\n\n• Stage 1: Numbers 1 to 10.\n• Stage 2: Advanced random number blocks (e.g., 21 to 30).',
+    parentNote:
+      'This game helps bridge the gap between recognizing numbers and understanding their sequence. It encourages patience and pattern recognition in a playful environment.',
+    parentProTip:
+      'If your child is stuck on a multi-digit number, prompt them to look at the numbers before it. Understanding that "twenty" is a 2 and a 0 helps them learn place value!',
+    variantClass: 'gradient-brand-button',
+  },
+  {
     id: 'Mystery Messages',
     title: 'Mystery Messages',
     icon: '🕵️‍♂️',

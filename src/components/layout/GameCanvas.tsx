@@ -1,5 +1,6 @@
 import { ComingSoonBadge } from '../ui/ComingSoonBadge';
 import { AlphabetHunt } from '../game/alphabet-hunt';
+import { NumberHunt } from '../game/number-hunt';
 import { MysteryMessages } from '../game/mystery-messages';
 import { SurpriseBox } from '../game/surprise-box';
 import { BigParade } from '../game/big-parade';
@@ -17,6 +18,8 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
         <div className="flex w-full h-full flex-col items-center justify-center transition-all duration-500">
           {selectedGame === 'ABC Hunt' ? (
             <AlphabetHunt />
+          ) : selectedGame === 'Number Hunt' ? (
+            <NumberHunt />
           ) : selectedGame === 'Mystery Messages' ? (
             <MysteryMessages />
           ) : selectedGame === 'Surprise Box' ? (
