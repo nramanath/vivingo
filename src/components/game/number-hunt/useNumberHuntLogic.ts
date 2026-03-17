@@ -3,13 +3,12 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 export type StageConfig = {
   level: number;
   sets: number;
-  sequenceType: '1-10' | '10-100' | 'random-tens';
+  sequenceType: '1-10' | 'random-tens';
 };
 
 export const STAGES: StageConfig[] = [
   { level: 1, sets: 3, sequenceType: '1-10' },
-  { level: 2, sets: 3, sequenceType: '10-100' },
-  { level: 3, sets: 3, sequenceType: 'random-tens' },
+  { level: 2, sets: 3, sequenceType: 'random-tens' },
 ];
 
 export type FeedbackType = 'correct' | 'wrong' | 'completed' | null;
@@ -37,8 +36,6 @@ export function useNumberHuntLogic() {
     let newSequence: number[] = [];
     if (stage.sequenceType === '1-10') {
       newSequence = Array.from({ length: 10 }, (_, i) => i + 1);
-    } else if (stage.sequenceType === '10-100') {
-      newSequence = Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
     } else if (stage.sequenceType === 'random-tens') {
       const tenBlocks = [11, 21, 31, 41, 51, 61, 71, 81, 91];
       const randomStart = tenBlocks[Math.floor(Math.random() * tenBlocks.length)];

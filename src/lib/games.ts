@@ -77,7 +77,7 @@ export const games: GameMetadata[] = [
       },
     ],
     howToPlay:
-      'Look at the sequence and find the numbers with the question marks. Type the correct numbers on your keyboard to fill the gap!\n\n• Stage 1: Numbers 1 to 10.\n• Stage 2: Counting by tens.\n• Stage 3: Advanced random number blocks.',
+      'Look at the sequence and find the numbers with the question marks. Type the correct numbers on your keyboard to fill the gap!\n\n• Stage 1: Numbers 1 to 10.\n• Stage 2: Advanced random number blocks (e.g., 21 to 30).',
     parentNote:
       'This game helps bridge the gap between recognizing numbers and understanding their sequence. It encourages patience and pattern recognition in a playful environment.',
     parentProTip:
