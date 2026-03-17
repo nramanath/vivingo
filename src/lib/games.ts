@@ -90,7 +90,7 @@ export const games: GameMetadata[] = [
     icon: '🛤️',
     description:
       'A sequential counting game where children learn numbers by filling out blocks of ten.',
-    minAge: 3,
+    minAge: 4,
     maxAge: 4,
     teaches: [
       {
