@@ -21,13 +21,10 @@ describe('NumberHunt Game Integration', () => {
   });
 
   it('starts the game, processes user input, and ignores invalid keystrokes', () => {
-    let callCount = 0;
     vi.spyOn(Math, 'random').mockImplementation(() => {
-      // Provide a sequence of unique decimals to guarantee generatePuzzle while loops can complete
-      const values = [0.01, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95];
-      const val = values[callCount % values.length];
-      callCount++;
-      return val;
+      // By returning 0, the pool-based selection logic will always splice the first
+      // element of the pool, consistently resulting in missing indices [0, 1, 2]
+      return 0;
     });
 
     render(<NumberHunt />);

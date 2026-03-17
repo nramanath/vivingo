@@ -45,12 +45,12 @@ export function useNumberHuntLogic() {
     setSequence(newSequence);
 
     const newMissing: number[] = [];
-    while (newMissing.length < 3) {
-      const minIdx = stage.sequenceType === 'random-tens' ? 1 : 0;
-      const randomIdx = minIdx + Math.floor(Math.random() * (10 - minIdx));
-      if (!newMissing.includes(randomIdx)) {
-        newMissing.push(randomIdx);
-      }
+    const minIdx = stage.sequenceType === 'random-tens' ? 1 : 0;
+    const indicesPool = Array.from({ length: 10 - minIdx }, (_, i) => i + minIdx);
+
+    for (let i = 0; i < 3; i++) {
+      const poolIndex = Math.floor(Math.random() * indicesPool.length);
+      newMissing.push(indicesPool.splice(poolIndex, 1)[0]);
     }
     newMissing.sort((a, b) => a - b);
 

@@ -7,6 +7,15 @@ import {
   GameOverScreen,
 } from '../shared';
 
+interface NumberTileProps {
+  number: number;
+  isMissing: boolean;
+  isJustSolved: boolean;
+  isWobbling: boolean;
+  isCurrentTarget: boolean;
+  inputBuffer: string;
+}
+
 const NumberTile = ({
   number,
   isMissing,
@@ -14,14 +23,7 @@ const NumberTile = ({
   isWobbling,
   isCurrentTarget,
   inputBuffer,
-}: {
-  number: number;
-  isMissing: boolean;
-  isJustSolved: boolean;
-  isWobbling: boolean;
-  isCurrentTarget: boolean;
-  inputBuffer: string;
-}) => {
+}: NumberTileProps) => {
   return (
     <div
       className={cn(
