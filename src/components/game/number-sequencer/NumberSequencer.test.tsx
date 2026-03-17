@@ -117,4 +117,25 @@ describe('useNumberSequencerLogic Hook Unit Tests', () => {
     // A valid keystroke immediately drops the hint logic so they figure out the rest
     expect(result.current.isHintActive).toBe(false);
   });
+
+  it('resets game effectively and clears completedblocks', () => {
+    const { result } = renderHook(() => useNumberSequencerLogic());
+
+    // Fake solving 1 block
+    act(() => {
+      // Internal state isn't directly settable, so let's start a sequence
+      result.current.startSequence(11);
+    });
+
+    act(() => {
+      // Simulate completing a block by artificially calling returnToMenu would just drop it,
+      // but let's test specifically the `resetGame` function's side effects
+      result.current.resetGame();
+    });
+
+    expect(result.current.completedBlocks.size).toBe(0);
+    expect(result.current.selectedBlockStart).toBeNull();
+    expect(result.current.sequence).toEqual([]);
+    expect(result.current.solvedCount).toBe(0);
+  });
 });

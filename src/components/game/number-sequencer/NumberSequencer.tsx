@@ -5,13 +5,12 @@ import { GameInstructionPill, GameFeedbackBanner, GameOverScreen } from '../shar
 
 const BLOCKS = [1, 11, 21, 31, 41, 51, 61, 71, 81, 91];
 
-const BlockMenu = ({
-  completedBlocks,
-  onSelectBlock,
-}: {
+interface BlockMenuProps {
   completedBlocks: Set<number>;
   onSelectBlock: (start: number) => void;
-}) => (
+}
+
+const BlockMenu = ({ completedBlocks, onSelectBlock }: BlockMenuProps) => (
   <div className="flex flex-col items-center justify-center animate-in zoom-in duration-500 w-full h-full p-4 sm:p-8">
     <div className="text-6xl mb-4">🛤️</div>
     <h2 className="mb-4 font-fredoka text-4xl font-black text-black drop-shadow-sm text-center">
@@ -46,6 +45,16 @@ const BlockMenu = ({
   </div>
 );
 
+interface SequenceTileProps {
+  number: number;
+  isAnchor: boolean;
+  isSolved: boolean;
+  isCurrentTarget: boolean;
+  isWobbling: boolean;
+  isHintActive: boolean;
+  inputBuffer: string;
+}
+
 const SequenceTile = ({
   number,
   isAnchor,
@@ -54,15 +63,7 @@ const SequenceTile = ({
   isWobbling,
   isHintActive,
   inputBuffer,
-}: {
-  number: number;
-  isAnchor: boolean;
-  isSolved: boolean;
-  isCurrentTarget: boolean;
-  isWobbling: boolean;
-  isHintActive: boolean;
-  inputBuffer: string;
-}) => {
+}: SequenceTileProps) => {
   // Anchors and Solved tiles act the same visually.
   const isFilled = isAnchor || isSolved;
 
