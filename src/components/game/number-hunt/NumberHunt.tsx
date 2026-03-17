@@ -122,7 +122,7 @@ export const NumberHunt = () => {
       <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-2 sm:px-6 lg:px-12 mt-12 z-20">
         <GameFeedbackBanner feedback={feedback} />
 
-        <div className="grid grid-cols-5 md:grid-cols-10 gap-2 sm:gap-3 lg:gap-4 w-full relative mt-4 max-w-4xl">
+        <div className="grid grid-cols-5 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 w-full relative mt-4 max-w-3xl">
           {sequence.map((num, index) => {
             const isMissing = missingIndices.includes(index) && !solvedIndices.includes(index);
             const isJustSolved = solvedIndices.includes(index);
