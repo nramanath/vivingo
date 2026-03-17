@@ -1,23 +1,12 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { NumberHunt } from './NumberHunt';
+import { useNumberHuntLogic } from './useNumberHuntLogic';
 
-describe('NumberHunt Game', () => {
+describe('NumberHunt Game Integration', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    // Spy on Math.random to strictly control the generated puzzle
-    // Mock random to consistently pick sequence type and missing indices
-    // Sequence 1-10 will be used (Level 1)
-    // Random indices: 0, 1, 2
-    let callCount = 0;
-    vi.spyOn(Math, 'random').mockImplementation(() => {
-      // Return values so the missing indices are 0, 1, 2
-      // The generate puzzle logic does: Math.floor(Math.random() * 10)
-      const values = [0.01, 0.15, 0.25];
-      const val = values[callCount % values.length] || 0.5;
-      callCount++;
-      return val;
-    });
   });
 
   afterEach(() => {
@@ -31,22 +20,50 @@ describe('NumberHunt Game', () => {
     expect(screen.getByText('Start Playing!')).toBeDefined();
   });
 
-  it('starts the game and completes a level with multi-digit input', () => {
-    render(<NumberHunt />);
+  it('starts the game, processes user input, and ignores invalid keystrokes', () => {
+    let callCount = 0;
+    vi.spyOn(Math, 'random').mockImplementation(() => {
+      // Provide a sequence of unique decimals to guarantee generatePuzzle while loops can complete
+      const values = [0.01, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95];
+      const val = values[callCount % values.length];
+      callCount++;
+      return val;
+    });
 
-    // Start game
+    render(<NumberHunt />);
     fireEvent.click(screen.getByText('Start Playing!'));
 
-    // Stage 1 (Round 1 of 3)
+    // Check initial stage metadata
     expect(screen.getByText('Stage: 1')).toBeDefined();
     expect(screen.getByText('(Round 1 of 3)')).toBeDefined();
 
-    // With indices 0, 1, 2 missing, the empty tiles correspond to numbers 1, 2, and 3
-    // Simulate keyboard event for '1'
+    // The missing numbers will be 1, 2, and 3
+
+    // Verify invalid alphabetic inputs are completely ignored
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'A' }));
+    });
+    // Visual error buffer should not append 'A_'
+    expect(screen.queryByText('A_')).toBeNull();
+    // 'Wrong!' should not be displayed since the keypress was discarded entirely
+    expect(screen.queryByText('Wrong!')).toBeNull();
+
+    // Press a completely incorrect number (9)
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: '9' }));
+    });
+    // The tile should wobble and register Wrong
+    expect(screen.getByText('Wrong!')).toBeDefined();
+
+    // Forward timers to clear the wobble state
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+
+    // Now enter everything correctly: "1", "2", "3"
     act(() => {
       window.dispatchEvent(new KeyboardEvent('keydown', { key: '1' }));
     });
-    // Check if the first missing tile is solved
     expect(screen.getByText('1')).toBeDefined();
 
     act(() => {
@@ -59,29 +76,63 @@ describe('NumberHunt Game', () => {
     });
     expect(screen.getByText('3')).toBeDefined();
 
-    // Advance to next stage/set
+    // Fast forward through the stage completion banner
     act(() => {
       vi.advanceTimersByTime(1500);
     });
 
+    // Validates progression to Round 2
     expect(screen.getByText('(Round 2 of 3)')).toBeDefined();
   });
+});
 
-  it('handles wrong input buffer clear and wobble', () => {
-    render(<NumberHunt />);
-    fireEvent.click(screen.getByText('Start Playing!'));
+describe('useNumberHuntLogic Hook Unit Tests', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
 
-    // The first missing number is '1'. Press '9' (wrong).
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.useRealTimers();
+  });
+
+  it('generates random-tens sequence for Stage 2 guaranteeing first number is never missing', () => {
+    const { result } = renderHook(() => useNumberHuntLogic());
+
     act(() => {
-      window.dispatchEvent(new KeyboardEvent('keydown', { key: '9' }));
+      result.current.startGame();
     });
 
-    // Should get a visual wobble and clear buffer (handled internally)
-    expect(screen.queryByText('9_')).toBeNull();
+    // Speed run all 3 sets of Stage 1 to reach Stage 2 natively
+    for (let set = 0; set < 3; set++) {
+      const missing = result.current.missingIndices;
+      const seq = result.current.sequence;
 
-    // Advance wobble timer
-    act(() => {
-      vi.advanceTimersByTime(500);
-    });
+      for (const idx of missing) {
+        const targetNumberStr = seq[idx].toString();
+        // simulate the multi-digit input parsing
+        for (const char of targetNumberStr) {
+          act(() => {
+            window.dispatchEvent(new KeyboardEvent('keydown', { key: char }));
+          });
+        }
+      }
+
+      act(() => {
+        vi.advanceTimersByTime(1500);
+      });
+    }
+
+    // Assert that we are strictly on Stage 2
+    expect(result.current.currentStage.level).toBe(2);
+    expect(result.current.currentStage.sequenceType).toBe('random-tens');
+
+    // Verify core fix constraint: Index 0 should NEVER be selected as missing across Stage 2 configurations
+    expect(result.current.missingIndices).not.toContain(0);
+
+    // Determine the underlying random ten increment logic is sound (i.e. starts with 11, 21, 31, etc.)
+    const firstNumStr = result.current.sequence[0].toString();
+    expect(firstNumStr.endsWith('1')).toBe(true);
+    expect(result.current.sequence[1]).toBe(result.current.sequence[0] + 1);
   });
 });
