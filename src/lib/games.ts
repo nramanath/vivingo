@@ -85,6 +85,40 @@ export const games: GameMetadata[] = [
     variantClass: 'gradient-brand-button',
   },
   {
+    id: 'Number Sequencer',
+    title: 'Number Sequencer',
+    icon: '🛤️',
+    description:
+      'A sequential counting game where children learn numbers by filling out blocks of ten.',
+    minAge: 3,
+    maxAge: 4,
+    teaches: [
+      {
+        title: 'Block Counting',
+        description: 'Learning numerical sequences in chunks of 10.',
+      },
+      {
+        title: 'Number Sequencing',
+        description: 'Filling out the blank spaces in exact sequential order.',
+      },
+      {
+        title: 'Keyboard Familiarity',
+        description: 'Familiarity with typing 2-digit and 3-digit numbers.',
+      },
+      {
+        title: 'Deduction with Hints',
+        description: 'Using hints to unblock themselves positively.',
+      },
+    ],
+    howToPlay:
+      'Select a block of numbers from the menu (like 31 to 40). Look at the first number and type the numbers that come next in order! Use the Hint button if you get stuck.',
+    parentNote:
+      'Unlike Number Hunt which tests random missing numbers, Sequencer focuses purely on continuous counting. Choosing their own blocks gives children a feeling of agency over their learning.',
+    parentProTip:
+      'Start with the 1-10 block. Once they master it, jump to a random block like 41-50 to show them that the counting pattern (1, 2, 3...) stays exactly the same no matter how high the numbers get!',
+    variantClass: 'gradient-brand-button',
+  },
+  {
     id: 'Mystery Messages',
     title: 'Mystery Messages',
     icon: '🕵️‍♂️',

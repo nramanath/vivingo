@@ -5,6 +5,7 @@ import { MysteryMessages } from '../game/mystery-messages';
 import { SurpriseBox } from '../game/surprise-box';
 import { BigParade } from '../game/big-parade';
 import { LeftRightMatch } from '../game/left-right-match';
+import { NumberSequencer } from '../game/number-sequencer';
 
 interface GameCanvasProps {
   selectedGame: string | null;
@@ -20,6 +21,8 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
             <AlphabetHunt />
           ) : selectedGame === 'Number Hunt' ? (
             <NumberHunt />
+          ) : selectedGame === 'Number Sequencer' ? (
+            <NumberSequencer />
           ) : selectedGame === 'Mystery Messages' ? (
             <MysteryMessages />
           ) : selectedGame === 'Surprise Box' ? (
