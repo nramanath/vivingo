@@ -111,7 +111,7 @@ export const NumberHunt = () => {
         <div>
           Stage: {currentStage.level}{' '}
           <span className="text-sm opacity-60 ml-2 hidden sm:inline-block">
-            (Set {currentSet} of {currentStage.sets})
+            (Round {currentSet} of {currentStage.sets})
           </span>
         </div>
         <div className="flex items-center gap-2">
