@@ -58,7 +58,7 @@ const NumberTile = ({
       )}
     >
       {isMissing ? (
-        <span className="font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black text-gray-400">
+        <span className="font-fredoka text-3xl sm:text-4xl lg:text-5xl font-black text-gray-400">
           {isCurrentTarget && inputBuffer ? (
             <span className="text-blue-600 animate-in zoom-in duration-200">{inputBuffer}_</span>
           ) : (
@@ -68,7 +68,7 @@ const NumberTile = ({
       ) : (
         <span
           className={cn(
-            'font-fredoka text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black select-none',
+            'font-fredoka text-3xl sm:text-4xl lg:text-5xl font-black select-none',
             isJustSolved ? 'text-green-600 animate-in zoom-in duration-300' : 'text-black'
           )}
         >
@@ -122,7 +122,7 @@ export const NumberHunt = () => {
       <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-2 sm:px-6 lg:px-12 mt-12 z-20">
         <GameFeedbackBanner feedback={feedback} />
 
-        <div className="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-4 w-full relative mt-4 max-w-4xl">
+        <div className="grid grid-cols-5 md:grid-cols-10 gap-2 sm:gap-3 lg:gap-4 w-full relative mt-4 max-w-4xl">
           {sequence.map((num, index) => {
             const isMissing = missingIndices.includes(index) && !solvedIndices.includes(index);
             const isJustSolved = solvedIndices.includes(index);
