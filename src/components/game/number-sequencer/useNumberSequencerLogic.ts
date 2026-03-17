@@ -36,6 +36,11 @@ export function useNumberSequencerLogic() {
     setIsHintActive(false);
   }, []);
 
+  const resetGame = useCallback(() => {
+    setCompletedBlocks(new Set());
+    returnToMenu();
+  }, [returnToMenu]);
+
   const triggerHint = useCallback(() => {
     setIsHintActive(true);
   }, []);
@@ -127,5 +132,6 @@ export function useNumberSequencerLogic() {
     startSequence,
     returnToMenu,
     triggerHint,
+    resetGame,
   };
 }

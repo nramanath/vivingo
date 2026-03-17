@@ -1,7 +1,7 @@
 import { ArrowLeft, Lightbulb } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 import { useNumberSequencerLogic } from './useNumberSequencerLogic';
-import { GameInstructionPill, GameFeedbackBanner } from '../shared';
+import { GameInstructionPill, GameFeedbackBanner, GameOverScreen } from '../shared';
 
 const BLOCKS = [1, 11, 21, 31, 41, 51, 61, 71, 81, 91];
 
@@ -116,7 +116,12 @@ export const NumberSequencer = () => {
     startSequence,
     returnToMenu,
     triggerHint,
+    resetGame,
   } = useNumberSequencerLogic();
+
+  if (completedBlocks.size === BLOCKS.length) {
+    return <GameOverScreen score={BLOCKS.length} onRestart={resetGame} />;
+  }
 
   if (selectedBlockStart === null) {
     return <BlockMenu completedBlocks={completedBlocks} onSelectBlock={startSequence} />;
