@@ -46,7 +46,8 @@ export function useNumberHuntLogic() {
 
     const newMissing: number[] = [];
     while (newMissing.length < 3) {
-      const randomIdx = Math.floor(Math.random() * 10);
+      const minIdx = stage.sequenceType === 'random-tens' ? 1 : 0;
+      const randomIdx = minIdx + Math.floor(Math.random() * (10 - minIdx));
       if (!newMissing.includes(randomIdx)) {
         newMissing.push(randomIdx);
       }
