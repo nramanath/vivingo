@@ -80,7 +80,7 @@ export function useNumberSequencerLogic() {
           if (newSolvedCount === 9) {
             // 9 tiles + 1 anchor = 10
             showFeedback('completed');
-            setCompletedBlocks((prev) => new Set([...prev, selectedBlockStart]));
+            setCompletedBlocks((prev) => new Set(prev).add(selectedBlockStart));
 
             completionTimeoutRef.current = setTimeout(() => {
               returnToMenu();

@@ -70,14 +70,15 @@ const SequenceTile = ({
   return (
     <div
       className={cn(
-        'relative flex flex-col items-center justify-center rounded-2xl border-4 transition-all duration-300 aspect-square shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm',
-        !isFilled
-          ? 'border-dashed border-gray-400 opacity-80'
-          : 'border-transparent bg-white shadow-md',
-        isCurrentTarget && isHintActive ? 'border-yellow-400 bg-yellow-50 animate-pulse' : '',
-        isCurrentTarget && isWobbling ? 'animate-[shake_0.5s_ease-in-out] border-red-400' : '',
-        isFilled ? 'border-green-400 bg-green-50' : '',
-        isCurrentTarget && !isWobbling && !isHintActive ? 'border-blue-400 bg-blue-50/50' : ''
+        'relative flex flex-col items-center justify-center rounded-2xl border-4 transition-all duration-300 aspect-square shadow-sm overflow-hidden',
+        isFilled ? 'border-green-400 bg-green-50 shadow-md' : 'bg-white/50 backdrop-blur-sm',
+        isCurrentTarget
+          ? {
+              'border-yellow-400 bg-yellow-50 animate-pulse': isHintActive,
+              'animate-[shake_0.5s_ease-in-out] border-red-400': isWobbling,
+              'border-blue-400 bg-blue-50/50': !isWobbling && !isHintActive,
+            }
+          : !isFilled && 'border-dashed border-gray-400 opacity-80'
       )}
     >
       {!isFilled ? (
