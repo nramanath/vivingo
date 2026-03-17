@@ -1,34 +1,11 @@
-import { Play } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 import { useNumberHuntLogic } from './useNumberHuntLogic';
-import { GameActionButton, GameInstructionPill, GameFeedbackBanner } from '../shared';
-
-const StartScreen = ({ onStart }: { onStart: () => void }) => (
-  <div className="flex flex-col items-center justify-center animate-in zoom-in duration-500">
-    <div className="text-6xl mb-4">🔢</div>
-    <h2 className="mb-4 font-fredoka text-4xl font-black text-black drop-shadow-sm text-center">
-      Number Hunt
-    </h2>
-    <p className="max-w-md font-fredoka text-xl text-black/80 mb-8 text-center">
-      Find the missing numbers to complete the sequence! Use your keyboard.
-    </p>
-    <GameActionButton onClick={onStart} text="Start Playing!" icon={Play} />
-  </div>
-);
-
-const GameOverScreen = ({ score, onRestart }: { score: number; onRestart: () => void }) => (
-  <div className="flex flex-col items-center justify-center animate-in zoom-in duration-500 w-full h-full p-4 text-center">
-    <div className="text-8xl mb-6">🎉</div>
-    <h2 className="mb-4 font-fredoka text-5xl font-black text-[var(--color-kelly-green)] drop-shadow-sm">
-      You did it! Great work!
-    </h2>
-    <p className="max-w-md font-fredoka text-2xl text-black/80 mb-8">
-      Keep up the good work! You completed all the stages with a score of {score}{' '}
-      <span className="text-yellow-500">⭐</span>
-    </p>
-    <GameActionButton onClick={onRestart} text="Play Again!" icon={Play} />
-  </div>
-);
+import {
+  GameInstructionPill,
+  GameFeedbackBanner,
+  GameStartScreen,
+  GameOverScreen,
+} from '../shared';
 
 const NumberTile = ({
   number,
@@ -96,7 +73,14 @@ export const NumberHunt = () => {
   } = useNumberHuntLogic();
 
   if (!isPlaying) {
-    return <StartScreen onStart={startGame} />;
+    return (
+      <GameStartScreen
+        icon="🔢"
+        title="Number Hunt"
+        description="Find the missing numbers to complete the sequence! Use your keyboard."
+        onStart={startGame}
+      />
+    );
   }
 
   if (isGameOver) {
