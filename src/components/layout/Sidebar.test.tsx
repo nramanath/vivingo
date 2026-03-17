@@ -73,4 +73,25 @@ describe('Sidebar', () => {
     expect(screen.getByText('Surprise Box')).toBeDefined();
     expect(screen.queryByText('Mystery Messages')).toBeNull();
   });
+
+  it('correctly filters games specifically across adjacent age cohorts (Age 3 vs Age 4)', () => {
+    const { rerender } = render(
+      <Sidebar onSelectGame={vi.fn()} selectedGame={null} selectedAge="3" onSelectAge={vi.fn()} />
+    );
+
+    // Age 3 should show ABC Hunt and Number Hunt, but NOT Number Sequencer
+    expect(screen.getByText('ABC Hunt')).toBeDefined();
+    expect(screen.getByText('Number Hunt')).toBeDefined();
+    expect(screen.queryByText('Number Sequencer')).toBeNull();
+
+    // Re-render for Age 4
+    rerender(
+      <Sidebar onSelectGame={vi.fn()} selectedGame={null} selectedAge="4" onSelectAge={vi.fn()} />
+    );
+
+    // Age 4 should show Number Sequencer, but NOT Number Hunt or ABC Hunt
+    expect(screen.getByText('Number Sequencer')).toBeDefined();
+    expect(screen.queryByText('Number Hunt')).toBeNull();
+    expect(screen.queryByText('ABC Hunt')).toBeNull();
+  });
 });

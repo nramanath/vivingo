@@ -57,7 +57,7 @@ export const games: GameMetadata[] = [
     description:
       'A fun number-matching game where children complete a sequence by finding missing numbers.',
     minAge: 3,
-    maxAge: 4,
+    maxAge: 3,
     teaches: [
       {
         title: 'Number Sequencing',
