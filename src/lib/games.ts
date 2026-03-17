@@ -57,7 +57,7 @@ export const games: GameMetadata[] = [
     description:
       'A fun number-matching game where children complete a sequence by finding missing numbers.',
     minAge: 3,
-    maxAge: 4,
+    maxAge: 3,
     teaches: [
       {
         title: 'Number Sequencing',
@@ -82,6 +82,40 @@ export const games: GameMetadata[] = [
       'This game helps bridge the gap between recognizing numbers and understanding their sequence. It encourages patience and pattern recognition in a playful environment.',
     parentProTip:
       'If your child is stuck on a multi-digit number, prompt them to look at the numbers before it. Understanding that "twenty" is a 2 and a 0 helps them learn place value!',
+    variantClass: 'gradient-brand-button',
+  },
+  {
+    id: 'Number Sequencer',
+    title: 'Number Sequencer',
+    icon: '🛤️',
+    description:
+      'A sequential counting game where children learn numbers by filling out blocks of ten.',
+    minAge: 4,
+    maxAge: 4,
+    teaches: [
+      {
+        title: 'Block Counting',
+        description: 'Learning numerical sequences in chunks of 10.',
+      },
+      {
+        title: 'Number Sequencing',
+        description: 'Filling out the blank spaces in exact sequential order.',
+      },
+      {
+        title: 'Keyboard Familiarity',
+        description: 'Familiarity with typing 2-digit and 3-digit numbers.',
+      },
+      {
+        title: 'Deduction with Hints',
+        description: 'Using hints to unblock themselves positively.',
+      },
+    ],
+    howToPlay:
+      'Select a block of numbers from the menu (like 31 to 40). Look at the first number and type the numbers that come next in order! Use the Hint button if you get stuck.',
+    parentNote:
+      'Unlike Number Hunt which tests random missing numbers, Sequencer focuses purely on continuous counting. Choosing their own blocks gives children a feeling of agency over their learning.',
+    parentProTip:
+      'Start with the 1-10 block. Once they master it, jump to a random block like 41-50 to show them that the counting pattern (1, 2, 3...) stays exactly the same no matter how high the numbers get!',
     variantClass: 'gradient-brand-button',
   },
   {
