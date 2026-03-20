@@ -225,4 +225,33 @@ export const games: GameMetadata[] = [
       'Put a small green sticker on the Left arrow and a red one on the Right arrow. This provides a physical anchor for them to learn which hand to use.',
     variantClass: 'gradient-brand-button',
   },
+  {
+    id: 'World Explorer Pilot',
+    title: 'World Explorer',
+    icon: '🌍',
+    description: 'Learn the continents by pressing the matching numbers on the world map!',
+    minAge: 3,
+    maxAge: 4,
+    teaches: [
+      {
+        title: 'Geographic Awareness',
+        description: 'Learning the names and locations of the 7 continents.',
+      },
+      {
+        title: 'Number Recognition',
+        description: 'Matching numbers 1-7 to map locations.',
+      },
+      {
+        title: 'Memory and Recall',
+        description: 'Remembering which continent corresponds to which number.',
+      },
+    ],
+    howToPlay:
+      'First, look at the map and listen to learn the numbers and continents. When you are ready, press SPACEBAR to start the game. Listen to the voice and press the matching number on your keyboard to find the continent!',
+    parentNote:
+      'This game teaches basic geography and number mapping in a completely frustration-free sandbox.',
+    parentProTip:
+      'Encourage your child to yell out the name of the continent when they press the number to build their vocabulary!',
+    variantClass: 'gradient-brand-button',
+  },
 ];
