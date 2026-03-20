@@ -35,8 +35,10 @@
     "clsx": "^2.1.1",
     "compromise": "^14.15.0",
     "lucide-react": "^0.576.0",
+    "prop-types": "^15.8.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-simple-maps": "^3.0.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
@@ -50,6 +52,7 @@
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@types/react-simple-maps": "^3.0.6",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitest/coverage-v8": "4.0.18",
     "eslint": "^9.39.1",
