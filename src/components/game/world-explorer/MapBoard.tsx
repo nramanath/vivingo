@@ -4,7 +4,7 @@ import { geoCentroid } from 'd3-geo';
 import { CONTINENTS, type ContinentData } from './continentData';
 import countryMappingData from '../../../assets/country-by-continent.json';
 
-const geoUrl = 'https://unpkg.com/world-atlas@2.0.2/countries-110m.json';
+const geoUrl = '/countries-110m.json';
 
 interface MapBoardProps {
   phase: 'LEARNING' | 'CHALLENGE' | 'GAMEOVER';
@@ -19,8 +19,7 @@ export const MapBoard: React.FC<MapBoardProps> = memo(
     const getContinentColor = useMemo(() => {
       // Map country name to continent string
       const map = new Map<string, string>();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (countryMappingData as any[]).forEach((item) => {
+      (countryMappingData as { country: string; continent: string }[]).forEach((item) => {
         map.set(item.country, item.continent);
       });
 

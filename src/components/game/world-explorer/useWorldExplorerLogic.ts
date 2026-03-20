@@ -3,6 +3,9 @@ import { CONTINENTS, type ContinentData } from './continentData';
 
 export type GamePhase = 'LEARNING' | 'CHALLENGE' | 'GAMEOVER';
 
+const LEARNING_CYCLE_MS = 4000;
+const FEEDBACK_DELAY_MS = 1500;
+
 export function useWorldExplorerLogic() {
   const [phase, setPhase] = useState<GamePhase>('LEARNING');
   const [learningIndex, setLearningIndex] = useState(0);
@@ -37,7 +40,7 @@ export function useWorldExplorerLogic() {
 
       const timer = setTimeout(() => {
         setLearningIndex((prev) => (prev + 1) % CONTINENTS.length);
-      }, 4000); // 4 seconds per continent
+      }, LEARNING_CYCLE_MS); // 4 seconds per continent
 
       return () => clearTimeout(timer);
     }
@@ -58,7 +61,7 @@ export function useWorldExplorerLogic() {
       } else {
         setPhase('GAMEOVER');
       }
-    }, 1500);
+    }, FEEDBACK_DELAY_MS);
   }, [currentMission, currentMissionIndex, missions.length, speak]);
 
   // Keyboard controls for Challenge phase
@@ -83,7 +86,7 @@ export function useWorldExplorerLogic() {
           // Clear hint banner after 1.5 seconds so game feels responsive
           setTimeout(() => {
             setFeedback((prev) => (prev?.type === 'hint' ? null : prev));
-          }, 1500);
+          }, FEEDBACK_DELAY_MS);
         }
       }
     };
