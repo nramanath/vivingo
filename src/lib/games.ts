@@ -254,4 +254,38 @@ export const games: GameMetadata[] = [
       'Encourage your child to yell out the name of the continent when they press the number to build their vocabulary!',
     variantClass: 'gradient-brand-button',
   },
+  {
+    id: 'Ball Maze',
+    title: 'Ball Maze',
+    icon: '🏐',
+    description:
+      'A 3D maze adventure! Roll your ball through twisting corridors to reach the finish zone.',
+    minAge: 4,
+    maxAge: 5,
+    teaches: [
+      {
+        title: 'Spatial Reasoning',
+        description: 'Navigating a ball through a maze develops spatial awareness.',
+      },
+      {
+        title: 'Motor Control',
+        description: 'Coordinating arrow key presses to steer the ball smoothly.',
+      },
+      {
+        title: 'Problem Solving',
+        description: 'Finding the correct path from start to finish.',
+      },
+      {
+        title: 'Patience & Persistence',
+        description: 'Learning to backtrack and try different routes.',
+      },
+    ],
+    howToPlay:
+      'Use the Arrow Keys (↑ ↓ ← →) or WASD to roll the ball. Navigate through the maze walls and reach the yellow finish zone to win!',
+    parentNote:
+      "This is your child's first 3D game! It introduces spatial navigation in a simple, frustration-free environment with clear visual start and finish zones.",
+    parentProTip:
+      'If your child is stuck, encourage them to trace the path with their finger on the screen before trying to move the ball. This builds planning skills!',
+    variantClass: 'gradient-brand-button',
+  },
 ];
