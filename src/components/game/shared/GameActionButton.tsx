@@ -1,10 +1,10 @@
-import React from 'react';
+import type { LucideIcon } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 
 export interface GameActionButtonProps {
   onClick: () => void;
   text: string;
-  icon?: React.ElementType;
+  icon?: LucideIcon;
   className?: string;
 }
 
