@@ -5,6 +5,18 @@ import type { StageConfig } from './mazeData';
 
 export type GamePhase = 'START' | 'PLAYING' | 'WON';
 
+/** Key codes that control ball movement — defined once at module level for O(1) lookup. */
+const VALID_KEYS = new Set([
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'KeyW',
+  'KeyA',
+  'KeyS',
+  'KeyD',
+]);
+
 export const useBallMazeLogic = () => {
   const [phase, setPhase] = useState<GamePhase>('START');
   const [stageIndex, setStageIndex] = useState(0);
@@ -74,17 +86,7 @@ export const useBallMazeLogic = () => {
     if (phase !== 'PLAYING') return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      const valid = [
-        'ArrowUp',
-        'ArrowDown',
-        'ArrowLeft',
-        'ArrowRight',
-        'KeyW',
-        'KeyA',
-        'KeyS',
-        'KeyD',
-      ];
-      if (valid.includes(e.code)) {
+      if (VALID_KEYS.has(e.code)) {
         e.preventDefault();
         pressedKeys.current.add(e.code);
       }

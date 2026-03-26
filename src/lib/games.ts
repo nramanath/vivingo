@@ -281,7 +281,7 @@ export const games: GameMetadata[] = [
       },
     ],
     howToPlay:
-      'Use the Arrow Keys (↑ ↓ ← →) or WASD to roll the ball. Navigate through the maze walls and reach the red finish zone to win!',
+      'Use the Arrow Keys (↑ ↓ ← →) or WASD to roll the ball. Navigate through the maze walls and reach the yellow finish zone to win!',
     parentNote:
       "This is your child's first 3D game! It introduces spatial navigation in a simple, frustration-free environment with clear visual start and finish zones.",
     parentProTip:
