@@ -14,75 +14,48 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
 ![Mise](https://img.shields.io/badge/Mise-Managed-blue?style=flat-square&logo=task&logoColor=white)
 ![Antigravity](https://img.shields.io/badge/AI_Agent-Antigravity-6e5494?style=flat-square&logo=deepmind&logoColor=white)
-![Gemini CLI](https://img.shields.io/badge/Gemini--CLI-4285F4?style=flat-square&logo=googlegemini&logoColor=white)
+[![Gemini Code Assist](https://img.shields.io/badge/Gemini_Code_Assist-Automated_PR_Review-4285F4?style=flat-square&logo=googlegemini&logoColor=white)](https://github.com/marketplace/gemini-code-assist)
 
 Building the ultimate toddler learning universe. Interactive, safe, and wildly fun educational games designed entirely for curious tiny minds.
 
-## Getting Started
+## Quickstart
 
-This project uses [Mise](https://mise.jdx.dev/) for managing tools and tasks, and [Bun](https://bun.sh/) as the JavaScript runtime and package manager.
+Built for speed and simplicity. We use **Mise** for task management and **Bun** as our ultra-fast runtime.
 
-### Prerequisites
+```bash
+# 1. Clone the repository
+>_ git clone https://github.com/nramanath/vivingo.git
+>_ cd vivingo
 
-- [Mise](https://mise.jdx.dev/getting-started.html) installed on your machine.
+# 2. Install & Start (Managed via Mise)
+>_ mise run init
+>_ mise run dev
 
-### Installation & Setup
+[Vite] Server running at http://localhost:5173
+```
 
-1. Clone the repository and navigate into it:
-
-   ```bash
-   git clone https://github.com/nramanath/vivingo.git
-   cd vivingo
-   ```
-
-2. Install dependencies via `mise`:
-   ```bash
-   mise run init
-   ```
-
-### Development Commands
-
-All common commands are managed via our `mise.toml` task configuration:
-
-- **`mise run dev`**: Start the Vite development server.
-- **`mise run build`**: Build the project for production.
-- **`mise run preview`**: Preview the production build locally.
-- **`mise run lint`**: Run ESLint to check for code quality issues.
-- **`mise run format`**: Format code using Prettier.
-- **`mise run test`**: Run the test suite via Vitest.
-- **`mise run pr`**: Run all strict CI checks (format, lint, build, test) locally before opening a pull request.
-
-## Deployment
-
-The application (`vivingo.vercel.app`) is deployed on Vercel and fully integrated with the GitHub repository. Future deployments are handled automatically:
-
-- **Production Deployments:** Any commits pushed or merged into the `main` branch trigger an automatic build and deployment that updates the live site securely and quickly.
-- **Preview Deployments:** Whenever you push a working branch or open a Pull Request, Vercel automatically generates a temporary, unique URL for that specific build. This allows you to visually verify your changes in a real cloud environment before modifying production.
-
-No manual deployment steps or custom GitHub Actions workflows are required for the deployment process itself. Our `ci.yml` GitHub workflow handles rigorous code quality checks, while Vercel's native integration automatically watches the repository for updates to build and serve the application.
-
-## 🎮 Games
+## Games
 
 Vivingo's game library is built on a **Unified Game Architecture**, ensuring a consistent look and feel while keeping game-specific logic completely decoupled.
 
-<details>
-<summary><strong>Explore the Game Library</strong></summary>
+<details open>
+<summary><strong style="font-size: 1.2em; color: #f9d876;">View All Available Games</strong></summary>
 
-### 🔤 ABC Hunt (Age 3+)
+<br>
 
-A letter-recognition game where kids complete the alphabet by typing missing letters.
+| Game                    | Age | Core Mechanic     | Educational Focus            |
+| :---------------------- | :-: | :---------------- | :--------------------------- |
+| **🔤 ABC Hunt**         | 3+  | Keyboard matching | Typing, Alphabet Sequence    |
+| **🔢 Number Hunt**      | 3+  | Keyboard matching | Number Sequence (1-100)      |
+| **🛤️ Number Sequencer** | 4+  | Fill-in-the-blank | Advanced Counting & Patterns |
+| **🕵️‍♂️ Mystery Messages** | 3+  | Symbol Decoding   | Reading, Problem Solving     |
+| **↔️ Left-Right Match** | 2+  | Arrow Key Choice  | Directional Awareness        |
+| **🦁 The Big Parade**   | 2+  | Action timing     | Cause-and-Effect, Vocabulary |
+| **🎁 Surprise Box**     | 2+  | Button Mashing    | Discovery, Motor Skills      |
+| **🌍 World Explorer**   | 3+  | Number Mapping    | Geography                    |
+| **🏐 Ball Maze**        | 4+  | 3D Physics Roll   | Spatial Navigation           |
 
-- **Goal**: Find the '?' tiles and press the matching keyboard key.
-- **Progression**: 3 stages with increasing difficulty (1 missing letter → 2 → 3).
-- **Teaches**: Visual letter recognition, keyboard familiarity.
-
-### 🕵️‍♂️ Mystery Messages (Age 3+)
-
-A word-decoding game where a jumbled grid hides a secret phrase.
-
-- **Goal**: Type the underlined target letters left-to-right to reveal the message.
-- **Progression**: Increases word length and "noise" density across 3 stages.
-- **Teaches**: Spelling, focus, and sequential processing.
+</details>
 
 > [!NOTE]
 > **Technical Deep Dive: Mystery Messages Architecture**
@@ -117,33 +90,7 @@ A word-decoding game where a jumbled grid hides a secret phrase.
 >
 > </details>
 
-### ↔️ Left-Right Match (Age 2+)
-
-A directional awareness game that teaches kids to distinguish between left and right.
-
-- **Goal**: Identify which side (Left/Right) contains the target object (e.g., "Where is the Elephant?").
-- **Interaction**: Click/Tap or use Arrow Keys.
-- **Teaches**: Lateral awareness, object identification.
-
-### 🦁 The Big Parade (Age 2+)
-
-An interactive discovery game featuring a vibrant animal parade.
-
-- **Goal**: Help the animals move across the screen by pressing the Spacebar.
-- **Feedback**: Each animal blast triggers a sound effect and name display.
-- **Teaches**: Cause and effect, animal names/sounds.
-
-### 🎁 Surprise Box (Age 2+)
-
-A game of persistence and delightful rewards.
-
-- **Goal**: Tap the box repeatedly to build up energy until it "pops".
-- **Reward**: A random high-value emoji reward with a confetti celebration.
-- **Teaches**: Persistence, fine motor timing.
-
-</details>
-
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 <details>
 <summary><strong>Unified Game Framework</strong></summary>
@@ -161,9 +108,19 @@ All games are built using a standardized framework that separates UI from Logic:
 - **Agentic Workflows**: Located in `.agent/workflows`, our custom agentic commands (`/pr-creator`, `/code-reviewer`) enforce production-grade standards autonomously.
 - **Code Style**: Strictly enforced via Prettier and comprehensive ESLint rules.
 - **Conventional Commits**: Enforced via Husky and Commitlint (`.commitlintrc.cjs`).
+</details>
 
 ## Design System
 
 - Styled with **Tailwind CSS**.
 - UI components built with **shadcn/ui**.
 - Custom Brand Theme: **Zesty Macaroons** (Neon Green, Kelly Green, Freesia, Yellow).
+
+## Continuous Deployment
+
+Fully integrated with **Vercel**. Every push to `main` immediately updates `vivingo.vercel.app`. Every PR gets a unique dynamic preview string sent straight to GitHub for sandbox testing.
+
+<div align="center">
+  <br>
+  Built with ❤️ for tiny minds. Powered by 🤖.
+</div>
