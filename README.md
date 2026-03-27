@@ -1,169 +1,109 @@
-# Vivingo
+<div align="center">
 
-[![CI Status](https://github.com/nramanath/vivingo/actions/workflows/ci.yml/badge.svg)](https://github.com/nramanath/vivingo/actions/workflows/ci.yml)
-[![Vercel Deployment](https://therealsujitk-vercel-badge.vercel.app/?app=vivingo)](https://vivingo.vercel.app/)
-![Last Commit](https://img.shields.io/github/last-commit/nramanath/vivingo?style=flat-square)
-![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
-![Dependencies](https://img.shields.io/badge/dependencies-up--to--date-brightgreen?style=flat-square)
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=50&pause=1000&color=98B66E&center=true&vCenter=true&width=500&lines=VIVINGO;Interactive;Learning;Universe;VIVINGO" alt="Typing SVG" />
 
-![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
-![Bun](https://img.shields.io/badge/Bun-%3E%3D1.0.0-black?style=flat-square&logo=bun&logoColor=FDF0D5)
-![Node](https://img.shields.io/badge/Node-%3E%3D20.0.0-339933?style=flat-square&logo=node.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
-![Mise](https://img.shields.io/badge/Mise-Managed-blue?style=flat-square&logo=task&logoColor=white)
-![Antigravity](https://img.shields.io/badge/AI_Agent-Antigravity-6e5494?style=flat-square&logo=deepmind&logoColor=white)
-![Gemini CLI](https://img.shields.io/badge/Gemini--CLI-4285F4?style=flat-square&logo=googlegemini&logoColor=white)
+**Building the ultimate toddler learning universe. Interactive, safe, and wildly fun educational games designed entirely for curious tiny minds.**
 
-Building the ultimate toddler learning universe. Interactive, safe, and wildly fun educational games designed entirely for curious tiny minds.
+[![Gemini Code Assist](https://img.shields.io/badge/Gemini_Code_Assist-Automated_PR_Review-4285F4?style=for-the-badge&logo=googlegemini&logoColor=white)](https://github.com/marketplace/gemini-code-assist)
+![Antigravity Workflows](https://img.shields.io/badge/AI_Agent-Antigravity-6e5494?style=for-the-badge&logo=deepmind&logoColor=white)
 
-## Getting Started
+[![CI Status](https://img.shields.io/github/actions/workflow/status/nramanath/vivingo/ci.yml?style=for-the-badge&logo=github&color=98b66e)](https://github.com/nramanath/vivingo/actions/workflows/ci.yml)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel)](https://vivingo.vercel.app/)
 
-This project uses [Mise](https://mise.jdx.dev/) for managing tools and tasks, and [Bun](https://bun.sh/) as the JavaScript runtime and package manager.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white" />
+</p>
 
-### Prerequisites
+</div>
 
-- [Mise](https://mise.jdx.dev/getting-started.html) installed on your machine.
+---
 
-### Installation & Setup
+## 🚀 Quickstart
 
-1. Clone the repository and navigate into it:
+Built for speed and simplicity. We use **Mise** for task management and **Bun** as our ultra-fast runtime.
 
-   ```bash
-   git clone https://github.com/nramanath/vivingo.git
-   cd vivingo
-   ```
+```bash
+# 1. Clone the repository
+>_ git clone https://github.com/nramanath/vivingo.git
+>_ cd vivingo
 
-2. Install dependencies via `mise`:
-   ```bash
-   mise run init
-   ```
+# 2. Install & Start (Managed via Mise)
+>_ mise run init
+>_ mise run dev
 
-### Development Commands
+[Vite] Server running at http://localhost:5173
+```
 
-All common commands are managed via our `mise.toml` task configuration:
+---
 
-- **`mise run dev`**: Start the Vite development server.
-- **`mise run build`**: Build the project for production.
-- **`mise run preview`**: Preview the production build locally.
-- **`mise run lint`**: Run ESLint to check for code quality issues.
-- **`mise run format`**: Format code using Prettier.
-- **`mise run test`**: Run the test suite via Vitest.
-- **`mise run pr`**: Run all strict CI checks (format, lint, build, test) locally before opening a pull request.
+## 🤖 AI-Driven Development
 
-## Deployment
+This repository is turbo-charged by cutting-edge AI integrations to enforce strict production-grade standards and automate tedious deployment chores.
 
-The application (`vivingo.vercel.app`) is deployed on Vercel and fully integrated with the GitHub repository. Future deployments are handled automatically:
+### 🛡️ Gemini Code Assist
 
-- **Production Deployments:** Any commits pushed or merged into the `main` branch trigger an automatic build and deployment that updates the live site securely and quickly.
-- **Preview Deployments:** Whenever you push a working branch or open a Pull Request, Vercel automatically generates a temporary, unique URL for that specific build. This allows you to visually verify your changes in a real cloud environment before modifying production.
+All Pull Requests in Vivingo are automatically audited by the [**Gemini Code Assist Bot**](https://github.com/marketplace/gemini-code-assist).
 
-No manual deployment steps or custom GitHub Actions workflows are required for the deployment process itself. Our `ci.yml` GitHub workflow handles rigorous code quality checks, while Vercel's native integration automatically watches the repository for updates to build and serve the application.
+- Instantly reviews code against best practices.
+- Catches potential bugs and performance regressions before they merge.
+- Summarizes PRs for rapid human review.
 
-## 🎮 Games
+### 🧠 Antigravity Autonomous Workflows
 
-Vivingo's game library is built on a **Unified Game Architecture**, ensuring a consistent look and feel while keeping game-specific logic completely decoupled.
+We leverage Google Deepmind's **Antigravity** architecture to perform complex dev cycles. Our `.agent/workflows` define rigid, reproducible logic:
 
-<details>
-<summary><strong>Explore the Game Library</strong></summary>
+- `/pr-creator`: Wraps up codebase edits, runs formatting/testing validation, and opens structured Pull Requests autonomously.
+- `/code-reviewer`: An internal agent step that ruthlessly cross-references uncommitted code against our Unified Game Framework rules.
+- `/pr-bot-review-resolver`: Autonomously reads feedback from the Gemini PR bot, applies valid logic fixes, and commits those patches safely.
 
-### 🔤 ABC Hunt (Age 3+)
+---
 
-A letter-recognition game where kids complete the alphabet by typing missing letters.
+## 🎮 The Game Library
 
-- **Goal**: Find the '?' tiles and press the matching keyboard key.
-- **Progression**: 3 stages with increasing difficulty (1 missing letter → 2 → 3).
-- **Teaches**: Visual letter recognition, keyboard familiarity.
+Vivingo's game library is built on a **Unified Game Architecture**, ensuring a consistent, beautifully themed experience while completely abstracting individual game engine logic.
 
-### 🕵️‍♂️ Mystery Messages (Age 3+)
+<details open>
+<summary><strong style="font-size: 1.2em; color: #f9d876;">View All Available Games</strong></summary>
 
-A word-decoding game where a jumbled grid hides a secret phrase.
+<br>
 
-- **Goal**: Type the underlined target letters left-to-right to reveal the message.
-- **Progression**: Increases word length and "noise" density across 3 stages.
-- **Teaches**: Spelling, focus, and sequential processing.
-
-> [!NOTE]
-> **Technical Deep Dive: Mystery Messages Architecture**
->
-> <details>
-> <summary>Click to see Word System & Combinations</summary>
->
-> #### Phrase Generation
->
-> Phrases are composed from categorized JSON word banks located in `src/components/game/mystery-messages/utils/words/`.
->
-> | File              | Contents              |
-> | ----------------- | --------------------- |
-> | `animals.json`    | 80+ animals           |
-> | `nature.json`     | 80+ nature words      |
-> | `food.json`       | 80+ food words        |
-> | `things.json`     | 100+ everyday objects |
-> | `adjectives.json` | 150+ adjectives       |
-> | `verbs.json`      | 100+ action verbs     |
->
-> #### Stage Progression
->
-> | Stage | Template        | Example          |
-> | ----- | --------------- | ---------------- |
-> | 1     | Single noun     | `CAT`            |
-> | 2     | ADJ + NOUN      | `WET FOX`        |
-> | 3     | Complex phrases | `FAST DEER LEAP` |
->
-> #### Unique Puzzle Combinations
->
-> With over **24.8 million** possible combinations, a child playing twice daily would encounter less than **0.025%** of the content in a year.
->
-> </details>
-
-### ↔️ Left-Right Match (Age 2+)
-
-A directional awareness game that teaches kids to distinguish between left and right.
-
-- **Goal**: Identify which side (Left/Right) contains the target object (e.g., "Where is the Elephant?").
-- **Interaction**: Click/Tap or use Arrow Keys.
-- **Teaches**: Lateral awareness, object identification.
-
-### 🦁 The Big Parade (Age 2+)
-
-An interactive discovery game featuring a vibrant animal parade.
-
-- **Goal**: Help the animals move across the screen by pressing the Spacebar.
-- **Feedback**: Each animal blast triggers a sound effect and name display.
-- **Teaches**: Cause and effect, animal names/sounds.
-
-### 🎁 Surprise Box (Age 2+)
-
-A game of persistence and delightful rewards.
-
-- **Goal**: Tap the box repeatedly to build up energy until it "pops".
-- **Reward**: A random high-value emoji reward with a confetti celebration.
-- **Teaches**: Persistence, fine motor timing.
+| Game                    | Age | Core Mechanic     | Educational Focus            |
+| :---------------------- | :-: | :---------------- | :--------------------------- |
+| **🔤 ABC Hunt**         | 3+  | Keyboard matching | Typing, Alphabet Sequence    |
+| **🔢 Number Hunt**      | 3+  | Keyboard matching | Number Sequence (1-100)      |
+| **🛤️ Number Sequencer** | 4+  | Fill-in-the-blank | Advanced Counting & Patterns |
+| **🕵️‍♂️ Mystery Messages** | 3+  | Symbol Decoding   | Reading, Problem Solving     |
+| **↔️ Left-Right Match** | 2+  | Arrow Key Choice  | Directional Awareness        |
+| **🦁 The Big Parade**   | 2+  | Action timing     | Cause-and-Effect, Vocabulary |
+| **🎁 Surprise Box**     | 2+  | Button Mashing    | Discovery, Motor Skills      |
+| **🌍 World Explorer**   | 3+  | Number Mapping    | Geography                    |
+| **🏐 Ball Maze**        | 4+  | 3D Physics Roll   | Spatial Navigation           |
 
 </details>
+
+---
 
 ## 🏗️ Technical Architecture
 
 <details>
 <summary><strong>Unified Game Framework</strong></summary>
 
-All games are built using a standardized framework that separates UI from Logic:
+All games are built using a standardized React container pattern:
 
-1.  **Shared Components**: Reusable UI elements (`GameActionButton`, `GameInstructionPill`, `GameFeedbackBanner`, `GameProgressDots`) ensure a premium, consistent experience.
-2.  **Custom Hooks**: Business logic is encapsulated in game-specific hooks (e.g., `useAlphabetHuntLogic`), making the visual components lightweight and purely representational.
-3.  **Strict Testing**: Every game is backed by an automated test suite ensuring reliability across all stages and interactions.
+1. **Shared Layouts:** Reusable sidebars, top navs, and modals so kids never have to re-learn how to navigate between apps.
+2. **Logic Hooks:** Business logic for scores and states are pushed into custom React Hooks (e.g. `useBallMazeLogic`).
+3. **Immersive UI:** A heavy focus on _Zesty Macaroons_ color themes (`#c5e5a5` Neon Green, `#f9d876` Freesia) and micro-interactions.
 </details>
 
-<details>
-<summary><strong>Development Standards & Workflows</strong></summary>
+## 🚢 Continuous Deployment
 
-- **Agentic Workflows**: Located in `.agent/workflows`, our custom agentic commands (`/pr-creator`, `/code-reviewer`) enforce production-grade standards autonomously.
-- **Code Style**: Strictly enforced via Prettier and comprehensive ESLint rules.
-- **Conventional Commits**: Enforced via Husky and Commitlint (`.commitlintrc.cjs`).
+Fully integrated with **Vercel**. Every push to `main` immediately updates `vivingo.vercel.app`. Every PR gets a unique dynamic preview string sent straight to GitHub for sandbox testing.
 
-## Design System
-
-- Styled with **Tailwind CSS**.
-- UI components built with **shadcn/ui**.
-- Custom Brand Theme: **Zesty Macaroons** (Neon Green, Kelly Green, Freesia, Yellow).
+<div align="center">
+  <br>
+  <i>Built with ❤️ for tiny minds. Powered by 🤖.</i>
+</div>
