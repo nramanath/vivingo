@@ -18,7 +18,7 @@
 
 Building the ultimate toddler learning universe. Interactive, safe, and wildly fun educational games designed entirely for curious tiny minds.
 
-## 🚀 Quickstart
+## Quickstart
 
 Built for speed and simplicity. We use **Mise** for task management and **Bun** as our ultra-fast runtime.
 
@@ -34,7 +34,7 @@ Built for speed and simplicity. We use **Mise** for task management and **Bun** 
 [Vite] Server running at http://localhost:5173
 ```
 
-## 🎮 Games
+## Games
 
 Vivingo's game library is built on a **Unified Game Architecture**, ensuring a consistent look and feel while keeping game-specific logic completely decoupled.
 
@@ -90,7 +90,7 @@ Vivingo's game library is built on a **Unified Game Architecture**, ensuring a c
 >
 > </details>
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 <details>
 <summary><strong>Unified Game Framework</strong></summary>
@@ -116,7 +116,7 @@ All games are built using a standardized framework that separates UI from Logic:
 - UI components built with **shadcn/ui**.
 - Custom Brand Theme: **Zesty Macaroons** (Neon Green, Kelly Green, Freesia, Yellow).
 
-## 🚢 Continuous Deployment
+## Continuous Deployment
 
 Fully integrated with **Vercel**. Every push to `main` immediately updates `vivingo.vercel.app`. Every PR gets a unique dynamic preview string sent straight to GitHub for sandbox testing.
 
