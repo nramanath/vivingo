@@ -119,3 +119,8 @@ All games are built using a standardized framework that separates UI from Logic:
 ## 🚢 Continuous Deployment
 
 Fully integrated with **Vercel**. Every push to `main` immediately updates `vivingo.vercel.app`. Every PR gets a unique dynamic preview string sent straight to GitHub for sandbox testing.
+
+<div align="center">
+  <br>
+  Built with ❤️ for tiny minds. Powered by 🤖.
+</div>
