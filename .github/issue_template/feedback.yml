@@ -1,0 +1,23 @@
+name: General Feedback
+description: Suggest improvements, UX adjustments, or technical enhancements.
+labels: ['enhancement', 'feedback']
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feedback Category
+      options:
+        - User Interface (UI)
+        - Audio / Sound Effects
+        - Visuals / Animations
+        - Performance
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Detail the feedback or proposed improvement.
+    validations:
+      required: true

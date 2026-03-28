@@ -42,3 +42,9 @@ To keep the codebase sustainable and readable in the long run, agents must abide
 - **Self-Documenting Standard**:
   - Rely on descriptive, explicit variable and property names mapping exactly to their business context instead of inline documentation whenever possible.
   - Write inline or block comments only for specifically _complex_ or _unintuitive_ algorithmic choices, never to describe obvious syntax.
+
+## 5. Documentation & Communication Standards
+
+- **No Emojis**: Strictly forbid the use of emojis in professional documentation (README, Wiki), issue templates, pull request descriptions, and commit messages.
+- **Tone**: Maintain a strictly professional, technical tone. Avoid "hacker" or "slang" terminology.
+- **Clarity**: Prioritize information density over visual flair. Use standard Markdown structures (tables, lists, blockquotes) for emphasis.
