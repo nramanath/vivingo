@@ -43,17 +43,17 @@ Vivingo's game library is built on a **Unified Game Architecture**, ensuring a c
 
 <br>
 
-| Game                    | Age | Core Mechanic     | Educational Focus            |
-| :---------------------- | :-: | :---------------- | :--------------------------- |
-| **🔤 ABC Hunt**         | 3+  | Keyboard matching | Typing, Alphabet Sequence    |
-| **🔢 Number Hunt**      | 3+  | Keyboard matching | Number Sequence (1-100)      |
-| **🛤️ Number Sequencer** | 4+  | Fill-in-the-blank | Advanced Counting & Patterns |
-| **🕵️‍♂️ Mystery Messages** | 3+  | Symbol Decoding   | Reading, Problem Solving     |
-| **↔️ Left-Right Match** | 2+  | Arrow Key Choice  | Directional Awareness        |
-| **🦁 The Big Parade**   | 2+  | Action timing     | Cause-and-Effect, Vocabulary |
-| **🎁 Surprise Box**     | 2+  | Button Mashing    | Discovery, Motor Skills      |
-| **🌍 World Explorer**   | 3+  | Number Mapping    | Geography                    |
-| **🏐 Ball Maze**        | 4+  | 3D Physics Roll   | Spatial Navigation           |
+| Game                 | Age | Core Mechanic     | Educational Focus            |
+| :------------------- | :-: | :---------------- | :--------------------------- |
+| **ABC Hunt**         | 3+  | Keyboard matching | Typing, Alphabet Sequence    |
+| **Number Hunt**      | 3+  | Keyboard matching | Number Sequence (1-100)      |
+| **Number Sequencer** | 4+  | Fill-in-the-blank | Advanced Counting & Patterns |
+| **Mystery Messages** | 3+  | Symbol Decoding   | Reading, Problem Solving     |
+| **Left-Right Match** | 2+  | Arrow Key Choice  | Directional Awareness        |
+| **The Big Parade**   | 2+  | Action timing     | Cause-and-Effect, Vocabulary |
+| **Surprise Box**     | 2+  | Button Mashing    | Discovery, Motor Skills      |
+| **World Explorer**   | 3+  | Number Mapping    | Geography                    |
+| **Ball Maze**        | 4+  | 3D Physics Roll   | Spatial Navigation           |
 
 </details>
 
@@ -122,5 +122,5 @@ Fully integrated with **Vercel**. Every push to `main` immediately updates `vivi
 
 <div align="center">
   <br>
-  Built with ❤️ for tiny minds. Powered by 🤖.
+  Built with care for tiny minds. Powered by Antigravity AI.
 </div>

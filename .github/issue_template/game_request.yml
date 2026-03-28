@@ -1,0 +1,41 @@
+name: New Game Request
+description: Propose a new educational game concept for the Vivingo platform.
+labels: ['enhancement', 'game-request']
+body:
+  - type: markdown
+    attributes:
+      value: 'Vivingo focuses on educational experiences for children aged 2-6 using simple, accessible mechanics.'
+  - type: input
+    id: concept_name
+    attributes:
+      label: Game Concept Name
+      placeholder: e.g., "Color Catcher"
+    validations:
+      required: true
+  - type: dropdown
+    id: target_age
+    attributes:
+      label: Target Age Range
+      options:
+        - 2+
+        - 3+
+        - 4+
+        - 5+
+        - 6+
+    validations:
+      required: true
+  - type: input
+    id: educational_focus
+    attributes:
+      label: Educational Focus
+      placeholder: e.g., Shape Recognition, Early Mathematics
+    validations:
+      required: true
+  - type: textarea
+    id: mechanics
+    attributes:
+      label: Core Game Mechanics
+      description: Describe the gameplay interaction.
+      placeholder: 'Describe how the user interacts with the game...'
+    validations:
+      required: true

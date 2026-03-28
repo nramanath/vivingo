@@ -1,0 +1,65 @@
+name: Bug Report
+description: Report an issue to help improve the game experience.
+labels: ['bug', 'needs-triage']
+body:
+  - type: markdown
+    attributes:
+      value: 'Thank you for reporting an issue. Please note that Vivingo is optimized for desktop computer browsers. Mobile devices are not formally supported at this time.'
+  - type: dropdown
+    id: game
+    attributes:
+      label: Affected Game
+      description: Select the specific game where the issue occurred.
+      options:
+        - ABC Hunt
+        - Number Hunt
+        - Number Sequencer
+        - Mystery Messages
+        - Left-Right Match
+        - The Big Parade
+        - Surprise Box
+        - World Explorer
+        - Ball Maze
+        - Global UI / Main Menu
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Windows
+        - ChromeOS
+        - Linux
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Google Chrome
+        - Mozilla Firefox
+        - Apple Safari
+        - Microsoft Edge
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: Provide clear, numbered steps to reproduce the issue.
+      placeholder: |
+        1. Navigate to ...
+        2. Perform the following action ...
+        3. Observe the reported issue.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs Actual Behavior
+      description: Describe the expected outcome versus what actually occurred.
+    validations:
+      required: true
