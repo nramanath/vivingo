@@ -10,6 +10,7 @@ body:
     attributes:
       label: Affected Game
       description: Select the specific game where the issue occurred.
+      # NOTE: If you add a new game to src/lib/games.ts, you MUST also add it to the options list below.
       options:
         - ABC Hunt
         - Number Hunt
