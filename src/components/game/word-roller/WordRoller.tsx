@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { BoardScene } from './BoardScene';
 import { useWordRollerLogic } from './useWordRollerLogic';
 import { STAGES } from './wordRollerData';
-import { GameInstructionPill, GameOverScreen } from '../shared';
+import { GameInstructionPill, GameOverScreen, GameStartScreen } from '../shared';
 import { ConfettiCannon } from './ConfettiCannon';
 import { cn } from '../../../lib/utils';
 
@@ -45,10 +45,12 @@ export default function WordRoller() {
     lettersFoundCount,
     targetWord,
     pressedKeys,
+    isPlaying,
     isTransitioning,
     gameCompleted,
     confettiTrigger,
     confettiBursts,
+    startGame,
     handleBallPosition,
     resetGame,
   } = useWordRollerLogic();
@@ -56,6 +58,17 @@ export default function WordRoller() {
   const config = STAGES[stageIndex];
 
   if (!config) return null;
+
+  if (!isPlaying) {
+    return (
+      <GameStartScreen
+        icon="🎲"
+        title="Word Roller"
+        description="Roll the ball to collect letters in order and spell the hidden word! Three stages of increasing difficulty."
+        onStart={startGame}
+      />
+    );
+  }
 
   if (gameCompleted) {
     return <GameOverScreen score={1} onRestart={resetGame} />;

@@ -291,7 +291,7 @@ export const games: GameMetadata[] = [
   {
     id: 'Word Roller',
     title: 'Word Roller',
-    icon: '🔤',
+    icon: '🎲',
     description:
       'Roll your ball over the correct letters to spell the hidden word in this 3D word puzzle!',
     minAge: 4,

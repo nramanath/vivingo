@@ -13,6 +13,7 @@ export function useWordRollerLogic() {
   const [boardGrid, setBoardGrid] = useState<GridLetter[][]>([]);
   const [lettersFoundCount, setLettersFoundCount] = useState(0);
   const [gameCompleted, setGameCompleted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [confettiTrigger, setConfettiTrigger] = useState(0);
   const [confettiBursts, setConfettiBursts] = useState(1);
@@ -38,6 +39,8 @@ export function useWordRollerLogic() {
   useEffect(() => {
     initBoard(0);
   }, [initBoard]);
+
+  const startGame = () => setIsPlaying(true);
 
   // Handle Keyboard Inputs
   useEffect(() => {
@@ -118,6 +121,7 @@ export function useWordRollerLogic() {
   const resetGame = () => {
     setStageIndex(0);
     setGameCompleted(false);
+    setIsPlaying(false); // go back to start screen on reset
     initBoard(0);
   };
 
@@ -127,10 +131,12 @@ export function useWordRollerLogic() {
     lettersFoundCount,
     targetWord,
     pressedKeys,
+    isPlaying,
     isTransitioning,
     gameCompleted,
     confettiTrigger,
     confettiBursts,
+    startGame,
     handleBallPosition,
     resetGame,
   };
