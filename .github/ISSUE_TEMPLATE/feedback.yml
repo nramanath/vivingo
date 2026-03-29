@@ -1,6 +1,6 @@
 name: General Feedback
 description: Suggest improvements, UX adjustments, or technical enhancements.
-labels: ['enhancement', 'feedback']
+labels: ['feedback']
 body:
   - type: dropdown
     id: category

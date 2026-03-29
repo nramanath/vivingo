@@ -1,6 +1,6 @@
 name: Bug Report
 description: Report an issue to help improve the game experience.
-labels: ['bug', 'needs-triage']
+labels: ['bug']
 body:
   - type: markdown
     attributes:
