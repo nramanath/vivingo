@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { generateBoard, STAGES } from './wordRollerData';
+import { generateBoard, STAGES, WORD_LISTS } from './wordRollerData';
 import type { GridLetter } from './wordRollerData';
 import type { FeedbackType } from '../shared/GameFeedbackBanner';
 
@@ -7,9 +7,6 @@ const AUDIO_URLS = {
   success: '/audio/success.mp3',
   complete: '/audio/complete.mp3',
 };
-
-// Words for Stage 1 (3 letters)
-const DICTIONARY_3 = ['CAT', 'DOG', 'SUN', 'BAT', 'PIG', 'HAT'];
 
 export function useWordRollerLogic() {
   const [stageIndex, setStageIndex] = useState(0);
@@ -27,18 +24,12 @@ export function useWordRollerLogic() {
     setTimeout(() => setIsTransitioning(true), 0);
     setTimeout(() => {
       const stageConfig = STAGES[idx];
-      // Random word based on wordLen length
-      let wordList = DICTIONARY_3;
-      if (stageConfig.wordLen === 4) wordList = ['BIRD', 'FISH', 'FROG'];
-      if (stageConfig.wordLen === 5) wordList = ['APPLE', 'TRAIN', 'SNAKE'];
-
+      const wordList = WORD_LISTS[stageConfig.wordLen] ?? WORD_LISTS[3];
       const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
       setTargetWord(randomWord);
       setBoardGrid(generateBoard(randomWord.split(''), stageConfig.gridSize));
       setLettersFoundCount(0);
       setFeedback(null);
-
-      // Delay to fade back in
       setTimeout(() => {
         setIsTransitioning(false);
       }, 300);

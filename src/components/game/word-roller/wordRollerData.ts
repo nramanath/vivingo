@@ -16,9 +16,16 @@ export interface RollingStageConfig {
 
 export const STAGES: RollingStageConfig[] = [
   { label: 'Stage 1', gridSize: 3, wordLen: 3 },
-  // { label: 'Stage 2', gridSize: 4, wordLen: 4 }, // Future
-  // { label: 'Stage 3', gridSize: 5, wordLen: 5 }, // Future
+  { label: 'Stage 2', gridSize: 4, wordLen: 4 },
+  { label: 'Stage 3', gridSize: 5, wordLen: 5 },
 ];
+
+/** Word banks per letter count — age-appropriate, single-syllable or common words */
+export const WORD_LISTS: Record<number, string[]> = {
+  3: ['CAT', 'DOG', 'SUN', 'BAT', 'PIG', 'HAT', 'CUP', 'BUS', 'JAM', 'NET'],
+  4: ['BIRD', 'FISH', 'FROG', 'DUCK', 'CRAB', 'WOLF', 'BEAR', 'DEER', 'GOAT', 'LAMB'],
+  5: ['CHAIR', 'PLANT', 'CLOUD', 'TRAIN', 'BREAD', 'TIGER', 'SHARK', 'HORSE', 'GRAPE', 'SNAIL'],
+};
 
 export interface GridLetter {
   char: string;

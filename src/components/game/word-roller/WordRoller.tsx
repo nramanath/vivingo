@@ -64,7 +64,26 @@ export default function WordRoller() {
         <h2 className="font-fredoka text-xl font-black text-[var(--color-kelly-green)]">
           Word Roller
         </h2>
-        <span className="font-fredoka text-sm font-bold text-black">{config.label}</span>
+        <div className="flex items-center gap-3">
+          <span className="font-fredoka text-sm font-bold text-black">{config.label}</span>
+          <div className="flex gap-1.5">
+            {STAGES.map((_, i) => (
+              <div
+                key={i}
+                className="w-2.5 h-2.5 rounded-full transition-all duration-300"
+                style={{
+                  backgroundColor:
+                    i < stageIndex
+                      ? 'var(--color-kelly-green)'
+                      : i === stageIndex
+                        ? 'var(--color-freesia)'
+                        : '#D1D5DB',
+                  transform: i === stageIndex ? 'scale(1.4)' : 'scale(1)',
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Canvas area — relatively positioned so all overlays anchor inside it */}
