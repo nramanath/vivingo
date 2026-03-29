@@ -288,4 +288,30 @@ export const games: GameMetadata[] = [
       'If your child is stuck, encourage them to trace the path with their finger on the screen before trying to move the ball. This builds planning skills!',
     variantClass: 'gradient-brand-button',
   },
+  {
+    id: 'Word Roller',
+    title: 'Word Roller',
+    icon: '🎲',
+    description:
+      'Roll your ball over the correct letters to spell the hidden word in this 3D word puzzle!',
+    minAge: 4,
+    maxAge: 5,
+    teaches: [
+      {
+        title: 'Spelling',
+        description: 'Practicing the correct sequence of letters for common words.',
+      },
+      {
+        title: 'Motor Control',
+        description: 'Navigating a 3D ball accurately on a flat board.',
+      },
+    ],
+    howToPlay:
+      'Look at the word at the top of the screen. Use your Arrow Keys (↑ ↓ ← →) or WASD to roll the ball on the board and touch the letters in the correct spelling order!',
+    parentNote:
+      'Word Roller takes the physics navigation of Ball Maze and combines it with letter recognition. Since there is no penalty for hitting the wrong letter, kids can experiment freely and build confidence.',
+    parentProTip:
+      'Encourage your child to say each letter out loud as the ball touches it. If they accidentally hit the wrong one, you can say "Oops, that\'s a distractor!" to keep it fun.',
+    variantClass: 'gradient-brand-button',
+  },
 ];
