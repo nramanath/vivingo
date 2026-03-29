@@ -42,7 +42,20 @@ export function useWordRollerLogic() {
 
   // Handle Keyboard Inputs
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => pressedKeys.current.add(e.code);
+    const GAME_KEYS = new Set([
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'KeyW',
+      'KeyA',
+      'KeyS',
+      'KeyD',
+    ]);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (GAME_KEYS.has(e.code)) e.preventDefault(); // stop page/sidebar scroll
+      pressedKeys.current.add(e.code);
+    };
     const handleKeyUp = (e: KeyboardEvent) => pressedKeys.current.delete(e.code);
 
     window.addEventListener('keydown', handleKeyDown);

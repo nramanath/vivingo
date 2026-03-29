@@ -7,20 +7,22 @@ import { STAGES } from './wordRollerData';
 import { GameFeedbackBanner, GameInstructionPill, GameOverScreen } from '../shared';
 import { cn } from '../../../lib/utils';
 
-const CameraFit = ({ gridSize }: { gridSize: number }) => {
+const CameraFit = () => {
   const { size, get } = useThree();
   const needsUpdate = useRef(true);
 
   useEffect(() => {
     needsUpdate.current = true;
-  }, [size, gridSize]);
+  }, [size]);
 
   useFrame(() => {
     if (!needsUpdate.current) return;
     needsUpdate.current = false;
 
-    // CELL_SIZE = 2. MARGIN = 3.5 keeps the 3x3 grid small and centered.
-    const physicalSize = gridSize * 2;
+    // Fix zoom to Stage 1 (3x3) reference so every cell is the same size at all stages.
+    // Larger grids (4x4, 5x5) extend further across the canvas — cells don't shrink.
+    const REFERENCE_GRID_SIZE = 3;
+    const physicalSize = REFERENCE_GRID_SIZE * 2;
     const MARGIN = 3.5;
 
     const zoom = Math.min(
@@ -59,31 +61,40 @@ export default function WordRoller() {
 
   return (
     <div className="flex flex-col w-full h-full gap-2">
-      {/* HUD bar — title + stage only, clean and minimal */}
-      <div className="flex-shrink-0 flex items-center justify-between bg-white/70 backdrop-blur-sm px-6 py-3 rounded-2xl shadow-md border border-white/60">
+      {/* HUD bar — title left, difficulty dots centered, stage label right */}
+      <div className="flex-shrink-0 relative flex items-center bg-white/70 backdrop-blur-sm px-6 py-3 rounded-2xl shadow-md border border-white/60">
+        {/* Left: game title */}
         <h2 className="font-fredoka text-xl font-black text-[var(--color-kelly-green)]">
           Word Roller
         </h2>
-        <div className="flex items-center gap-3">
-          <span className="font-fredoka text-sm font-bold text-black">{config.label}</span>
-          <div className="flex gap-1.5">
-            {STAGES.map((_, i) => (
+
+        {/* Center: difficulty dots — absolutely positioned */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+          {STAGES.map((_, i) => {
+            // Fixed difficulty colors: green (easy) → yellow (medium) → red-orange (hard)
+            const DIFFICULTY_COLORS = ['#6bae3e', '#f9d876', '#e05c3a'];
+            const isActive = i === stageIndex;
+            const isDone = i < stageIndex;
+            return (
               <div
                 key={i}
-                className="w-2.5 h-2.5 rounded-full transition-all duration-300"
+                className="rounded-full transition-all duration-300"
                 style={{
-                  backgroundColor:
-                    i < stageIndex
-                      ? 'var(--color-kelly-green)'
-                      : i === stageIndex
-                        ? 'var(--color-freesia)'
-                        : '#D1D5DB',
-                  transform: i === stageIndex ? 'scale(1.4)' : 'scale(1)',
+                  width: isActive ? '12px' : '8px',
+                  height: isActive ? '12px' : '8px',
+                  backgroundColor: isDone
+                    ? '#9ca3af' // grey once passed
+                    : DIFFICULTY_COLORS[i],
+                  opacity: isDone ? 0.4 : 1,
+                  boxShadow: isActive ? `0 0 0 3px ${DIFFICULTY_COLORS[i]}40` : 'none',
                 }}
               />
-            ))}
-          </div>
+            );
+          })}
         </div>
+
+        {/* Right: stage label */}
+        <span className="ml-auto font-fredoka text-sm font-bold text-black">{config.label}</span>
       </div>
 
       {/* Canvas area — relatively positioned so all overlays anchor inside it */}
@@ -93,8 +104,8 @@ export default function WordRoller() {
           isTransitioning ? 'opacity-0' : 'opacity-100'
         )}
       >
-        {/* Target word tiles — centered at the top of the canvas, above the grid */}
-        <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+        {/* Word tiles — just below the HUD bar edge, always above the grid */}
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
           {targetWord.split('').map((char, index) => {
             const isFound = index < lettersFoundCount;
             return (
@@ -124,7 +135,7 @@ export default function WordRoller() {
           style={{ width: '100%', height: '100%' }}
         >
           <color attach="background" args={['#FFF8E7']} />
-          <CameraFit gridSize={config.gridSize} />
+          <CameraFit />
           <Suspense fallback={null}>
             <BoardScene
               key={stageIndex}

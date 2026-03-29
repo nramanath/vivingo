@@ -22,7 +22,7 @@ export const BoardScene: React.FC<BoardSceneProps> = ({
 }) => {
   const { gridSize } = config;
   const boardWidth = gridSize * CELL_SIZE;
-  const wallThickness = 1.0; // Thick enough to prevent tunneling at high velocities
+  const wallThickness = 0.3; // Thin, consistent border across all grid sizes
   const hOffset = boardWidth / 2 + wallThickness / 2;
 
   const bounds = [
