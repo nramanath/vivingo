@@ -1,11 +1,40 @@
-import { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Suspense, useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { BoardScene } from './BoardScene';
 import { useWordRollerLogic } from './useWordRollerLogic';
 import { STAGES } from './wordRollerData';
 import { GameFeedbackBanner } from '../shared/GameFeedbackBanner';
 import { GameOverScreen } from '../shared/GameOverScreen';
 import { cn } from '../../../lib/utils';
+
+const CameraFit = ({ gridSize }: { gridSize: number }) => {
+  const { size, get } = useThree();
+  const needsUpdate = useRef(true);
+
+  useEffect(() => {
+    needsUpdate.current = true;
+  }, [size, gridSize]);
+
+  useFrame(() => {
+    if (!needsUpdate.current) return;
+    needsUpdate.current = false;
+
+    // 2 is the CELL_SIZE. 1.8 is the margin multiplier to keep it "small and nice"
+    const physicalSize = gridSize * 2;
+    const MARGIN = 1.8;
+
+    const zoom = Math.min(
+      size.width / (physicalSize * MARGIN),
+      size.height / (physicalSize * MARGIN)
+    );
+    const cam = get().camera as THREE.OrthographicCamera;
+    cam.zoom = zoom;
+    cam.updateProjectionMatrix();
+  });
+
+  return null;
+};
 
 export default function WordRoller() {
   const {
@@ -24,8 +53,6 @@ export default function WordRoller() {
   const config = STAGES[stageIndex];
 
   if (!config) return null;
-
-  const currentFOV = 35 + stageIndex * 5;
 
   if (gameCompleted) {
     return <GameOverScreen score={1} onRestart={resetGame} />;
@@ -67,7 +94,12 @@ export default function WordRoller() {
           isTransitioning ? 'opacity-0' : 'opacity-100'
         )}
       >
-        <Canvas shadows camera={{ position: [0, 12, 0], fov: currentFOV }}>
+        <Canvas
+          shadows
+          orthographic
+          camera={{ position: [0, 15, 0.01], zoom: 40, near: 0.1, far: 100 }}
+        >
+          <CameraFit gridSize={config.gridSize} />
           <Suspense fallback={null}>
             <BoardScene
               boardGrid={boardGrid}
