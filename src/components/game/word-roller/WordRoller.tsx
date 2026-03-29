@@ -4,7 +4,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { BoardScene } from './BoardScene';
 import { useWordRollerLogic } from './useWordRollerLogic';
 import { STAGES } from './wordRollerData';
-import { GameFeedbackBanner, GameInstructionPill, GameOverScreen } from '../shared';
+import { GameInstructionPill, GameOverScreen } from '../shared';
+import { ConfettiCannon } from './ConfettiCannon';
 import { cn } from '../../../lib/utils';
 
 const CameraFit = () => {
@@ -44,9 +45,10 @@ export default function WordRoller() {
     lettersFoundCount,
     targetWord,
     pressedKeys,
-    feedback,
     isTransitioning,
     gameCompleted,
+    confettiTrigger,
+    confettiBursts,
     handleBallPosition,
     resetGame,
   } = useWordRollerLogic();
@@ -124,8 +126,7 @@ export default function WordRoller() {
           })}
         </div>
 
-        {/* Feedback banner — floats over the canvas when triggered */}
-        <GameFeedbackBanner feedback={feedback} />
+        <ConfettiCannon trigger={confettiTrigger} bursts={confettiBursts} />
 
         {/* Three.js canvas */}
         <Canvas

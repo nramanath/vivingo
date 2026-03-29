@@ -1,7 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { generateBoard, STAGES, WORD_LISTS } from './wordRollerData';
 import type { GridLetter } from './wordRollerData';
-import type { FeedbackType } from '../shared/GameFeedbackBanner';
 
 const AUDIO_URLS = {
   success: '/audio/success.mp3',
@@ -14,8 +13,9 @@ export function useWordRollerLogic() {
   const [boardGrid, setBoardGrid] = useState<GridLetter[][]>([]);
   const [lettersFoundCount, setLettersFoundCount] = useState(0);
   const [gameCompleted, setGameCompleted] = useState(false);
-  const [feedback, setFeedback] = useState<FeedbackType>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [confettiTrigger, setConfettiTrigger] = useState(0);
+  const [confettiBursts, setConfettiBursts] = useState(1);
 
   const pressedKeys = useRef<Set<string>>(new Set());
 
@@ -29,7 +29,6 @@ export function useWordRollerLogic() {
       setTargetWord(randomWord);
       setBoardGrid(generateBoard(randomWord.split(''), stageConfig.gridSize));
       setLettersFoundCount(0);
-      setFeedback(null);
       setTimeout(() => {
         setIsTransitioning(false);
       }, 300);
@@ -71,11 +70,6 @@ export function useWordRollerLogic() {
     audio.play().catch(() => {});
   };
 
-  const showFeedback = (type: FeedbackType, duration = 1000) => {
-    setFeedback(type);
-    setTimeout(() => setFeedback(null), duration);
-  };
-
   const handleBallPosition = useCallback(
     (row: number, col: number) => {
       if (isTransitioning || gameCompleted) return;
@@ -90,11 +84,14 @@ export function useWordRollerLogic() {
 
         if (newFoundCount === targetWord.length) {
           playSound('complete');
-          showFeedback('completed', 2000);
+          const isLastStage = stageIndex + 1 >= STAGES.length;
+          // Fire confetti — 2 bursts on final stage, 1 burst otherwise
+          setConfettiBursts(isLastStage ? 2 : 1);
+          setConfettiTrigger((prev) => prev + 1);
 
           // Progress to next stage after short delay
           setTimeout(() => {
-            if (stageIndex + 1 < STAGES.length) {
+            if (!isLastStage) {
               setStageIndex((prev) => prev + 1);
               initBoard(stageIndex + 1);
             } else {
@@ -103,7 +100,6 @@ export function useWordRollerLogic() {
           }, 2000);
         } else {
           playSound('success');
-          showFeedback('correct');
         }
       }
       // Wrong tiles are silently ignored — no penalty, no feedback
@@ -131,9 +127,10 @@ export function useWordRollerLogic() {
     lettersFoundCount,
     targetWord,
     pressedKeys,
-    feedback,
     isTransitioning,
     gameCompleted,
+    confettiTrigger,
+    confettiBursts,
     handleBallPosition,
     resetGame,
   };
