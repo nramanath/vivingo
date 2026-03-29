@@ -120,6 +120,10 @@ All games are built using a standardized framework that separates UI from Logic:
 
 Fully integrated with **Vercel**. Every push to `main` immediately updates `vivingo.vercel.app`. Every PR gets a unique dynamic preview string sent straight to GitHub for sandbox testing.
 
+## Feedback and Contributions
+
+We welcome input from parents, educators, and developers. If you have ideas for new educational games, want to report a bug, or simply have feedback on the user experience, please use the structured forms in our [Issues tab](https://github.com/nramanath/vivingo/issues/new/choose).
+
 <div align="center">
   <br>
   Built with care for tiny minds. Powered by Antigravity AI.

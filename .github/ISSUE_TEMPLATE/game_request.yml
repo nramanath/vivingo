@@ -1,6 +1,6 @@
 name: New Game Request
 description: Propose a new educational game concept for the Vivingo platform.
-labels: ['enhancement', 'game-request']
+labels: ['game-request']
 body:
   - type: markdown
     attributes:
