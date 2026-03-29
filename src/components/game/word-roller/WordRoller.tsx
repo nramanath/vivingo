@@ -104,7 +104,7 @@ export default function WordRoller() {
                   'w-12 h-12 flex items-center justify-center rounded-xl text-2xl font-fredoka font-bold transition-all duration-300 shadow-sm',
                   isFound
                     ? 'bg-green-100 text-green-600 border-2 border-green-300 scale-110'
-                    : 'bg-white/90 text-slate-300 border-2 border-dashed border-slate-200'
+                    : 'bg-white/90 text-black border-2 border-dashed border-slate-300'
                 )}
               >
                 {char}

@@ -21,8 +21,8 @@ export const LetterTile: React.FC<LetterTileProps> = ({
   const [x, , zWorld] = gridToWorld(row, col, gridSize);
 
   // Floor plate colors
-  const plateColor = isCollected ? '#81C784' : '#f9d876';
-  const textColor = isCollected ? '#ffffff' : '#000000';
+  const plateColor = isCollected ? '#81C784' : 'var(--color-freesia)';
+  const textColor = isCollected ? '#ffffff' : '#1a1a1a';
 
   return (
     <group position={[x, 0.01, zWorld]}>
