@@ -5,7 +5,6 @@ import type { FeedbackType } from '../shared/GameFeedbackBanner';
 
 const AUDIO_URLS = {
   success: '/audio/success.mp3',
-  error: '/audio/error.mp3',
   complete: '/audio/complete.mp3',
 };
 
@@ -102,14 +101,8 @@ export function useWordRollerLogic() {
           playSound('success');
           showFeedback('correct');
         }
-      } else if (cell.isTarget && cell.orderIndex > lettersFoundCount) {
-        playSound('error');
-        showFeedback('wrong');
-      } else if (!cell.isTarget) {
-        // touched distractor tile
-        playSound('error');
-        showFeedback('wrong');
       }
+      // Wrong tiles are silently ignored — no penalty, no feedback
     },
     [
       boardGrid,
