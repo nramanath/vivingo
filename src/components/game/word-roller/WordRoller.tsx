@@ -127,6 +127,7 @@ export default function WordRoller() {
           <CameraFit gridSize={config.gridSize} />
           <Suspense fallback={null}>
             <BoardScene
+              key={stageIndex}
               boardGrid={boardGrid}
               config={config}
               lettersFoundCount={lettersFoundCount}

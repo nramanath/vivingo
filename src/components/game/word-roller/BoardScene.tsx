@@ -22,7 +22,7 @@ export const BoardScene: React.FC<BoardSceneProps> = ({
 }) => {
   const { gridSize } = config;
   const boardWidth = gridSize * CELL_SIZE;
-  const wallThickness = 0.5;
+  const wallThickness = 1.0; // Thick enough to prevent tunneling at high velocities
   const hOffset = boardWidth / 2 + wallThickness / 2;
 
   const bounds = [
@@ -49,9 +49,10 @@ export const BoardScene: React.FC<BoardSceneProps> = ({
         shadow-mapSize-height={1024}
       />
 
+      {/* Floor — solid box so collisions work from all directions */}
       <RigidBody type="fixed">
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
-          <planeGeometry args={[boardWidth + 5, boardWidth + 5]} />
+        <mesh position={[0, -0.05, 0]} receiveShadow>
+          <boxGeometry args={[boardWidth + 4, 0.1, boardWidth + 4]} />
           <meshStandardMaterial visible={false} />
         </mesh>
       </RigidBody>

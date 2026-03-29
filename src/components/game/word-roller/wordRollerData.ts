@@ -6,7 +6,7 @@
 export const CELL_SIZE = 2; // Making it slightly larger so letters fit nicely
 
 /** Height of perimeter walls */
-export const WALL_HEIGHT = 0.8;
+export const WALL_HEIGHT = 1.5; // Tall enough ball can never escape over the top
 
 export interface RollingStageConfig {
   label: string;

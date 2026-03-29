@@ -81,10 +81,11 @@ export const Ball: React.FC<BallProps> = ({ gridSize, pressedKeys, onPositionCha
       ref={rigidBodyRef}
       position={[0, BALL_RADIUS, 0]} // Spawn in center
       colliders="ball"
-      restitution={0.1}
+      restitution={0.05}
       friction={0.8}
-      linearDamping={2.5}
-      angularDamping={1.0}
+      linearDamping={3.0}
+      angularDamping={1.5}
+      ccd={true}
     >
       <mesh castShadow>
         <sphereGeometry args={[BALL_RADIUS, 32, 32]} />
