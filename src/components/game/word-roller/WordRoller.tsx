@@ -20,9 +20,10 @@ const CameraFit = ({ gridSize }: { gridSize: number }) => {
     if (!needsUpdate.current) return;
     needsUpdate.current = false;
 
-    // 2 is the CELL_SIZE. 1.8 is the margin multiplier to keep it "small and nice"
+    // CELL_SIZE = 2. MARGIN > 1 gives breathing room around the grid.
+    // 3.5 keeps a 3x3 grid looking small and nicely centered like Ball Maze.
     const physicalSize = gridSize * 2;
-    const MARGIN = 1.8;
+    const MARGIN = 3.5;
 
     const zoom = Math.min(
       size.width / (physicalSize * MARGIN),
@@ -59,46 +60,53 @@ export default function WordRoller() {
   }
 
   return (
-    <div className="relative flex w-full h-full rounded-[1.5rem] overflow-hidden shadow-inner border border-black/5 bg-[#FFF8E7]">
-      {/* Target Word HUD */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-        <div className="flex gap-2 p-3 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border-2 border-slate-100">
-          {targetWord.split('').map((char, index) => {
-            const isFound = index < lettersFoundCount;
-            return (
-              <div
-                key={index}
-                className={cn(
-                  'w-14 h-14 flex items-center justify-center rounded-xl text-3xl font-fredoka font-bold transition-all duration-300',
-                  isFound
-                    ? 'bg-green-100 text-green-600 border-2 border-green-200'
-                    : 'bg-slate-50 text-slate-300 border-2 border-dashed border-slate-200'
-                )}
-              >
-                {char}
-              </div>
-            );
-          })}
-        </div>
-        <div className="text-slate-500 font-fredoka font-medium text-sm tracking-widest uppercase text-center w-full">
-          Find these letters
+    <div className="flex flex-col w-full h-full gap-2">
+      {/* HUD — separate row above canvas, mirrors BallMaze layout */}
+      <div className="flex-shrink-0 flex items-center justify-between bg-white/70 backdrop-blur-sm px-6 py-3 rounded-2xl shadow-md border border-white/60">
+        <h2 className="font-fredoka text-xl font-black text-[var(--color-kelly-green)]">
+          Word Roller
+        </h2>
+        <div className="flex items-center gap-3">
+          <p className="font-fredoka text-sm text-black/60">
+            Roll the ball to spell:{' '}
+            <span className="text-[var(--color-freesia)] font-bold">{config.label}</span>
+          </p>
+          <div className="flex gap-2">
+            {targetWord.split('').map((char, index) => {
+              const isFound = index < lettersFoundCount;
+              return (
+                <div
+                  key={index}
+                  className={cn(
+                    'w-10 h-10 flex items-center justify-center rounded-lg text-xl font-fredoka font-bold transition-all duration-300',
+                    isFound
+                      ? 'bg-green-100 text-green-600 border-2 border-green-200 scale-105'
+                      : 'bg-slate-50 text-slate-300 border-2 border-dashed border-slate-200'
+                  )}
+                >
+                  {char}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <GameFeedbackBanner feedback={feedback} />
-
-      {/* Primary 3D Canvas */}
+      {/* 3D Canvas — flex-1 so it only takes remaining space */}
       <div
         className={cn(
-          'w-full h-full transition-opacity duration-500',
+          'relative flex-1 min-h-0 rounded-2xl overflow-hidden transition-opacity duration-500',
           isTransitioning ? 'opacity-0' : 'opacity-100'
         )}
       >
+        <GameFeedbackBanner feedback={feedback} />
         <Canvas
           shadows
           orthographic
           camera={{ position: [0, 15, 0.01], zoom: 40, near: 0.1, far: 100 }}
+          style={{ width: '100%', height: '100%' }}
         >
+          <color attach="background" args={['#FFF8E7']} />
           <CameraFit gridSize={config.gridSize} />
           <Suspense fallback={null}>
             <BoardScene
@@ -112,7 +120,7 @@ export default function WordRoller() {
         </Canvas>
       </div>
 
-      <div className="absolute bottom-6 left-6 text-slate-400 font-fredoka opacity-50 flex items-center gap-2 bg-white/50 px-3 py-1.5 rounded-full backdrop-blur-sm pointer-events-none">
+      <div className="flex-shrink-0 text-center text-slate-400 font-fredoka text-sm opacity-60 pb-1">
         Use Arrow Keys or WASD to Roll
       </div>
     </div>

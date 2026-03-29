@@ -40,6 +40,7 @@ export const LetterTile: React.FC<LetterTileProps> = ({
         color={textColor}
         anchorX="center"
         anchorY="middle"
+        font="/fonts/Fredoka-Bold.ttf"
         characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
       >
         {data.char}
