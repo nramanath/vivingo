@@ -16,6 +16,10 @@ Building upon the base `.agent/rules/coding-conventions.md`, this file specifica
 ## 2. Design & Aesthetics
 
 - **Color Palettes**: Never use standard basic colors or basic box-shadows. The web application is driven by dynamic gradients, blurs, and animations meant for children.
+  - **Shared 3D Theme**: To maintain visual consistency across all 3D or R3F games (like Ball Maze, Rolling Letters, etc.), strictly use the following color palette unless overridden:
+    - Canvas Background / Path Color: `#FFF8E7` (warm cream)
+    - Wall Colors: `#6E9445` (base) and `#98b66e` (top cap)
+    - Default Text / Highlight Colors: `var(--color-kelly-green)` or `var(--color-freesia)`
 - **Theming Hooks**:
   - Core interaction buttons (like "Start Playing" or "Restart") must utilize the `gradient-brand-button` stylistic formatting. This enforces dynamic kelly green/yellow laser border animations. Make it look alive, vibrant, and engaging.
 - **Feedback Proximity**: Real-time feedback ("Correct!" or "Wrong!") should be clearly positioned near active interaction points (like just above the game board), not pinned far away or covering the user's primary vision (e.g., big center emojis blocking text).
@@ -34,7 +38,8 @@ Every game in Vivingo is part of a standardized "Shell" that handles navigation,
   - **Never** rebuild instructions or back buttons manually inside the game logic; rely on the sidebar's `selectedGame` state.
 - **Visual & Component Standards**:
   - **Emoji Icons**: Use a single, high-quality emoji as the primary identifier for the game.
-  - **Typography**: Strictly use the `font-fredoka` (Fredoka) font for all text meant for children or parents to maintain the playful brand identity.
+  - **Typography**: Strictly use the `font-fredoka` (Fredoka) font class for all HTML text meant for children or parents to maintain the playful brand identity.
+    - _For 3D / WebGL Text_: When utilizing `<Text>` from `@react-three/drei`, do NOT inject custom `.ttf` or `.woff` fonts. Always rely on the default built-in font (Roboto) because local Vite dev server caches and CORS policies aggressively block 3D font parsing, resulting in invisible letters or fatal Suspense crashes.
   - **GradientGameCard**: Used in the sidebar grid. Requires a `variantClass` (typically `gradient-brand-button`) for the animated border effects.
   - **GameDetails**: Automatically rendered in the sidebar when a game is selected. It parses the metadata to show "How to Play," "Note for Parents," and "What it Teaches."
   - **GameCanvas**: The root container in `src/components/layout/GameCanvas.tsx` where the game component itself (e.g., `<AlphabetHunt />`) is rendered. The game logic should assume it is centered within this canvas.
