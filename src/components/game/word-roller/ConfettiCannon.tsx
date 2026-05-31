@@ -14,7 +14,15 @@ interface Particle {
   decay: number;
 }
 
-const COLORS = ['#f9d876', '#6bae3e', '#e05c3a', '#4fc6e0', '#b87de8', '#ff8fab', '#ffffff'];
+const COLORS = [
+  '#f9d876', // Stage 2 - medium (freesia)
+  '#6bae3e', // Stage 1 - easy
+  '#e05c3a', // Stage 3 - hard
+  '#4fc6e0',
+  '#b87de8',
+  '#ff8fab',
+  '#ffffff'
+];
 
 function spawnBurst(particles: Particle[], cx: number, cy: number) {
   for (let i = 0; i < 90; i++) {

@@ -21,7 +21,7 @@ export const LetterTile: React.FC<LetterTileProps> = ({
   const [x, , zWorld] = gridToWorld(row, col, gridSize);
 
   // Floor plate colors
-  const plateColor = isCollected ? '#81C784' : 'var(--color-freesia)';
+  const plateColor = isCollected ? '#81C784' : '#f9d876';
   const textColor = isCollected ? '#ffffff' : '#1a1a1a';
 
   return (
@@ -40,7 +40,6 @@ export const LetterTile: React.FC<LetterTileProps> = ({
         color={textColor}
         anchorX="center"
         anchorY="middle"
-        font="/fonts/Fredoka-Bold.ttf"
         characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
       >
         {data.char}
