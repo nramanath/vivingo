@@ -21,7 +21,7 @@ const COLORS = [
   '#4fc6e0',
   '#b87de8',
   '#ff8fab',
-  '#ffffff'
+  '#ffffff',
 ];
 
 function spawnBurst(particles: Particle[], cx: number, cy: number) {
