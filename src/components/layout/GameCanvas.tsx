@@ -8,6 +8,7 @@ import { LeftRightMatch } from '../game/left-right-match';
 import { NumberSequencer } from '../game/number-sequencer';
 import { WorldExplorer } from '../game/world-explorer';
 import { BallMaze } from '../game/ball-maze';
+import WordRoller from '../game/word-roller/WordRoller';
 
 interface GameCanvasProps {
   selectedGame: string | null;
@@ -37,6 +38,8 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
             <LeftRightMatch />
           ) : selectedGame === 'Ball Maze' ? (
             <BallMaze />
+          ) : selectedGame === 'Word Roller' ? (
+            <WordRoller />
           ) : selectedGame ? (
             <div className="p-8 text-center flex flex-col items-center justify-center">
               <ComingSoonBadge selectedGame={selectedGame} />

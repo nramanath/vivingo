@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { generateMysteryPhrase } from './utils/dictionary';
+import { generateMysteryPhrase } from '../../../lib/dictionary/dictionary';
 
 const MAX_ROUNDS = 3;
 const MAX_STAGES = 3;

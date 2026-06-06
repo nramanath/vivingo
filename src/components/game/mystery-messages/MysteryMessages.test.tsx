@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import { MysteryMessages } from './MysteryMessages';
-import * as dictionaryMock from './utils/dictionary';
+import * as dictionaryMock from '../../../lib/dictionary/dictionary';
 
 // Mock our offline dictionary hook so we aren't at the mercy of the random-words npm module during tests
-vi.mock('./utils/dictionary', () => ({
+vi.mock('../../../lib/dictionary/dictionary', () => ({
   generateMysteryPhrase: vi.fn(),
 }));
 
