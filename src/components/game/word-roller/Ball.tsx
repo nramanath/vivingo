@@ -15,17 +15,17 @@ const BALL_RADIUS = CELL_SIZE * 0.25; // Smaller relative to cell for a 3x3 open
 const IMPULSE_FORCE = 0.25;
 const MAX_VELOCITY = 4.5;
 
-// We reuse the striped texture idea
+// We reuse the striped texture idea, matching Vivingo theme greens
 const createStripedTexture = (): THREE.CanvasTexture => {
   const canvas = document.createElement('canvas');
   canvas.width = 256;
   canvas.height = 256;
   const ctx = canvas.getContext('2d')!;
 
-  ctx.fillStyle = '#C8E6C9';
+  ctx.fillStyle = '#98b66e'; // Vivingo Kelly Green (ball background)
   ctx.fillRect(0, 0, 256, 256);
 
-  ctx.fillStyle = '#4CAF50';
+  ctx.fillStyle = '#ffffff'; // White rings
   for (let y = 0; y < 256; y += 64) {
     ctx.fillRect(0, y, 256, 20);
   }

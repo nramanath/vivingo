@@ -302,6 +302,14 @@ export const games: GameMetadata[] = [
         description: 'Practicing the correct sequence of letters for common words.',
       },
       {
+        title: 'Working Memory',
+        description: 'Remembering target spelling sequences while searching the board.',
+      },
+      {
+        title: 'Visual Scanning',
+        description: 'Locating target letters among scattered distractor tiles.',
+      },
+      {
         title: 'Motor Control',
         description: 'Navigating a 3D ball accurately on a flat board.',
       },
@@ -309,7 +317,7 @@ export const games: GameMetadata[] = [
     howToPlay:
       'Look at the word at the top of the screen. Use your Arrow Keys (↑ ↓ ← →) or WASD to roll the ball on the board and touch the letters in the correct spelling order!',
     parentNote:
-      'Word Roller takes the physics navigation of Ball Maze and combines it with letter recognition. Since there is no penalty for hitting the wrong letter, kids can experiment freely and build confidence.',
+      'Word Roller takes the physics navigation of Ball Maze and combines it with letter recognition. Ask your child to repeat or sound out the letters as they roll over them to reinforce spelling and letter retention. Since there is no penalty for hitting the wrong letter, kids can experiment freely and build confidence.',
     parentProTip:
       'Encourage your child to say each letter out loud as the ball touches it. If they accidentally hit the wrong one, you can say "Oops, that\'s a distractor!" to keep it fun.',
     variantClass: 'gradient-brand-button',

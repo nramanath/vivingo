@@ -5,7 +5,7 @@ import { LetterTile } from './LetterTile';
 import { CELL_SIZE, WALL_HEIGHT } from './wordRollerData';
 import type { RollingStageConfig, GridLetter } from './wordRollerData';
 
-const WALL_COLOR = '#6E9445'; // Base wall color
+const WALL_COLOR = '#98b66e'; // Theme Kelly Green
 
 interface BoardSceneProps {
   boardGrid: GridLetter[][];
