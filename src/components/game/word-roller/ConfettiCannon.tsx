@@ -14,7 +14,24 @@ interface Particle {
   decay: number;
 }
 
-const COLORS = ['#f9d876', '#6bae3e', '#e05c3a', '#4fc6e0', '#b87de8', '#ff8fab', '#ffffff'];
+// Colors matching game-development.md themes and difficulty indicators
+const COLOR_EASY = '#6bae3e';
+const COLOR_MEDIUM = '#f9d876'; // Same as freesia
+const COLOR_HARD = '#e05c3a';
+const COLOR_CYAN = '#4fc6e0';
+const COLOR_PURPLE = '#b87de8';
+const COLOR_PINK = '#ff8fab';
+const COLOR_WHITE = '#ffffff';
+
+const COLORS = [
+  COLOR_MEDIUM,
+  COLOR_EASY,
+  COLOR_HARD,
+  COLOR_CYAN,
+  COLOR_PURPLE,
+  COLOR_PINK,
+  COLOR_WHITE,
+];
 
 function spawnBurst(particles: Particle[], cx: number, cy: number) {
   for (let i = 0; i < 90; i++) {

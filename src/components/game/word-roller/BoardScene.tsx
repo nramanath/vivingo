@@ -5,6 +5,8 @@ import { LetterTile } from './LetterTile';
 import { CELL_SIZE, WALL_HEIGHT } from './wordRollerData';
 import type { RollingStageConfig, GridLetter } from './wordRollerData';
 
+const WALL_COLOR = '#6E9445'; // Base wall color
+
 interface BoardSceneProps {
   boardGrid: GridLetter[][];
   config: RollingStageConfig;
@@ -65,7 +67,7 @@ export const BoardScene: React.FC<BoardSceneProps> = ({
         >
           <mesh visible={true}>
             <boxGeometry args={w.size as [number, number, number]} />
-            <meshStandardMaterial color="#6E9445" />
+            <meshStandardMaterial color={WALL_COLOR} />
           </mesh>
         </RigidBody>
       ))}

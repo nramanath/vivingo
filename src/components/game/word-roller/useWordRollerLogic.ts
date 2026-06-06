@@ -19,26 +19,41 @@ export function useWordRollerLogic() {
   const [confettiBursts, setConfettiBursts] = useState(1);
 
   const pressedKeys = useRef<Set<string>>(new Set());
+  const timeoutsRef = useRef<number[]>([]);
+
+  const clearAllTimeouts = useCallback(() => {
+    timeoutsRef.current.forEach((id) => clearTimeout(id));
+    timeoutsRef.current = [];
+  }, []);
 
   // Wait 100ms before generating so initial render catches the fallback canvas
-  const initBoard = useCallback((idx: number) => {
-    setTimeout(() => setIsTransitioning(true), 0);
-    setTimeout(() => {
-      const stageConfig = STAGES[idx];
-      const wordList = WORD_LISTS[stageConfig.wordLen] ?? WORD_LISTS[3];
-      const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-      setTargetWord(randomWord);
-      setBoardGrid(generateBoard(randomWord.split(''), stageConfig.gridSize));
-      setLettersFoundCount(0);
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 300);
-    }, 100);
-  }, []);
+  const initBoard = useCallback(
+    (idx: number) => {
+      clearAllTimeouts();
+      const t1 = window.setTimeout(() => setIsTransitioning(true), 0);
+      const t2 = window.setTimeout(() => {
+        const stageConfig = STAGES[idx];
+        const wordList = WORD_LISTS[stageConfig.wordLen] ?? WORD_LISTS[3];
+        const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+        setTargetWord(randomWord);
+        setBoardGrid(generateBoard(randomWord.split(''), stageConfig.gridSize));
+        setLettersFoundCount(0);
+        const t3 = window.setTimeout(() => {
+          setIsTransitioning(false);
+        }, 300);
+        timeoutsRef.current.push(t3);
+      }, 100);
+      timeoutsRef.current.push(t1, t2);
+    },
+    [clearAllTimeouts]
+  );
 
   useEffect(() => {
     initBoard(0);
-  }, [initBoard]);
+    return () => {
+      clearAllTimeouts();
+    };
+  }, [initBoard, clearAllTimeouts]);
 
   const startGame = () => setIsPlaying(true);
 
@@ -93,7 +108,7 @@ export function useWordRollerLogic() {
           setConfettiTrigger((prev) => prev + 1);
 
           // Progress to next stage after short delay
-          setTimeout(() => {
+          const t4 = window.setTimeout(() => {
             if (!isLastStage) {
               setStageIndex((prev) => prev + 1);
               initBoard(stageIndex + 1);
@@ -101,6 +116,7 @@ export function useWordRollerLogic() {
               setGameCompleted(true);
             }
           }, 2000);
+          timeoutsRef.current.push(t4);
         } else {
           playSound('success');
         }

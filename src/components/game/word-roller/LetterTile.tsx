@@ -3,6 +3,12 @@ import { Text } from '@react-three/drei';
 import { CELL_SIZE, gridToWorld } from './wordRollerData';
 import type { GridLetter } from './wordRollerData';
 
+// Theme color constants for Three.js (WebGL cannot parse CSS variables directly)
+const COLOR_FREESIA = '#f9d876';
+const COLOR_SUCCESS = '#81C784';
+const COLOR_TEXT_LIGHT = '#ffffff';
+const COLOR_TEXT_DARK = '#1a1a1a';
+
 interface LetterTileProps {
   row: number;
   col: number;
@@ -21,8 +27,8 @@ export const LetterTile: React.FC<LetterTileProps> = ({
   const [x, , zWorld] = gridToWorld(row, col, gridSize);
 
   // Floor plate colors
-  const plateColor = isCollected ? '#81C784' : 'var(--color-freesia)';
-  const textColor = isCollected ? '#ffffff' : '#1a1a1a';
+  const plateColor = isCollected ? COLOR_SUCCESS : COLOR_FREESIA;
+  const textColor = isCollected ? COLOR_TEXT_LIGHT : COLOR_TEXT_DARK;
 
   return (
     <group position={[x, 0.01, zWorld]}>
@@ -40,7 +46,6 @@ export const LetterTile: React.FC<LetterTileProps> = ({
         color={textColor}
         anchorX="center"
         anchorY="middle"
-        font="/fonts/Fredoka-Bold.ttf"
         characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
       >
         {data.char}
