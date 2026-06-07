@@ -10,9 +10,9 @@ This rule file defines styling practices for Vivingo using Tailwind CSS v4 and t
 
 Tailwind v4 deprecates `tailwind.config.js` in favor of a CSS-first configuration model.
 
-- **Theme Definition**: All custom theme variables, fonts, colors, and keyframes must be registered inside [global.css](file:///Users/ramanathan/Documents/code/vivingo/src/styles/global.css) under the `@theme` directive or within CSS layers (`@layer base`, `@layer utilities`, `@layer components`).
+- **Theme Definition**: All custom theme variables, fonts, colors, and keyframes must be registered inside [global.css](../../src/styles/global.css) under the `@theme` directive or within CSS layers (`@layer base`, `@layer utilities`, `@layer components`).
 - **Do NOT Edit `tailwind.config.js`**: Do not attempt to add plugins or configuration options to `tailwind.config.js` or write standard Tailwind v3 configuration files.
-- **CSS Import**: The file [global.css](file:///Users/ramanathan/Documents/code/vivingo/src/styles/global.css) relies on the v4 compiler import `@import 'tailwindcss';` at the top of the file.
+- **CSS Import**: The file [global.css](../../src/styles/global.css) relies on the v4 compiler import `@import 'tailwindcss';` at the top of the file.
 
 ## 2. Color Palette & Theming (Zesty Macaroons)
 
@@ -26,7 +26,7 @@ Instead, use the **Zesty Macaroons** brand variables defined in `:root`:
 
 ## 3. Predefined Interactive Styling
 
-Use the customized animated gradients and cards defined in [global.css](file:///Users/ramanathan/Documents/code/vivingo/src/styles/global.css) to build interfaces that feel premium:
+Use the customized animated gradients and cards defined in [global.css](../../src/styles/global.css) to build interfaces that feel premium:
 
 - **Game/Action Cards**: Use `gradient-card-base` class name which provides a custom radial gradient background, smooth layout transitions, and animated border effects on hover.
 - **Buttons**:

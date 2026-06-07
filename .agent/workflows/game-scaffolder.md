@@ -70,7 +70,7 @@ Create unit tests matching the Vivingo testing paradigm:
 
 ### 1. Register in `src/lib/games.ts`
 
-Add the game metadata to the `games` array in [games.ts](file:///Users/ramanathan/Documents/code/vivingo/src/lib/games.ts):
+Add the game metadata to the `games` array in [games.ts](../../src/lib/games.ts):
 
 ```typescript
 {
@@ -93,7 +93,7 @@ Add the game metadata to the `games` array in [games.ts](file:///Users/ramanatha
 
 ### 2. Register in `src/components/layout/GameCanvas.tsx`
 
-Open [GameCanvas.tsx](file:///Users/ramanathan/Documents/code/vivingo/src/components/layout/GameCanvas.tsx):
+Open [GameCanvas.tsx](../../src/components/layout/GameCanvas.tsx):
 
 - Import the new component:
   ```typescript
