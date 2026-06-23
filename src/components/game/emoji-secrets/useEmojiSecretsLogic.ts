@@ -19,6 +19,7 @@ export function useEmojiSecretsLogic() {
 
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const feedbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const levelPuzzlesRef = useRef<Record<number, EmojiPuzzle[]>>({});
 
   const showFeedback = useCallback((type: 'correct' | 'wrong') => {
     setFeedback(type);
@@ -27,7 +28,7 @@ export function useEmojiSecretsLogic() {
   }, []);
 
   const loadPuzzle = useCallback((lvl: PuzzleLevel, idx: number) => {
-    const puzzle = emojiSecretsData[lvl][idx];
+    const puzzle = levelPuzzlesRef.current[lvl]?.[idx];
     if (!puzzle) return;
 
     setCurrentPuzzle(puzzle);
@@ -45,6 +46,13 @@ export function useEmojiSecretsLogic() {
   }, []);
 
   const startGame = useCallback(() => {
+    // Pick 3 random puzzles for each level
+    levelPuzzlesRef.current = {
+      1: [...emojiSecretsData[1]].sort(() => Math.random() - 0.5).slice(0, 3),
+      2: [...emojiSecretsData[2]].sort(() => Math.random() - 0.5).slice(0, 3),
+      3: [...emojiSecretsData[3]].sort(() => Math.random() - 0.5).slice(0, 3),
+    };
+
     setPhase('PLAYING');
     setLevel(1);
     setPuzzleIndex(0);
@@ -94,7 +102,7 @@ export function useEmojiSecretsLogic() {
             setScore((s) => s + 1);
 
             const nextIndex = puzzleIndex + 1;
-            if (nextIndex < emojiSecretsData[level].length) {
+            if (nextIndex < levelPuzzlesRef.current[level].length) {
               // Next puzzle in same level
               setPuzzleIndex(nextIndex);
               loadPuzzle(level, nextIndex);
