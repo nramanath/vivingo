@@ -322,4 +322,33 @@ export const games: GameMetadata[] = [
       'Encourage your child to say each letter out loud as the ball touches it. If they accidentally hit the wrong one, you can say "Oops, that\'s a distractor!" to keep it fun.',
     variantClass: 'gradient-brand-button',
   },
+  {
+    id: 'Emoji Secrets',
+    title: 'Emoji Secrets',
+    icon: '🕵️‍♀️',
+    description: 'Decode the secret emojis to find the compound word or routine sentence.',
+    minAge: 4,
+    maxAge: 6,
+    teaches: [
+      {
+        title: 'Vocabulary Expansion',
+        description: 'Learning compound words and building phrases from visual symbols.',
+      },
+      {
+        title: 'Sentence Structure',
+        description: 'Practicing Subject-Verb-Object syntax using daily routines.',
+      },
+      {
+        title: 'Reading Comprehension',
+        description: 'Translating concepts into sight words.',
+      },
+    ],
+    howToPlay:
+      'Look at the secret emojis and guess the hidden word or phrase! Tap the words at the bottom to fill in the blanks.',
+    parentNote:
+      'Emoji Secrets helps children transition from recognizing simple pictures to understanding compound words and basic sentence grammar.',
+    parentProTip:
+      'If your child is stuck, prompt them to say what the emojis are out loud, and then try reading the word choices to see what matches!',
+    variantClass: 'gradient-brand-button',
+  },
 ];
