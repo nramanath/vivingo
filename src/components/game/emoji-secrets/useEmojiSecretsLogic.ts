@@ -49,6 +49,9 @@ export function useEmojiSecretsLogic() {
   }, []);
 
   const startGame = useCallback(() => {
+    if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
+    if (feedbackTimeoutRef.current) clearTimeout(feedbackTimeoutRef.current);
+
     // Pick 3 random puzzles for each level
     levelPuzzlesRef.current = {
       1: shuffleArray(emojiSecretsData[1]).slice(0, 3),
@@ -69,7 +72,7 @@ export function useEmojiSecretsLogic() {
 
   const handleTokenClick = useCallback(
     (token: string, tokenIndex: number) => {
-      if (phase !== 'PLAYING' || !currentPuzzle || feedback === 'correct') return;
+      if (phase !== 'PLAYING' || !currentPuzzle || feedback !== null) return;
 
       // Find first empty slot
       const emptyIndex = filledSlots.findIndex((slot) => slot === null);
@@ -121,7 +124,7 @@ export function useEmojiSecretsLogic() {
                 setPhase('WON');
               }
             }
-          }, 2000);
+          }, 1500);
         } else {
           showFeedback('wrong');
           // Let them try again after a brief moment by auto-returning tokens
@@ -152,7 +155,7 @@ export function useEmojiSecretsLogic() {
 
   const handleSlotClick = useCallback(
     (slotIndex: number) => {
-      if (phase !== 'PLAYING' || !currentPuzzle || feedback === 'correct') return;
+      if (phase !== 'PLAYING' || !currentPuzzle || feedback !== null) return;
 
       const token = filledSlots[slotIndex];
       if (!token) return;

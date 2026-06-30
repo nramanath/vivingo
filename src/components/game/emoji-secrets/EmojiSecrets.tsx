@@ -118,7 +118,7 @@ export const EmojiSecrets: React.FC = () => {
               key={`${token}-${idx}`}
               onClick={() => handleTokenClick(token, idx)}
               className="gradient-brand-button px-5 py-2 sm:px-6 sm:py-3 rounded-xl font-fredoka text-xl sm:text-2xl font-bold shadow-md hover:scale-105 active:scale-95 transition-all animate-in slide-in-from-bottom-4 duration-300"
-              disabled={feedback === 'correct'}
+              disabled={feedback !== null}
             >
               {token}
             </button>
