@@ -3,6 +3,15 @@ import confetti from 'canvas-confetti';
 import type { PuzzleLevel, EmojiPuzzle } from './emojiSecretsData';
 import { emojiSecretsData } from './emojiSecretsData';
 
+function shuffleArray<T>(array: T[]): T[] {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
 export type GamePhase = 'START' | 'PLAYING' | 'WON';
 
 export function useEmojiSecretsLogic() {
@@ -48,9 +57,9 @@ export function useEmojiSecretsLogic() {
   const startGame = useCallback(() => {
     // Pick 3 random puzzles for each level
     levelPuzzlesRef.current = {
-      1: [...emojiSecretsData[1]].sort(() => Math.random() - 0.5).slice(0, 3),
-      2: [...emojiSecretsData[2]].sort(() => Math.random() - 0.5).slice(0, 3),
-      3: [...emojiSecretsData[3]].sort(() => Math.random() - 0.5).slice(0, 3),
+      1: shuffleArray(emojiSecretsData[1]).slice(0, 3),
+      2: shuffleArray(emojiSecretsData[2]).slice(0, 3),
+      3: shuffleArray(emojiSecretsData[3]).slice(0, 3),
     };
 
     setPhase('PLAYING');
