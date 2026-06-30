@@ -32,6 +32,11 @@ Building upon the base `.agent/rules/coding-conventions.md`, this file specifica
   - Core interaction buttons (like "Start Playing" or "Restart") must utilize the `gradient-brand-button` stylistic formatting. This enforces dynamic kelly green/yellow laser border animations. Make it look alive, vibrant, and engaging.
 - **Feedback Proximity**: Real-time feedback should be clearly positioned near active interaction points, not pinned far away or covering the user's primary vision.
 - **Nuanced Animations**: Wobbly or shaking micro-animations should be utilized to intuitively show "wrong" selections.
+- **Feedback Banner Safety**: The `GameFeedbackBanner` is styled with `absolute top-12` by default. When building a game with a top HUD bar (or headbar), you MUST ensure the banner does not overlap it. Use `className="!top-24"` (or an appropriate offset) to push the banner safely below the headbar.
+- **Instruction Pill Layout**: The `GameInstructionPill` should always be absolutely positioned at the bottom of the outer container (`absolute bottom-4 left-0 right-0 flex justify-center pointer-events-none z-30`).
+  - To prevent long wrapping text or multiple rows of buttons from pushing the pill off-screen, configure the middle content container with `overflow-y-auto` and bottom padding (e.g., `pb-16`). This keeps the instruction pill static and ensures elements never scroll underneath it destructively.
+- **Canvas Color Consistency**: Keep the main container's background consistent with the Vivingo theme. Do not add dynamic background color shifts (like screen tints) between stages unless specifically requested, as it breaks the layout's clean visual identity.
+- **Word Bank Container**: Any word bank, letter bank, or token tray must utilize a subtle, theme-matching tint (such as `bg-green-50` with a `border-green-200` border) to cleanly separate the interactive tokens from the general canvas area.
 
 ## 3. Platform Infrastructure (Do Not Rebuild)
 
