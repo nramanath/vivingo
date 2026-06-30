@@ -37,15 +37,42 @@ export const EmojiSecrets: React.FC = () => {
     return <GameOverScreen score={score} onRestart={restartGame} />;
   }
 
+  const BG_COLORS = ['bg-green-50/50', 'bg-yellow-50/50', 'bg-red-50/50'];
+  const currentBg = BG_COLORS[level - 1] || 'bg-transparent';
+
   return (
-    <div className="flex flex-col items-center w-full h-full p-4 relative animate-in fade-in duration-500">
+    <div
+      className={`flex flex-col items-center w-full h-full p-4 relative animate-in fade-in duration-500 transition-colors duration-1000 ${currentBg}`}
+    >
       <GameFeedbackBanner feedback={feedback} />
 
-      {/* Top HUD with Stage and Score */}
-      <div className="absolute top-6 left-6 right-6 flex justify-between items-center font-fredoka text-2xl font-bold text-black/80 pointer-events-none z-10">
-        <div>Stage: {level}</div>
-        <div className="flex items-center gap-2">
-          <span>{score}</span> <span className="text-3xl text-yellow-500">⭐</span>
+      {/* HUD bar */}
+      <div className="flex-shrink-0 relative flex w-full items-center bg-white/70 backdrop-blur-sm px-6 py-3 rounded-2xl shadow-md border border-white/60 mb-8 z-10">
+        <h2 className="font-fredoka text-xl font-black text-[var(--color-kelly-green)]">
+          Emoji Secrets
+        </h2>
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+          {[1, 2, 3].map((stg, i) => {
+            const DOT_COLORS = ['#6bae3e', '#f9d876', '#e05c3a'];
+            const isActive = stg === level;
+            const isDone = stg < level;
+            return (
+              <div
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: isActive ? '12px' : '8px',
+                  height: isActive ? '12px' : '8px',
+                  backgroundColor: isDone ? '#9ca3af' : DOT_COLORS[i],
+                  opacity: isDone ? 0.4 : 1,
+                  boxShadow: isActive ? `0 0 0 3px ${DOT_COLORS[i]}40` : 'none',
+                }}
+              />
+            );
+          })}
+        </div>
+        <div className="ml-auto flex items-center gap-2 font-fredoka text-xl font-bold text-black/80">
+          <span>{score}</span> <span className="text-2xl text-yellow-500">⭐</span>
         </div>
       </div>
 
