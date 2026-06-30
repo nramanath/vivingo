@@ -44,7 +44,7 @@ export const EmojiSecrets: React.FC = () => {
     <div
       className={`flex flex-col items-center w-full h-full p-4 relative animate-in fade-in duration-500 transition-colors duration-1000 ${currentBg}`}
     >
-      <GameFeedbackBanner feedback={feedback} />
+      <GameFeedbackBanner feedback={feedback} className="!top-24" />
 
       {/* HUD bar */}
       <div className="flex-shrink-0 relative flex w-full items-center bg-white/70 backdrop-blur-sm px-6 py-3 rounded-2xl shadow-md border border-white/60 mb-8 z-10">
@@ -115,7 +115,7 @@ export const EmojiSecrets: React.FC = () => {
         </div>
 
         {/* The Word Bank (Available Tokens) */}
-        <div className="flex flex-wrap justify-center gap-3 mt-8 bg-white/30 p-6 rounded-3xl border border-white/50 shadow-inner w-full max-w-2xl min-h-[8rem]">
+        <div className="flex flex-wrap justify-center gap-3 mt-8 bg-indigo-50/60 p-6 rounded-3xl border border-indigo-100 shadow-inner w-full max-w-2xl min-h-[8rem]">
           {availableTokens.map((token, idx) => (
             <button
               key={`${token}-${idx}`}
