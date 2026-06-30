@@ -44,13 +44,7 @@ export function useEmojiSecretsLogic() {
     setFilledSlots(new Array(puzzle.tokens.length).fill(null));
 
     // Shuffle correct tokens and distractors
-    const allTokens = [...puzzle.tokens, ...puzzle.distractors];
-    // Fisher-Yates shuffle
-    for (let i = allTokens.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [allTokens[i], allTokens[j]] = [allTokens[j], allTokens[i]];
-    }
-    setAvailableTokens(allTokens);
+    setAvailableTokens(shuffleArray([...puzzle.tokens, ...puzzle.distractors]));
     setFeedback(null);
   }, []);
 
