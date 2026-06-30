@@ -76,7 +76,7 @@ export const EmojiSecrets: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-4 sm:px-12 z-20 gap-10 mt-8">
+      <div className="relative flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto px-4 sm:px-12 z-20 gap-6 sm:gap-8 mt-4 pb-16 overflow-y-auto">
         {/* The Emojis */}
         <div className="flex justify-center gap-6 mb-4">
           {currentPuzzle?.emojis.map((emoji, idx) => (
@@ -127,12 +127,10 @@ export const EmojiSecrets: React.FC = () => {
             </button>
           ))}
         </div>
+      </div>
 
-        <GameInstructionPill
-          text="Tap the words to decode the secret!"
-          isVisible={true}
-          className="mt-4"
-        />
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center pointer-events-none z-30">
+        <GameInstructionPill text="Tap the words to decode the secret!" isVisible={true} />
       </div>
     </div>
   );

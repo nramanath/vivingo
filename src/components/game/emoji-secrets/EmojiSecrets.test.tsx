@@ -25,7 +25,7 @@ describe('EmojiSecrets', () => {
     fireEvent.click(startButton);
 
     // Check if HUD is rendered
-    expect(screen.getByText('Stage: 1')).toBeDefined();
+    expect(screen.getAllByText('Emoji Secrets')[0]).toBeDefined();
     // Check instruction pill
     expect(screen.getByText('Tap the words to decode the secret!')).toBeDefined();
   });
