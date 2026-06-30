@@ -37,12 +37,9 @@ export const EmojiSecrets: React.FC = () => {
     return <GameOverScreen score={score} onRestart={restartGame} />;
   }
 
-  const BG_COLORS = ['bg-green-50/50', 'bg-yellow-50/50', 'bg-red-50/50'];
-  const currentBg = BG_COLORS[level - 1] || 'bg-transparent';
-
   return (
     <div
-      className={`flex flex-col items-center w-full h-full p-4 relative animate-in fade-in duration-500 transition-colors duration-1000 ${currentBg}`}
+      className={`flex flex-col items-center w-full h-full p-4 relative animate-in fade-in duration-500`}
     >
       <GameFeedbackBanner feedback={feedback} className="!top-24" />
 
@@ -115,7 +112,7 @@ export const EmojiSecrets: React.FC = () => {
         </div>
 
         {/* The Word Bank (Available Tokens) */}
-        <div className="flex flex-wrap justify-center gap-3 mt-8 bg-indigo-50/60 p-6 rounded-3xl border border-indigo-100 shadow-inner w-full max-w-2xl min-h-[8rem]">
+        <div className="flex flex-wrap justify-center gap-3 mt-8 bg-green-50 p-6 rounded-3xl border border-green-200 shadow-inner w-full max-w-2xl min-h-[8rem]">
           {availableTokens.map((token, idx) => (
             <button
               key={`${token}-${idx}`}
