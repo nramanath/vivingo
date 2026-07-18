@@ -1,3 +1,6 @@
+// @ts-expect-error mixbox doesn't ship TS declarations
+import mixbox from 'mixbox';
+
 export interface ColorInfo {
   name: string;
   hex: string;
@@ -96,11 +99,15 @@ export function mixColors(color1Name: string, color2Name: string): ColorInfo {
   const c1 = BASE_COLORS.find((c) => c.name === color1Name)!;
   const c2 = BASE_COLORS.find((c) => c.name === color2Name)!;
 
-  // Simple RGB average
+  // Real pigment mixing using mixbox
+  const rgb1Str = `rgb(${c1.rgb[0]}, ${c1.rgb[1]}, ${c1.rgb[2]})`;
+  const rgb2Str = `rgb(${c2.rgb[0]}, ${c2.rgb[1]}, ${c2.rgb[2]})`;
+  const mixedRgbStr = mixbox.lerp(rgb1Str, rgb2Str, 0.5);
+
   const mixedRGB: [number, number, number] = [
-    Math.round((c1.rgb[0] + c2.rgb[0]) / 2),
-    Math.round((c1.rgb[1] + c2.rgb[1]) / 2),
-    Math.round((c1.rgb[2] + c2.rgb[2]) / 2),
+    Math.round(mixedRgbStr[0]),
+    Math.round(mixedRgbStr[1]),
+    Math.round(mixedRgbStr[2]),
   ];
 
   // Helper to convert RGB to Hex
