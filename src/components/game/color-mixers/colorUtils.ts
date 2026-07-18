@@ -217,8 +217,11 @@ export function mixColors(color1Name: string, color2Name: string): ColorInfo {
     }
   }
 
+  // If the closest color is very near, use its name. Otherwise, label it as a Mix to avoid incorrect naming.
+  const name = minDistance < 35 ? bestMatch.name : `${color1Name}-${color2Name} Mix`;
+
   return {
-    name: bestMatch.name,
+    name,
     hex: exactHex,
     rgb: mixedRGB,
   };
