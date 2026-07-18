@@ -19,6 +19,13 @@ describe('colorUtils', () => {
     const result = mixColors('Red', 'Mint');
     expect(result).toBeDefined();
     expect(result.name).toBeTypeOf('string');
+    expect(result.hex).toMatch(/^#[0-9A-F]{6}$/i);
+    expect(result.rgb[0]).toBeGreaterThanOrEqual(0);
+    expect(result.rgb[0]).toBeLessThanOrEqual(255);
+    expect(result.rgb[1]).toBeGreaterThanOrEqual(0);
+    expect(result.rgb[1]).toBeLessThanOrEqual(255);
+    expect(result.rgb[2]).toBeGreaterThanOrEqual(0);
+    expect(result.rgb[2]).toBeLessThanOrEqual(255);
   });
 });
 

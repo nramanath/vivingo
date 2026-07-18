@@ -179,9 +179,7 @@ export function mixColors(color1Name: string, color2Name: string): ColorInfo {
   const c2 = BASE_COLORS.find((c) => c.name === color2Name)!;
 
   // Real pigment mixing using mixbox
-  const rgb1Str = `rgb(${c1.rgb[0]}, ${c1.rgb[1]}, ${c1.rgb[2]})`;
-  const rgb2Str = `rgb(${c2.rgb[0]}, ${c2.rgb[1]}, ${c2.rgb[2]})`;
-  const mixedRgbStr = mixbox.lerp(rgb1Str, rgb2Str, 0.5);
+  const mixedRgbStr = mixbox.lerp(c1.rgb, c2.rgb, 0.5);
 
   const mixedRGB: [number, number, number] = [
     Math.round(mixedRgbStr[0]),

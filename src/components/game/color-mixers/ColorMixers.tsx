@@ -64,7 +64,7 @@ export function ColorMixers() {
         <h3 className="text-center text-lg md:text-xl font-bold text-slate-600 mb-3">
           Color Palette
         </h3>
-        <div className="grid grid-cols-6 gap-2 justify-items-center">
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 md:gap-3 justify-items-center">
           {BASE_COLORS.map((color) => {
             const isSelected = selectedColors.includes(color.name);
             return (
