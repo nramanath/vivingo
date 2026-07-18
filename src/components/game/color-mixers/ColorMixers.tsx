@@ -149,9 +149,9 @@ export function ColorMixers() {
         {selectedColors.length > 0 && (
           <button
             onClick={resetSelection}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-200 hover:bg-slate-300 active:scale-95 transition-all text-slate-700 font-bold rounded-full text-xs md:text-sm shadow-sm"
+            className="flex items-center gap-2 px-5 py-2.5 bg-[var(--color-kelly-green)] hover:opacity-95 active:scale-95 transition-all text-white font-bold rounded-full text-sm md:text-lg shadow-md cursor-pointer mt-2"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-4 h-4 md:w-5 md:h-5" />
             Reset
           </button>
         )}
