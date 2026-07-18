@@ -60,7 +60,7 @@ export function ColorMixers() {
   return (
     <div className="flex flex-col md:flex-row items-stretch justify-center gap-6 w-full max-w-5xl mx-auto h-full p-4 md:p-6 font-fredoka overflow-hidden">
       {/* Left Column: Palette */}
-      <div className="w-full md:w-3/5 bg-white/80 p-4 rounded-3xl shadow-sm flex flex-col justify-center min-h-[300px]">
+      <div className="w-full md:w-3/5 bg-white/80 p-4 rounded-3xl shadow-sm flex flex-col justify-center min-h-[300px] order-2 md:order-1">
         <h3 className="text-center text-lg md:text-xl font-bold text-slate-600 mb-3">
           Color Palette
         </h3>
@@ -91,7 +91,7 @@ export function ColorMixers() {
       </div>
 
       {/* Right Column: Mixing Area */}
-      <div className="w-full md:w-2/5 bg-white/50 p-4 md:p-6 rounded-3xl shadow-sm flex flex-row md:flex-col items-center justify-around gap-2">
+      <div className="w-full md:w-2/5 bg-white/50 p-4 md:p-6 rounded-3xl shadow-sm flex flex-row md:flex-col items-center justify-around gap-2 order-1 md:order-2">
         {/* Color 1 */}
         <div className="flex flex-col items-center gap-1">
           <TriangularOval
