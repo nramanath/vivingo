@@ -351,4 +351,34 @@ export const games: GameMetadata[] = [
       'If your child is stuck, prompt them to say what the emojis are out loud, and then try reading the word choices to see what matches!',
     variantClass: 'gradient-brand-button',
   },
+  {
+    id: 'Color Mixers',
+    title: 'Color Mixers',
+    icon: '🎨',
+    description:
+      'Pick two colors from the palette to mix them together and discover a brand new color!',
+    minAge: 3,
+    maxAge: 6,
+    teaches: [
+      {
+        title: 'Color Recognition',
+        description: 'Learning the names of exact colors from a large palette.',
+      },
+      {
+        title: 'Color Theory',
+        description: 'Understanding how primary and secondary colors mix.',
+      },
+      {
+        title: 'Fine Motor Skills',
+        description: 'Using the mouse or touch to select small palette targets.',
+      },
+    ],
+    howToPlay:
+      'Look at the color palette at the bottom. Click on exactly two colors you want to mix. Watch as they combine to form a brand new color!',
+    parentNote:
+      'Color Mixers is a great sandbox game that teaches basic subtractive color theory. Have them try mixing opposites (like Red and Green) to see what happens!',
+    parentProTip:
+      'Encourage your child to predict what color they will make before they click the second color!',
+    variantClass: 'gradient-brand-button',
+  },
 ];

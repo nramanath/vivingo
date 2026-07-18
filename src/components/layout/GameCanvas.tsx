@@ -10,7 +10,7 @@ import { WorldExplorer } from '../game/world-explorer';
 import { BallMaze } from '../game/ball-maze';
 import WordRoller from '../game/word-roller/WordRoller';
 import { EmojiSecrets } from '../game/emoji-secrets';
-
+import { ColorMixers } from '../game/color-mixers';
 interface GameCanvasProps {
   selectedGame: string | null;
 }
@@ -43,6 +43,8 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
             <WordRoller />
           ) : selectedGame === 'Emoji Secrets' ? (
             <EmojiSecrets />
+          ) : selectedGame === 'Color Mixers' ? (
+            <ColorMixers />
           ) : selectedGame ? (
             <div className="p-8 text-center flex flex-col items-center justify-center">
               <ComingSoonBadge selectedGame={selectedGame} />
