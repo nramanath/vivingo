@@ -2,6 +2,7 @@ import { GameStartScreen } from '../shared/GameStartScreen';
 import { GameOverScreen } from '../shared/GameOverScreen';
 import { useColorMixersLogic } from './useColorMixersLogic';
 import { BASE_COLORS } from './colorUtils';
+import { RotateCcw } from 'lucide-react';
 
 const TriangularOval = ({
   hex,
@@ -38,8 +39,16 @@ const TriangularOval = ({
 );
 
 export function ColorMixers() {
-  const { phase, startGame, restartGame, selectedColors, mixedColor, handleColorSelect, mixCount } =
-    useColorMixersLogic();
+  const {
+    phase,
+    startGame,
+    restartGame,
+    selectedColors,
+    mixedColor,
+    handleColorSelect,
+    mixCount,
+    resetSelection,
+  } = useColorMixersLogic();
 
   if (phase === 'START') {
     return (
@@ -135,6 +144,17 @@ export function ColorMixers() {
             {mixedColor ? mixedColor.name : 'Result'}
           </span>
         </div>
+
+        {/* Clear Button */}
+        {selectedColors.length > 0 && (
+          <button
+            onClick={resetSelection}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-200 hover:bg-slate-300 active:scale-95 transition-all text-slate-700 font-bold rounded-full text-xs md:text-sm shadow-sm"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            Reset
+          </button>
+        )}
       </div>
     </div>
   );
