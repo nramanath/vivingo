@@ -162,6 +162,8 @@ const RICH_NAMED_COLORS: { name: string; rgb: [number, number, number] }[] = [
   { name: 'Ochre', rgb: [204, 119, 34] },
   { name: 'Periwinkle', rgb: [204, 204, 255] },
   { name: 'Mauve', rgb: [224, 176, 255] },
+  { name: 'Sage Green', rgb: [106, 132, 94] },
+  { name: 'Slate Green', rgb: [112, 127, 118] },
 ];
 
 export function mixColors(color1Name: string, color2Name: string): ColorInfo {
