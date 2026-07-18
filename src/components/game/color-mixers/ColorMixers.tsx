@@ -1,5 +1,4 @@
 import { GameStartScreen } from '../shared/GameStartScreen';
-import { GameOverScreen } from '../shared/GameOverScreen';
 import { useColorMixersLogic } from './useColorMixersLogic';
 import { BASE_COLORS } from './colorUtils';
 import { RotateCcw } from 'lucide-react';
@@ -39,16 +38,8 @@ const TriangularOval = ({
 );
 
 export function ColorMixers() {
-  const {
-    phase,
-    startGame,
-    restartGame,
-    selectedColors,
-    mixedColor,
-    handleColorSelect,
-    mixCount,
-    resetSelection,
-  } = useColorMixersLogic();
+  const { phase, startGame, selectedColors, mixedColor, handleColorSelect, resetSelection } =
+    useColorMixersLogic();
 
   if (phase === 'START') {
     return (
@@ -59,10 +50,6 @@ export function ColorMixers() {
         description="Pick two colors from the palette to mix them together!"
       />
     );
-  }
-
-  if (phase === 'WON') {
-    return <GameOverScreen onRestart={restartGame} score={mixCount} />;
   }
 
   const color1 =
