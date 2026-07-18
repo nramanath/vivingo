@@ -122,7 +122,7 @@ export function ColorMixers() {
           </span>
         </div>
 
-        <div className="text-2xl md:text-3xl font-bold text-slate-400 leading-none">=</div>
+        <div className="w-0.5 h-12 md:w-full md:h-0.5 bg-slate-300 mx-2 md:mx-0 md:my-2" />
 
         {/* Result Color */}
         <div className="flex flex-col items-center gap-1">
