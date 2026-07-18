@@ -85,7 +85,7 @@ export function ColorMixers() {
                   isSelected={isSelected}
                   className="w-10 h-10 md:w-12 md:h-12 drop-shadow-md"
                 />
-                <span className="text-[10px] md:text-xs font-bold text-slate-700 mt-1 text-center leading-tight h-6 flex items-start justify-center">
+                <span className="text-xs md:text-sm font-bold text-slate-800 mt-1.5 text-center leading-tight h-8 flex items-start justify-center">
                   {color.name}
                 </span>
               </button>
