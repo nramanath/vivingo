@@ -5,50 +5,53 @@ export interface ColorInfo {
 }
 
 export const BASE_COLORS: ColorInfo[] = [
-  // Primary & Secondary
+  // Reds
   { name: 'Red', hex: '#FF0000', rgb: [255, 0, 0] },
-  { name: 'Yellow', hex: '#FFFF00', rgb: [255, 255, 0] },
-  { name: 'Blue', hex: '#0000FF', rgb: [0, 0, 255] },
-  { name: 'Green', hex: '#008000', rgb: [0, 128, 0] },
-  { name: 'Orange', hex: '#FFA500', rgb: [255, 165, 0] },
-  { name: 'Purple', hex: '#800080', rgb: [128, 0, 128] },
-  // Neutrals
-  { name: 'White', hex: '#FFFFFF', rgb: [255, 255, 255] },
-  { name: 'Black', hex: '#000000', rgb: [0, 0, 0] },
-  { name: 'Gray', hex: '#808080', rgb: [128, 128, 128] },
-  { name: 'Silver', hex: '#C0C0C0', rgb: [192, 192, 192] },
-  { name: 'Brown', hex: '#8B4513', rgb: [139, 69, 19] },
-  // Pinks & Reds
-  { name: 'Pink', hex: '#FFC0CB', rgb: [255, 192, 203] },
-  { name: 'Magenta', hex: '#FF00FF', rgb: [255, 0, 255] },
   { name: 'Crimson', hex: '#DC143C', rgb: [220, 20, 60] },
-  { name: 'Vermilion', hex: '#E34234', rgb: [227, 66, 52] },
   { name: 'Maroon', hex: '#800000', rgb: [128, 0, 0] },
+  // Coral & Vermilion
+  { name: 'Vermilion', hex: '#E34234', rgb: [227, 66, 52] },
   { name: 'Coral', hex: '#FF7F50', rgb: [255, 127, 80] },
   { name: 'Salmon', hex: '#FA8072', rgb: [250, 128, 114] },
-  // Yellows & Oranges
-  { name: 'Gold', hex: '#FFD700', rgb: [255, 215, 0] },
+  // Oranges
+  { name: 'Orange', hex: '#FFA500', rgb: [255, 165, 0] },
   { name: 'Peach', hex: '#FFDAB9', rgb: [255, 218, 185] },
-  { name: 'Khaki', hex: '#F0E68C', rgb: [240, 230, 140] },
+  // Yellows
+  { name: 'Gold', hex: '#FFD700', rgb: [255, 215, 0] },
+  { name: 'Yellow', hex: '#FFFF00', rgb: [255, 255, 0] },
   { name: 'Mustard', hex: '#FFDB58', rgb: [255, 219, 88] },
+  { name: 'Khaki', hex: '#F0E68C', rgb: [240, 230, 140] },
   // Greens
   { name: 'Lime', hex: '#00FF00', rgb: [0, 255, 0] },
+  { name: 'Green', hex: '#008000', rgb: [0, 128, 0] },
   { name: 'Olive', hex: '#808000', rgb: [128, 128, 0] },
   { name: 'Mint', hex: '#98FF98', rgb: [152, 255, 152] },
+  // Cyans & Teals
+  { name: 'Aquamarine', hex: '#7FFFD4', rgb: [127, 255, 212] },
   { name: 'Teal', hex: '#008080', rgb: [0, 128, 128] },
-  // Blues & Cyans
   { name: 'Cyan', hex: '#00FFFF', rgb: [0, 255, 255] },
+  // Blues
   { name: 'Sky Blue', hex: '#87CEEB', rgb: [135, 206, 235] },
-  { name: 'Navy', hex: '#000080', rgb: [0, 0, 128] },
   { name: 'Turquoise', hex: '#40E0D0', rgb: [64, 224, 208] },
+  { name: 'Blue', hex: '#0000FF', rgb: [0, 0, 255] },
+  { name: 'Navy', hex: '#000080', rgb: [0, 0, 128] },
   { name: 'Indigo', hex: '#4B0082', rgb: [75, 0, 130] },
   // Purples
   { name: 'Violet', hex: '#EE82EE', rgb: [238, 130, 238] },
   { name: 'Lavender', hex: '#E6E6FA', rgb: [230, 230, 250] },
   { name: 'Plum', hex: '#DDA0DD', rgb: [221, 160, 221] },
-  // Others
+  { name: 'Purple', hex: '#800080', rgb: [128, 0, 128] },
+  // Pinks & Magentas
+  { name: 'Magenta', hex: '#FF00FF', rgb: [255, 0, 255] },
+  { name: 'Pink', hex: '#FFC0CB', rgb: [255, 192, 203] },
+  // Neutrals
+  { name: 'White', hex: '#FFFFFF', rgb: [255, 255, 255] },
+  { name: 'Silver', hex: '#C0C0C0', rgb: [192, 192, 192] },
+  { name: 'Gray', hex: '#808080', rgb: [128, 128, 128] },
+  { name: 'Black', hex: '#000000', rgb: [0, 0, 0] },
+  // Browns
   { name: 'Sienna', hex: '#A0522D', rgb: [160, 82, 45] },
-  { name: 'Aquamarine', hex: '#7FFFD4', rgb: [127, 255, 212] },
+  { name: 'Brown', hex: '#8B4513', rgb: [139, 69, 19] },
 ];
 
 const OVERRIDE_MAP: Record<string, string> = {
