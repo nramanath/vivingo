@@ -85,14 +85,6 @@ const OVERRIDE_MAP: Record<string, string> = {
   'Purple+Yellow': 'Brown',
 };
 
-function colorDistance(rgb1: [number, number, number], rgb2: [number, number, number]): number {
-  const rMean = (rgb1[0] + rgb2[0]) / 2;
-  const r = rgb1[0] - rgb2[0];
-  const g = rgb1[1] - rgb2[1];
-  const b = rgb1[2] - rgb2[2];
-  return Math.sqrt((2 + rMean / 256) * r * r + 4 * g * g + (2 + (255 - rMean) / 256) * b * b);
-}
-
 export function mixColors(color1Name: string, color2Name: string): ColorInfo {
   // Check override map first
   const overrideKey = `${color1Name}+${color2Name}`;
@@ -111,17 +103,25 @@ export function mixColors(color1Name: string, color2Name: string): ColorInfo {
     Math.round((c1.rgb[2] + c2.rgb[2]) / 2),
   ];
 
-  // Find nearest color
-  let bestMatch = BASE_COLORS[0];
-  let minDistance = Infinity;
+  // Helper to convert RGB to Hex
+  const rgbToHex = (r: number, g: number, b: number) => {
+    return (
+      '#' +
+      [r, g, b]
+        .map((x) => {
+          const hex = x.toString(16);
+          return hex.length === 1 ? '0' + hex : hex;
+        })
+        .join('')
+        .toUpperCase()
+    );
+  };
 
-  for (const color of BASE_COLORS) {
-    const dist = colorDistance(mixedRGB, color.rgb);
-    if (dist < minDistance) {
-      minDistance = dist;
-      bestMatch = color;
-    }
-  }
+  const exactHex = rgbToHex(mixedRGB[0], mixedRGB[1], mixedRGB[2]);
 
-  return bestMatch;
+  return {
+    name: `${color1Name}-${color2Name} Mix`,
+    hex: exactHex,
+    rgb: mixedRGB,
+  };
 }
