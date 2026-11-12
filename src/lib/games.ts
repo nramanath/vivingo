@@ -381,4 +381,38 @@ export const games: GameMetadata[] = [
       'Encourage your child to predict what color they will make before they click the second color!',
     variantClass: 'gradient-brand-button',
   },
+  {
+    id: "What's Missing?",
+    title: "What's Missing?",
+    icon: '🎩',
+    description:
+      'Memorize a tray of items, watch the magic curtain close, then spot which item vanished!',
+    minAge: 3,
+    maxAge: 6,
+    teaches: [
+      {
+        title: 'Visual Working Memory',
+        description: 'Holding a set of items in mind and recalling them.',
+      },
+      {
+        title: 'Observation & Attention',
+        description: 'Looking carefully at details and noticing change.',
+      },
+      {
+        title: 'Category Association',
+        description: 'Items come from themed scenes like the beach, farm, or space.',
+      },
+      {
+        title: 'Keyboard Familiarity',
+        description: 'Using number keys and the Spacebar to play.',
+      },
+    ],
+    howToPlay:
+      'Look at the items on the tray and try to remember them. Press SPACE (or tap Ready Now!) to hide them. Then pick the item that vanished by tapping it or pressing its number key!\n\n• Stage 1: 3 items.\n• Stage 2: 4 items.\n• Stage 3: 5 items, and the tray gets shuffled!',
+    parentNote:
+      'Every round uses a different themed scene with randomly chosen items, so the game stays fresh. Wrong guesses are never penalized; kids can simply try again.',
+    parentProTip:
+      'Encourage your child to say each item name out loud while memorizing. Naming items is a powerful memory strategy!',
+    variantClass: 'gradient-brand-button',
+  },
 ];
