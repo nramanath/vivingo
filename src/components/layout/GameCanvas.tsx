@@ -11,6 +11,7 @@ import { BallMaze } from '../game/ball-maze';
 import WordRoller from '../game/word-roller/WordRoller';
 import { EmojiSecrets } from '../game/emoji-secrets';
 import { ColorMixers } from '../game/color-mixers';
+import { WhatsMissing } from '../game/whats-missing';
 interface GameCanvasProps {
   selectedGame: string | null;
 }
@@ -45,6 +46,8 @@ export const GameCanvas = ({ selectedGame }: GameCanvasProps) => {
             <EmojiSecrets />
           ) : selectedGame === 'Color Mixers' ? (
             <ColorMixers />
+          ) : selectedGame === "What's Missing?" ? (
+            <WhatsMissing />
           ) : selectedGame ? (
             <div className="p-8 text-center flex flex-col items-center justify-center">
               <ComingSoonBadge selectedGame={selectedGame} />
